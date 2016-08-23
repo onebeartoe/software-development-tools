@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.onebeartoe.development.tools</groupId>
+    <artifactId>onebeartoe-development-tools-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <name>onebeartoe-development-tools-parent</name>
+
+    <modules>
+        <module>html-utility</module>
+    </modules>    
+
+    <repositories>
+		<repository>
+				<id>oss-snapshots-repo</id>
+				<name>Sonatype OSS Maven Repository</name>
+				<url>https://repository-onebeartoe.forge.cloudbees.com/snapshot/</url>
+				<snapshots>
+					<enabled>true</enabled>
+					<updatePolicy>always</updatePolicy>
+				</snapshots>
+		</repository>
+    </repositories>
+</project>
