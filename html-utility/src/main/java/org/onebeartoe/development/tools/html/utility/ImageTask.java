@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.TimerTask;
+import org.onebeartoe.application.ui.swing.ScrollableTextArea;
 
 import org.onebeartoe.filesystem.FileHelper;
 import org.onebeartoe.html.ImageTag;
@@ -15,20 +16,32 @@ import org.onebeartoe.html.ImageTag;
  */
 public class ImageTask extends TimerTask 
 {
-
+    private File sourceDirectory;
+    
+    private final ScrollableTextArea statusPanel;
+    
+    public ImageTask(File sourceDirectory, ScrollableTextArea statusPanel)
+    {
+        this.sourceDirectory = sourceDirectory;
+        
+        this.statusPanel = statusPanel;
+    }
+    
     public void run() 
     {
         try
         {
-            File source_dir = HtmlUtility.getSourceDir();
-            String file_name = source_dir.getPath() + File.separator + "image-tags.html";
+            String file_name = sourceDirectory.getPath() + File.separator + "image-tags.html";
             File outfile = new File(file_name);
             OutputStream outstream = new FileOutputStream(outfile);
             PrintWriter writer = new PrintWriter(outstream);
 
-            System.out.println("outputning to: " + outfile.getAbsolutePath() );
             
-            File[] contents = source_dir.listFiles();
+            String statusMessage = "\n\n" + "outputning to: " + outfile.getAbsolutePath();
+            System.out.println(statusMessage);
+            statusPanel.appendText(statusMessage + "\n");
+            
+            File[] contents = sourceDirectory.listFiles();
             for (int x = 0; x < contents.length; x++)
             {
                 if (FileHelper.isImageFile(contents[x].getName())) 
@@ -41,7 +54,10 @@ public class ImageTask extends TimerTask
                             
                     writer.println(tag);
                     writer.println("<br>\n</br>");
-                    System.out.println("generating HTML for: " + contents[x].getName() );
+                    
+                    statusMessage = "generating HTML for: " + contents[x].getName();
+                    System.out.println(statusMessage);
+                    statusPanel.appendText(statusMessage + "\n");
                 }
             }
             

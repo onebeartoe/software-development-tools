@@ -31,7 +31,7 @@ public class HtmlUtility extends JFrame implements ActionListener
 	TaskPanel tab2;
 	TaskPanel tab3;
 	JButton selectBtn;
-	private static File source_dir;	
+	private static File source_dir;
 
 	// utility variables
 	public String [] modes = {"Index Mode","Image Mode"};
@@ -64,37 +64,42 @@ public class HtmlUtility extends JFrame implements ActionListener
 // Make separate panels (like the one in the ResizeImageGui.java class) to fix 
 // this mess by giving the index and image panels their own directoy chooser.
 		IndexTask index_task = new IndexTask();
-		tab2 = new TaskPanel( (Class<TimerTask>)IndexTask.class, "index the directory");
+		tab2 = new TaskPanel(index_task, "index the directory");
 	
-		ImageTask image_task = new ImageTask();	
-		tab3 = new TaskPanel(image_task.class, "show images in the directory");
-		tabbedPane = new TabbedPane(tab1, tab2, tab3);
+		ImageTask image_task = new ImageTask(source_dir, null);	
+		tab3 = new TaskPanel(image_task, "show images in the directory");
+                
+                ImageTagPanel itp = new ImageTagPanel();
+                
+		tabbedPane = new TabbedPane(tab1, tab2, tab3, itp);
 
-		String [] titles = {"select directory", modes[0], modes[1]};
+		String [] titles = {"select directory", modes[0], modes[1], modes[1] + " - Real"};
 		tabbedPane.setTabTitles(titles);
 		getContentPane().add( tabbedPane );
-		setSize(500, 250);
+		setSize(600, 500);
 		setLocation(215,100);
 		setVisible( true );
 	}
 
 	public void actionPerformed( ActionEvent e ) 
-	{
-		
-		int result = fileChooser.showOpenDialog(null);  
-		source_dir = fileChooser.getSelectedFile();  
+	{		
+            int result = fileChooser.showOpenDialog(null);  
+            
+            source_dir = fileChooser.getSelectedFile();  
 
-		if ( source_dir != null && source_dir.exists() && source_dir.isDirectory() ) {
- 			tab2.setOnTask(true);
-			tab3.setOnTask(true);
-		}
-		else {
-			tab2.setOnTask(false);
-			tab3.setOnTask(false);
-			JOptionPane.showMessageDialog( this, "The source path given was invalid.",
-							 "Invalid Source", JOptionPane.ERROR_MESSAGE );
-			tabbedPane.setSelectedIndex(0);			
-		}
+            if ( source_dir != null && source_dir.exists() && source_dir.isDirectory() ) 
+            {
+                tab2.setOnTask(true);
+                tab3.setOnTask(true);
+            }
+            else 
+            {
+                tab2.setOnTask(false);
+                tab3.setOnTask(false);
+                JOptionPane.showMessageDialog( this, "The source path given was invalid.",
+                                                 "Invalid Source", JOptionPane.ERROR_MESSAGE );
+                tabbedPane.setSelectedIndex(0);			
+            }
 	}	
 
 	public static void main(String [] args) 
