@@ -35,7 +35,6 @@ public class ImageTask extends TimerTask
             File outfile = new File(file_name);
             OutputStream outstream = new FileOutputStream(outfile);
             PrintWriter writer = new PrintWriter(outstream);
-
             
             String statusMessage = "\n\n" + "outputning to: " + outfile.getAbsolutePath();
             System.out.println(statusMessage);

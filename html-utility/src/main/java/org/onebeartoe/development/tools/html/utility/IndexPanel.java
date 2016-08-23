@@ -21,11 +21,9 @@ import org.onebeartoe.application.ui.swing.FileSelectionPanel;
 import org.onebeartoe.application.ui.swing.ScrollableTextArea;
 import org.onebeartoe.filesystem.FileType;
 
-public class ImageTagPanel extends JPanel implements ActionListener 
+public class IndexPanel extends JPanel implements ActionListener 
 {
     final static long serialVersionUID = 8974787897798189498L;
-
-    public static String title = "Resize Image Helper";
 
     private final FileSelectionPanel fileSelectionPanel;
 
@@ -33,17 +31,16 @@ public class ImageTagPanel extends JPanel implements ActionListener
 
     private final ScrollableTextArea statusPanel;
     
-    public ImageTagPanel() 
+    public IndexPanel() 
     {
         // this panel gives the user a button to click to pick an input direcotyr,  it also shows which files will be worked on.
         boolean showRecursive = true;
         fileSelectionPanel = new FileSelectionPanel(FileType.IMAGE, FileSelectionMethods.SINGLE_DIRECTORY, showRecursive);
-        Border border = GUITools.factoryLineBorder("Input Images");
+        Border border = GUITools.factoryLineBorder("Input Files");
         fileSelectionPanel.setBorder(border);
         
         JPanel inputPanel = new JPanel(new BorderLayout());
         inputPanel.add(fileSelectionPanel, BorderLayout.CENTER);
-
 
         // this panel holds the  buttons that start the thumbnail generation and displays the status of the application.  Tthis is the text area the displays the status of the application
         statusPanel = new ScrollableTextArea("\n\n");
@@ -73,8 +70,8 @@ public class ImageTagPanel extends JPanel implements ActionListener
         Object eventSource = ae.getSource();
         if (eventSource == actionButton) 
         {            
-            File sourceDirectory = fileSelectionPanel.getCurrentDirectoty();
-            TimerTask task = new ImageTask(sourceDirectory, statusPanel);
+            File sourceDirectory = fileSelectionPanel.getCurrentDirectoty();     
+            TimerTask task = new IndexTask(sourceDirectory, statusPanel);
             Date date = new Date();
             Timer timer = new Timer();
             timer.schedule(task, date);           
