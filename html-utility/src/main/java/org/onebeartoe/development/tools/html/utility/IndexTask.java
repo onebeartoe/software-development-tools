@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.TimerTask;
 
 import org.onebeartoe.filesystem.FileHelper;
+import org.onebeartoe.html.AnchorTag;
 import org.onebeartoe.html.LinkTag;
 
 /**
@@ -33,7 +34,8 @@ public class IndexTask extends TimerTask
 				String link_item = contents[x].getName();
 				link_item += contents[x].isDirectory() ? "/index.html" : "";
                                 
-                                String link = ( new LinkTag(link_item) ).toString();
+                                AnchorTag tag = new AnchorTag(link_item, link_item);
+                                String link = tag.toString();
 				index_file.println(link + "<br>" );
 			}
 			index_file.close();

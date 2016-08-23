@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -44,11 +45,10 @@ public class HtmlUtility extends JFrame implements ActionListener
 
 	public HtmlUtility() 
 	{
-		super( "OneBearToe HTML Generator" );
+		super( "HtmlUtility by onebeartoe.com" );
 		
 		fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//		fileChooser.setCurrentDirectory(currentDirectory);
 
 		tab1 = new JPanel();
 		String instructions = "\nClick the button to select directory you want to work with.\n";
@@ -59,11 +59,15 @@ public class HtmlUtility extends JFrame implements ActionListener
 		tab1.add(label, BorderLayout.CENTER);	
 		tab1.add(selectBtn, BorderLayout.SOUTH);	
 
+// TODO:                
+//
+// Make separate panels (like the one in the ResizeImageGui.java class) to fix 
+// this mess by giving the index and image panels their own directoy chooser.
 		IndexTask index_task = new IndexTask();
-		tab2 = new TaskPanel(index_task, "index the directory");
+		tab2 = new TaskPanel( (Class<TimerTask>)IndexTask.class, "index the directory");
 	
 		ImageTask image_task = new ImageTask();	
-		tab3 = new TaskPanel(image_task, "show images in the directory");
+		tab3 = new TaskPanel(image_task.class, "show images in the directory");
 		tabbedPane = new TabbedPane(tab1, tab2, tab3);
 
 		String [] titles = {"select directory", modes[0], modes[1]};
@@ -72,7 +76,6 @@ public class HtmlUtility extends JFrame implements ActionListener
 		setSize(500, 250);
 		setLocation(215,100);
 		setVisible( true );
-
 	}
 
 	public void actionPerformed( ActionEvent e ) 
@@ -80,8 +83,6 @@ public class HtmlUtility extends JFrame implements ActionListener
 		
 		int result = fileChooser.showOpenDialog(null);  
 		source_dir = fileChooser.getSelectedFile();  
-		
-//		source_dir = GUITools.selectDirectory();  
 
 		if ( source_dir != null && source_dir.exists() && source_dir.isDirectory() ) {
  			tab2.setOnTask(true);
