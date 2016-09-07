@@ -1,7 +1,11 @@
 
 package org.onebeartoe.development.tools.android.adb.tool;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -11,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -22,7 +27,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
-import org.onebeartoe.system.Commander;
 
 public class FXMLController implements Initializable 
 {
@@ -38,19 +42,18 @@ public class FXMLController implements Initializable
     @FXML
     private Button sendButton;
     
-    private Commander commander;
-    
     private TextField adbPathTextField;
     
     private String adbPath = "adb";
     
     public FXMLController()
     {
-        commander = new Commander();
-        
+// Can these statements move to the initialize() method?        
         adbPathTextField = new TextField("/path/to/adb");
         
-        adbPath = "C:\\Users\\urhm020\\AppData\\Local\\Android\\sdk\\platform-tools\\adb.exe";
+        String userName = System.getProperty("user.name");
+        
+        adbPath = "C:\\Users\\" + userName + "\\AppData\\Local\\Android\\sdk\\platform-tools\\adb.exe";
     }
     
     @FXML
@@ -58,50 +61,90 @@ public class FXMLController implements Initializable
     {
         System.out.println("You clicked me!");
         label.setText("dang dan gdang da dang!");
+
+        String clipboard = "'I%s<3%shttp://www.onebeartoe.net/3d-printing/animals/owl/low-poly/'";
+  
+        String c = ouputTextArea.getText();
+        clipboard = "'" + c + "'";
         
-        String args = "";
+        // sample invocation of the shell to copy and paste text from a PC to an 
+        // Andriod emulator
+        //
+        //     $ adb shell input text "'I%s<3%shttp://www.onebeartoe.net/3d-printing/animals/owl/low-poly/'"
+        //
+        String [] command = {adbPath, "shell", "input", "text", clipboard};
         
-        String adbCommand = adbPath;
-        adbCommand = adbCommand + args;        
-//        adbCommand = "dir";
-        
+        ProcessBuilder builder = new ProcessBuilder(command);
         try 
         {
-            int exitCode = commander.executeCommand(adbCommand);
+            Process jobProcess = builder.start();
+            
+            int waitValue = jobProcess.waitFor();
+
+            // read the output from the command
+            InputStream instream = jobProcess.getInputStream();
+            InputStreamReader insteamReader = new InputStreamReader(instream);
+            BufferedReader stdInput = new BufferedReader(insteamReader);		
+            String s = null;
+            List<String> stdout = new ArrayList();
+            while ((s = stdInput.readLine()) != null) 
+            {
+                stdout.add(s);
+            }
+
+            // read any errors from the attempted command
+            List<String> stderr = new ArrayList();
+            InputStream is = jobProcess.getErrorStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader stdError = new BufferedReader(isr);
+            while ((s = stdError.readLine()) != null) 
+            {
+                stderr.add(s);
+            }
+
+            int exitCode = jobProcess.exitValue();
+            
+            System.out.println("\n" + "Stdout:");
+            List<String> stdoutLines = stdout.subList(0, stdout.size() );
+            boolean noDevicesFound = false;
+            for(String l : stdoutLines)
+            {
+                System.out.println(l);
+                
+                String target = "adb: error: connect failed: no devices/emulators found";
+                if( l.contains(target) )
+                {
+                    noDevicesFound = true;
+                }
+            }
+            
+            if(noDevicesFound)
+            {
+                showNoDevicesFound();
+            }
+
+            boolean missingAdbPath = false;
+            List<String> lines = stderr.subList(0, stderr.size() );
+            System.out.println("\n" + "Errors:");
+            for(String l : lines)
+            {
+                System.out.println(l);
+
+                if( l.contains("'adb' is not recognized as an internal or external command") ||
+                        l.contains("Cannot run program \"adb\"") )
+                {
+                    missingAdbPath = true;
+                }
+            }
+
+            if(missingAdbPath)
+            {
+                showMissingAdbDialog();
+            }            
         } 
         catch (Exception ex) 
         {
             ex.printStackTrace();
-        }
-        
-        
-        List<String> stderr = commander.getStderr();
-        List<String> stdout = commander.getStdout();
-
-        System.out.println("\n" + "Stdout:");
-        stdout.stream()
-            .forEach( s -> 
-            {
-                System.out.println(s);
-            });
-
-        boolean missingAdbPath = false;
-        List<String> lines = stderr.subList(0, stderr.size() );
-        System.out.println("\n" + "Errors:");
-        for(String l : lines)
-        {
-            System.out.println(l);
-            
-            if( l.contains("'adb' is not recognized as an internal or external command") ||
-                    l.contains("Cannot run program \"adb\"") )
-            {
-                missingAdbPath = true;
-            }
-        }
-        
-        if(missingAdbPath)
-        {
-            showMissingAdbDialog();
         }
     }
     
@@ -109,12 +152,17 @@ public class FXMLController implements Initializable
     public void initialize(URL url, ResourceBundle rb) 
     {
         // TODO
+        
     }
 
+    /**
+     * Fformat the input text to adb formatted text.
+     * 
+     * @param event 
+     */
     @FXML
     private void inputTextKeyReleased(KeyEvent event)
     {
-        // format the input text to adb formatted text
         System.out.println("ms word");
         
         String inputText = inputTextArea.getText();
@@ -180,6 +228,22 @@ public class FXMLController implements Initializable
             adbPath = path;
         }        
     }    
+    
+    private void showNoDevicesFound()
+    {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("No Android Emulator Found");
+        String message = "No Android emulator devices were found. \n<br>" +
+                "Make sure an emulator is running.";
+        alert.setContentText(message);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if ((result.isPresent()) && result.get() == ButtonType.OK)
+        {
+            System.out.println("okay was the repsonse");
+        }        
+    }
     
     private String toAdbText(String input)
     {
