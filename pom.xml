@@ -21,6 +21,7 @@
 
     <modules>
         <module>html-utility</module>
+        <module>android</module>
     </modules>    
 
     <repositories>
