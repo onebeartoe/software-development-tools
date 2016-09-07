@@ -1,12 +1,10 @@
+
 package org.onebeartoe.development.tools.android.adb.tool;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,9 +62,7 @@ public class FXMLController implements Initializable
         String args = "";
         
         String adbCommand = adbPath;
-//        adbCommand = adbCommand.replace("\\", "/");
-        adbCommand = adbCommand + args;
-        
+        adbCommand = adbCommand + args;        
 //        adbCommand = "dir";
         
         try 
@@ -138,9 +134,7 @@ public class FXMLController implements Initializable
                 "press Okay (or click title bar 'X' for cancel).");
         dialog.setResizable(true);
 
-        // Widgets
         Label label1 = new Label("full adb path: ");
-//        Label label2 = new Label("Target Score: ");
 
         // Create layout and add to dialog
         GridPane grid = new GridPane();
@@ -151,9 +145,7 @@ public class FXMLController implements Initializable
         grid.add(label1, 1, 1); // col=1, row=1
         
         grid.add(adbPathTextField, 2, 1);
-        
-//        grid.add(label2, 1, 2); // col=1, row=2
-//        grid.add(targetScoreDropdown, 2, 2);
+
         dialog.getDialogPane().setContent(grid);
 
         // Add button to dialog
