@@ -1,0 +1,21 @@
+This is how you create the executable JAR for the random samplings demo:
+
+ 9711  cp pom.xml random-data-pom.xml
+ 9712  ll
+ 9713  mvn package -p random-data-pom.xml
+ 9714  mvn -f random-data-pom.xml package
+ 9715  mvn install
+ 9716  mvn -f random-data-pom.xml package
+ 9717  cd ..
+ 9718  mvn install
+ 9719  cd serial-plotter/
+ 9720  mvn -f random-data-pom.xml package
+ 9721  ll
+ 9722  ll target/
+ 9723  java -jar target/serial-plotter-random-0.0.1-SNAPSHOT.jar
+ 9724  ll
+ 9725  java -jar target/serial-plotter-random-0.0.1-SNAPSHOT.jar
+ 9726  mvn install
+ 9727  mvn -f random-data-pom.xml package
+ 9728  java -jar target/serial-plotter-random-0.0.1-SNAPSHOT.jar
+
