@@ -40,7 +40,10 @@ import org.onebeartoe.system.Sleeper;
  * 
  * This was tested with the Adafruit EZ Link (adafruit.com/products/1628) using this command:
  * 
- * java -Djava.library.path="c:\opt\rxtx" -jar target/serial-plotter-0.0.1-SNAPSHOT.jar
+ * $ java -Djava.library.path="c:\opt\rxtx" -jar target/serial-plotter-0.0.1-SNAPSHOT.jar
+ * 
+ * or on 64bit operating system:
+ * $ java -Djava.library.path="C:\opt\rxtx\ch-rxtx-2.2-20081207-win-x64" -jar target/serial-plotter-0.0.1-SNAPSHOT.jar
  * 
  * @author Roberto Marquez
  */
@@ -130,7 +133,7 @@ public class SerialPotter extends Application implements SerialPortEventListener
         try
         {
             System.out.println("obtaining serial port");
-            serialPort = SerialPorts.get("COM17");
+            serialPort = SerialPorts.get("COM27");
             System.out.println("serial port obtained");
             Sleeper.sleepo(2000);
             
