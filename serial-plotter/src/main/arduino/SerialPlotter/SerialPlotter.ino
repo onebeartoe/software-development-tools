@@ -32,7 +32,7 @@ Tidied up inefficiencies since the last version.
 //  VARIABLES
 int pulsePin = 0;                 // Pulse Sensor purple wire connected to analog pin 0
 int blinkPin = 13;                // pin to blink led at each beat
-int fadePin = 5;                  // pin to do fancy classy fading blink at each beat
+int fadePin = 4;                  // pin to do fancy classy fading blink at each beat
 int fadeRate = 0;                 // used to fade LED on with PWM on fadePin
 
 
@@ -48,6 +48,9 @@ int lightSensorPin = 3; // analog pin 3
 unsigned long lightPreviousMillis = 0;
 unsigned long linearPotPreviousMillis = 0;
 
+/**
+ * The next int is the Arduino analog pin connected to the linear potentiometer.
+ */
 int linearPotPin = 5;
 
 void setup()
