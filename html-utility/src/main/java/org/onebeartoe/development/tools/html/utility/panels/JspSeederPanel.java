@@ -15,6 +15,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.border.Border;
+import org.onebeartoe.application.filesystem.FileSelectionMethods;
+import org.onebeartoe.application.ui.GUITools;
+import org.onebeartoe.application.ui.swing.FileSelectionPanel;
+import org.onebeartoe.application.ui.swing.ScrollableTextArea;
+import org.onebeartoe.development.tools.html.utility.tasks.JspSeederTask;
+import org.onebeartoe.filesystem.FileType;
 
 /**
  *
@@ -69,7 +75,7 @@ public class JspSeederPanel extends JPanel implements ActionListener
         if (eventSource == actionButton) 
         {            
             File sourceDirectory = fileSelectionPanel.getCurrentDirectoty();     
-            TimerTask task = new IndexTask(sourceDirectory, statusPanel);
+            TimerTask task = new JspSeederTask(sourceDirectory, statusPanel);
             Date date = new Date();
             Timer timer = new Timer();
             timer.schedule(task, date);           
