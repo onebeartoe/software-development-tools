@@ -21,7 +21,7 @@ import org.onebeartoe.application.ui.swing.FileSelectionPanel;
 import org.onebeartoe.application.ui.swing.ScrollableTextArea;
 import org.onebeartoe.filesystem.FileType;
 
-public class IndexPanel extends JPanel implements ActionListener 
+public class IndexPanel extends JPanel implements ActionListener
 {
     final static long serialVersionUID = 8974787897798189498L;
 

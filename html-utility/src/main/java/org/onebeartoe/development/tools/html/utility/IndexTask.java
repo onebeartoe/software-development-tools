@@ -15,7 +15,7 @@ import org.onebeartoe.html.AnchorTag;
  * author: Roberto H. Marquez
  * 
 */
-public class IndexTask extends TimerTask 
+public class IndexTask extends TimerTask
 {
     private File sourceDirectory;
     
