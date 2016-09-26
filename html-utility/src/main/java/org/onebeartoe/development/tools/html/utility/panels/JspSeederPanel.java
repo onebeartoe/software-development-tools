@@ -5,15 +5,22 @@ package org.onebeartoe.development.tools.html.utility.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import org.onebeartoe.application.filesystem.FileSelectionMethods;
 import org.onebeartoe.application.ui.GUITools;
@@ -21,6 +28,8 @@ import org.onebeartoe.application.ui.swing.FileSelectionPanel;
 import org.onebeartoe.application.ui.swing.ScrollableTextArea;
 import org.onebeartoe.development.tools.html.utility.tasks.JspSeederTask;
 import org.onebeartoe.filesystem.FileType;
+import org.onebeartoe.web.utilities.jsp.JspSeederService;
+import org.onebeartoe.web.utilities.jsp.StreamedJspSeederService;
 
 /**
  *
@@ -28,7 +37,10 @@ import org.onebeartoe.filesystem.FileType;
  */
 public class JspSeederPanel extends JPanel implements ActionListener
 {
-
+    private JTextField targetDirectory;
+    
+    private final JspSeederService seederService;
+    
     private final FileSelectionPanel fileSelectionPanel;
 
     private final JButton actionButton;
@@ -37,20 +49,29 @@ public class JspSeederPanel extends JPanel implements ActionListener
     
     public JspSeederPanel()
     {
+        seederService = new StreamedJspSeederService();
+        
         // this panel gives the user a button to click to pick an input direcotyr,  it also shows which files will be worked on.
-        boolean showRecursive = true;
+        boolean showRecursive = false;
         fileSelectionPanel = new FileSelectionPanel(FileType.IMAGE, FileSelectionMethods.SINGLE_DIRECTORY, showRecursive);
-        Border border = GUITools.factoryLineBorder("Input Files");
-        fileSelectionPanel.setBorder(border);
+        Border border = GUITools.factoryLineBorder("Input");
+        
+        targetDirectory = new JTextField();
+        JPanel targetPanel = new JPanel( new GridLayout(2, 1, 5,5) );
+        targetPanel.add( new JLabel("hellow"));
+        targetPanel.add(targetDirectory);
         
         JPanel inputPanel = new JPanel(new BorderLayout());
+        inputPanel.setBorder(border);
         inputPanel.add(fileSelectionPanel, BorderLayout.CENTER);
+        inputPanel.add(targetPanel, BorderLayout.NORTH);
 
-        // this panel holds the  buttons that start the thumbnail generation and displays the status of the application.  Tthis is the text area the displays the status of the application
+        // this panel holds the  buttons that start the thumbnail generation and displays the status of the application.  
+        // Tthis is the text area the displays the status of the application
         statusPanel = new ScrollableTextArea("\n\n");
 
         // this panel holds the  buttons that start the thumbnail generation				
-        actionButton = new JButton("Resize");
+        actionButton = new JButton("Index");
         actionButton.addActionListener(this);
 
         // place the status and action components onto a panel
@@ -74,11 +95,23 @@ public class JspSeederPanel extends JPanel implements ActionListener
         Object eventSource = ae.getSource();
         if (eventSource == actionButton) 
         {            
-            File sourceDirectory = fileSelectionPanel.getCurrentDirectoty();     
-            TimerTask task = new JspSeederTask(sourceDirectory, statusPanel);
-            Date date = new Date();
-            Timer timer = new Timer();
-            timer.schedule(task, date);           
+            File webRoot = fileSelectionPanel.getCurrentDirectoty();
+            String targetPath = targetDirectory.getText();
+            
+            SwingUtilities.invokeLater( () ->
+            {
+                try 
+                {
+                    seederService.seedIndex(webRoot, targetPath);
+                } 
+                catch (IOException ex) 
+                {
+                    ex.printStackTrace();
+                    
+                    String message = "\n" + "Error: " + ex.getMessage();
+                    statusPanel.appendText(message);
+                }
+            });
         }
     }    
 }

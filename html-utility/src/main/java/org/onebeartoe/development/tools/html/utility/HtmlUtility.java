@@ -30,7 +30,7 @@ public class HtmlUtility extends JFrame
         tabbedPane.setTabTitles(titles);
         
         getContentPane().add( tabbedPane );
-        setSize(600, 500);
+        setSize(800, 500);
         setLocation(215,100);
         setVisible(true);
     }
