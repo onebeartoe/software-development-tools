@@ -43,6 +43,9 @@ volatile int IBI = 600;             // holds the time between beats, the Inter-B
 volatile boolean Pulse = false;     // true when pulse wave is high, false when it's low
 volatile boolean QS = false;        // becomes true when Arduoino finds a beat.
 
+// make sure this is hooked up with a resistor and what not
+// https://learn.adafruit.com/photocells/using-a-photocell
+sure it is
 int lightSensorPin = 3; // analog pin 3
 
 unsigned long lightPreviousMillis = 0;

@@ -1,6 +1,4 @@
-/*
 
- */
 package org.onebeartoe.development.tools.html.utility.panels;
 
 import java.awt.BorderLayout;
@@ -10,11 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,8 +19,8 @@ import org.onebeartoe.application.filesystem.FileSelectionMethods;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.swing.FileSelectionPanel;
 import org.onebeartoe.application.ui.swing.ScrollableTextArea;
-import org.onebeartoe.development.tools.html.utility.tasks.JspSeederTask;
 import org.onebeartoe.filesystem.FileType;
+import org.onebeartoe.web.utilities.jsp.JspSeedReport;
 import org.onebeartoe.web.utilities.jsp.JspSeederService;
 import org.onebeartoe.web.utilities.jsp.StreamedJspSeederService;
 
@@ -58,7 +51,7 @@ public class JspSeederPanel extends JPanel implements ActionListener
         
         targetDirectory = new JTextField();
         JPanel targetPanel = new JPanel( new GridLayout(2, 1, 5,5) );
-        targetPanel.add( new JLabel("hellow"));
+        targetPanel.add( new JLabel("Target Path"));
         targetPanel.add(targetDirectory);
         
         JPanel inputPanel = new JPanel(new BorderLayout());
@@ -102,14 +95,18 @@ public class JspSeederPanel extends JPanel implements ActionListener
             {
                 try 
                 {
-                    seederService.seedIndex(webRoot, targetPath);
+                    JspSeedReport report = seederService.seedIndex(webRoot, targetPath);
+                    
+                    String text = report.toString();
+                    
+                    statusPanel.setText(text);
                 } 
                 catch (IOException ex) 
                 {
                     ex.printStackTrace();
                     
                     String message = "\n" + "Error: " + ex.getMessage();
-                    statusPanel.appendText(message);
+                    statusPanel.setText(message);
                 }
             });
         }
