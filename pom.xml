@@ -23,7 +23,8 @@
         <module>html-utility</module>
         <module>android</module>
         <module>serial-plotter</module>
-    </modules>    
+        <module>web-content-verification</module>
+    </modules>
 
     <repositories>
 		<repository>
