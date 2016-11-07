@@ -10,19 +10,17 @@ import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
-/**
- * @author Roberto Marquez
- */
-public class StatusHandlerCrawlController 
+public class StatusHandlerCrawlController
 {
     private static final Logger logger =
         LoggerFactory.getLogger(StatusHandlerCrawlController.class);
 
-    public static final String baseUrl = "http://onebeartoe.org/";
+    public static final String baseUrl = "http://www.onebeartoe.net/";
     
     public static void main(String[] args) throws Exception 
     {
-        if (args.length != 2) {
+        if (args.length != 2) 
+        {
             logger.info("Needed parameters: ");
             logger.info("\t rootFolder (it will contain intermediate crawl data)");
             logger.info("\t numberOfCralwers (number of concurrent threads)");
