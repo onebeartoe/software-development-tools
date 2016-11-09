@@ -26,7 +26,7 @@ public class HtmlUtility extends JFrame
 
         tabbedPane = new TabbedPane(itp, ip, jsp);
 
-        String [] titles = {"Image Tagging", "Directory Listing", "JEE Web Index"};
+        String [] titles = {"Image Tagging", "Directory Listing", "JSP Seeder"};
         tabbedPane.setTabTitles(titles);
         
         getContentPane().add( tabbedPane );
