@@ -80,7 +80,7 @@
                     <keystore>
                         ${keystorePath}
                     </keystore>
-                    <alias>${keystoreAlias}</alias>
+                    <alias>$keystoreAlias</alias>
                     <storepass>${keystorePass}</storepass>
                     <keypass>${keystorePass}</keypass>
                     <!--
