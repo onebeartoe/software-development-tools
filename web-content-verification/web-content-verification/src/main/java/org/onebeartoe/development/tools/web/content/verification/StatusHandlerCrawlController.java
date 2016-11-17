@@ -9,13 +9,16 @@ import edu.uci.ics.crawler4j.crawler.CrawlController;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
+import java.util.ArrayList;
+import java.util.List;
 
+//TODO: Rename this to BadLinkCrawController
 public class StatusHandlerCrawlController
 {
     private static final Logger logger =
         LoggerFactory.getLogger(StatusHandlerCrawlController.class);
 
-    public static final String baseUrl = "http://www.onebeartoe.net/";
+    public static final String baseUrl = "http://onebeartoe.org/";
     
     public static void main(String[] args) throws Exception 
     {
@@ -98,6 +101,43 @@ public class StatusHandlerCrawlController
      * Start the crawl. This is a blocking operation, meaning that your code
      * will reach the line after this only when crawling is finished.
      */
+        
         controller.start(StatusHandlerCrawler.class, numberOfCrawlers);
+        
+        List<Object> crawlersLocalData = controller.getCrawlersLocalData();
+        long totalLinks = 0;
+        long totalTextSize = 0;
+        int totalProcessedPages = 0;
+        long totalOkLinks = 0;
+        List<BadLink> allBadLinks = new ArrayList();
+        for (Object localData : crawlersLocalData) 
+        {
+            CrawlStat stat = (CrawlStat) localData;
+            
+            List<BadLink> badLinks = stat.getBadLinks();
+            allBadLinks.addAll(badLinks);
+            
+            totalLinks += stat.getTotalLinks();
+            totalTextSize += stat.getTotalTextSize();
+            totalOkLinks += stat.getOkVisitCount();
+            totalProcessedPages += stat.getTotalProcessedPages();
+        }
+
+        logger.info("Aggregated Statistics:");
+        logger.info("\tProcessed Pages: {}", totalProcessedPages);
+        logger.info("\tTotal OK links: {}", totalOkLinks);
+        logger.info("\tTotal Links found: {}", totalLinks);
+        logger.info("\tTotal Text Size: {}", totalTextSize);
+                
+        allBadLinks.sort(
+                (l1, l2) -> l1.getUrl().compareTo(l2.getUrl())
+        );
+        
+        logger.info("Bad links:");
+        allBadLinks.forEach( l ->
+        {
+            logger.info("{} - {} - {}", l.getUrl(), l.getStatusCode(), l.getParentUrls() );
+        });
+                
     }
 }
