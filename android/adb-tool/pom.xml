@@ -5,14 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.onebeartoe.development.tools.android</groupId>
-        <artifactId>android</artifactId>
+        <groupId>org.onebeartoe.development.tools</groupId>
+        <artifactId>android-adb-tool-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.onebeartoe.development.tools.android</groupId>
     <artifactId>adb-tool</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     
     <packaging>jar</packaging>
 
