@@ -47,7 +47,7 @@ import org.onebeartoe.system.Sleeper;
  * 
  * @author Roberto Marquez
  */
-public class SerialPotter extends Application implements SerialPortEventListener
+public class SerialPlotter extends Application implements SerialPortEventListener
 {
     private Logger logger;
     

@@ -18,7 +18,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>org.onebeartoe.data.visualization.serial.plotter.SerialPotter</mainClass>
+        <mainClass>org.onebeartoe.data.visualization.serial.plotter.SerialPlotter</mainClass>
     </properties>
 
     <organization>

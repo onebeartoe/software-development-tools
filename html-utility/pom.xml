@@ -64,6 +64,7 @@
                     </execution>
                 </executions>
             </plugin>
+<!--            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jarsigner-plugin</artifactId>
@@ -83,11 +84,9 @@
                     <alias>duder</alias>
                     <storepass>${keystorePass}</storepass>
                     <keypass>${keystorePass}</keypass>
-                    <!--
-                    processAttachedArtifacts>true</processAttachedArtifacts
-                    -->
                 </configuration>
-            </plugin>            
+            </plugin>
+-->
         </plugins>
     </build>    
 </project>
