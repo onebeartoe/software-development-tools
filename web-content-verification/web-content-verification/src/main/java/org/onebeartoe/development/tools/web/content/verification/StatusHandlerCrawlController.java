@@ -18,29 +18,38 @@ public class StatusHandlerCrawlController
     private static final Logger logger =
         LoggerFactory.getLogger(StatusHandlerCrawlController.class);
 
-    public static final String baseUrl = "http://onebeartoe.org/";
+    public static final String baseUrl = "http://electronics.onebeartoe.org/";
     
     public static void main(String[] args) throws Exception 
     {
-        if (args.length != 2) 
-        {
-            logger.info("Needed parameters: ");
-            logger.info("\t rootFolder (it will contain intermediate crawl data)");
-            logger.info("\t numberOfCralwers (number of concurrent threads)");
-            return;
-        }
-
     /*
      * crawlStorageFolder is a folder where intermediate crawl data is
      * stored.
      */
-        String crawlStorageFolder = args[0];
+        String crawlStorageFolder;
 
     /*
      * numberOfCrawlers shows the number of concurrent threads that should
      * be initiated for crawling.
      */
-        int numberOfCrawlers = Integer.parseInt(args[1]);
+        int numberOfCrawlers = Integer.parseInt(args[1]);        
+        
+        if (args.length != 2) 
+        {
+            logger.info("Needed parameters: ");
+            logger.info("\t rootFolder (it will contain intermediate crawl data)");
+            logger.info("\t numberOfCralwers (number of concurrent threads)");
+            
+            logger.info("using defaluts");
+            
+            crawlStorageFolder = "target/crawler4j";
+            numberOfCrawlers = 5;           
+        }
+        else
+        {
+            crawlStorageFolder = args[0];
+            numberOfCrawlers = Integer.parseInt(args[1]);
+        }
 
         CrawlConfig config = new CrawlConfig();
 
@@ -97,11 +106,10 @@ public class StatusHandlerCrawlController
      */
         controller.addSeed(baseUrl);
 
-    /*
-     * Start the crawl. This is a blocking operation, meaning that your code
-     * will reach the line after this only when crawling is finished.
-     */
-        
+        /*
+         * Start the crawl. This is a blocking operation, meaning that your code
+         * will reach the line after this only when crawling is finished.
+         */
         controller.start(StatusHandlerCrawler.class, numberOfCrawlers);
         
         List<Object> crawlersLocalData = controller.getCrawlersLocalData();
@@ -137,7 +145,6 @@ public class StatusHandlerCrawlController
         allBadLinks.forEach( l ->
         {
             logger.info("{} - {} - {}", l.getUrl(), l.getStatusCode(), l.getParentUrls() );
-        });
-                
+        });              
     }
 }

@@ -17,7 +17,7 @@
     <name>onebeartoe-development-tools-web-content-verification</name>
 
     <properties>
-        
+        <suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
     </properties>
     
     <dependencies>
@@ -31,6 +31,12 @@
             <groupId>org.slf4j</groupId> 
             <artifactId>slf4j-simple</artifactId> 
             <version>1.7.21</version> 
+        </dependency>
+        
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.1.1</version>
         </dependency>
     </dependencies>
     
@@ -58,6 +64,17 @@
 		    </execution>
 		</executions>
 	    </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>            
         </plugins>
     </build>
 </project>

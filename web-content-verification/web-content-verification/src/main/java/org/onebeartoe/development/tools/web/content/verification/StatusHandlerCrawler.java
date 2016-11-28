@@ -55,6 +55,8 @@ public class StatusHandlerCrawler extends WebCrawler
 //        logger.info("Visited: {}", page.getWebURL().getURL());
         myCrawlStat.incProcessedPages();
 
+// seeign how much performance increases by skipping the HTML parsing
+/*
         if(page.getParseData() instanceof HtmlParseData) 
         {
             HtmlParseData parseData = (HtmlParseData) page.getParseData();
@@ -66,6 +68,7 @@ public class StatusHandlerCrawler extends WebCrawler
                 // Do nothing
             }
         }
+*/
         // We dump this crawler statistics after processing every 50 pages
         if ((myCrawlStat.getTotalProcessedPages() % 50) == 0) 
         {
