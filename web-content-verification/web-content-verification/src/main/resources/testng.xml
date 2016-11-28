@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Smoke-Suite" parallel="none">
+    <test name="Smoke-Test">
+        <groups>
+            <run>
+                <include name="Smoke" />
+                <exclude name="Regression"/>
+            </run>
+        </groups>
+
+<!--        
+        <packages>
+            <package>*</package>
+        </packages>
+-->
+    
+        <classes>
+            <class name="DataDrivenTesting.TestDDT"/>
+            <class name="testngDemo.TestGroupDemo"/>
+        </classes>
+    </test>
+    
+<!--
+    <test name="Regression-Tests">
+        <groups>
+            <run>
+                <include name="Regression" />
+                <exclude name="Smoke"/>
+            </run>
+            
+            <packages>
+                <package>*</package>
+            </packages>
+        </groups>
+    </test>
+-->    
+</suite>

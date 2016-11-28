@@ -1,5 +1,5 @@
 
-package org.onebeartoe.development.tools.web.content.verification;
+package org.onebeartoe.development.tools.web.content.verification.crawlers;
 
 import java.util.regex.Pattern;
 
@@ -9,16 +9,15 @@ import org.slf4j.LoggerFactory;
 
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
-import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import edu.uci.ics.crawler4j.url.WebURL;
-import java.io.UnsupportedEncodingException;
-import java.util.Set;
+import org.onebeartoe.development.tools.web.content.verification.BadLink;
+import org.onebeartoe.development.tools.web.content.verification.CrawlStat;
 
 /**
  * @author Yasser Ganjisaffar
  */
 //TODO: Rename this to BadLinkCrawer
-public class StatusHandlerCrawler extends WebCrawler 
+public abstract class StatusHandlerCrawler extends WebCrawler 
 {
     private static final Logger logger = LoggerFactory.getLogger(StatusHandlerCrawler.class);
 
@@ -28,10 +27,16 @@ public class StatusHandlerCrawler extends WebCrawler
     
     private CrawlStat myCrawlStat;
     
-    public StatusHandlerCrawler()
+//    private String rootUrl;
+    
+    public StatusHandlerCrawler()//String rootUrl)
     {
         myCrawlStat = new CrawlStat();
+        
+//        this.rootUrl = rootUrl;
     }
+    
+    public abstract String getRootUrl();
 
     /**
      * You should implement this function to specify whether
@@ -41,8 +46,12 @@ public class StatusHandlerCrawler extends WebCrawler
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) 
     {
+//        url.get
         String href = url.getURL().toLowerCase();
-        return !FILTERS.matcher(href).matches() && href.startsWith(StatusHandlerCrawlController.baseUrl);
+        
+        String rootUrl = getRootUrl();
+        
+        return !FILTERS.matcher(href).matches() && href.startsWith(rootUrl);
     }
 
     /**

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="internal link -Suite" parallel="none">
+    <test name="interal links Test">
+        <groups>
+            <run>
+                <include name="internal-links" />
+                <include name="Smoke" />
+                <exclude name="Regression"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="org.onebeartoe.automation.content.verification.ElectronicsOnewebOrgInternalLinksTest"/>
+            <class name="org.onebeartoe.automation.content.verification.OnewebComInternalLinksTest"/>
+            <class name="org.onebeartoe.automation.content.verification.OnewebNetInternalLinksTest"/>
+            <class name="org.onebeartoe.automation.content.verification.OnewebOrgInternalLinksTest"/>
+        </classes>  
+        
+<!--        
+        <packages>
+            <package>*</package>
+        </packages>
+
+        <packages>
+            
+            <package>org.onebeartoe.automation.content.verification</package>
+        </packages>
+                
+        <classes>
+            <class name="DataDrivenTesting.TestDDT"/>
+            <class name="testngDemo.TestGroupDemo"/>
+        </classes>        
+-->
+    </test>
+    
+<!--
+    <test name="Regression-Tests">
+        <groups>
+            <run>
+                <include name="Regression" />
+                <exclude name="Smoke"/>
+            </run>
+            
+            <packages>
+                <package>*</package>
+            </packages>
+        </groups>
+    </test>
+-->    
+</suite>
+
