@@ -13,13 +13,16 @@
         </groups>
 
         <classes>
-            <class name="org.onebeartoe.automation.content.verification.NotTestngTest"/>
-<!--
+            <class name="org.onebeartoe.testng.Testing"/>
+
             <class name="org.onebeartoe.automation.content.verification.ElectronicsOnewebOrgInternalLinksTest"/>            
             <class name="org.onebeartoe.automation.content.verification.OnewebComInternalLinksTest"/>
             <class name="org.onebeartoe.automation.content.verification.OnewebNetInternalLinksTest"/>
--->            
             <class name="org.onebeartoe.automation.content.verification.OnewebOrgInternalLinksTest"/>
+<!--
+            <class name="org.onebeartoe.automation.content.verification.NotTestngTest"/>
+-->            
+            
         </classes>  
         
 <!--        

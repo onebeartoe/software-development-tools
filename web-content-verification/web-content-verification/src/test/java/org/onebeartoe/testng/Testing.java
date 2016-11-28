@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
  */
 public class Testing 
 {
-    @Test
+    @Test(groups = {"internal-links"})
     public void testFireFox() 
     {
 
