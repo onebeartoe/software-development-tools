@@ -32,7 +32,7 @@ public class ElectronicsOnewebOrgInternalLinksTest
     }
     
     @Test(dataProvider="electronics.oneweb.org", groups = {"internal-links"})
-    public void testFireFox(String url, int statusCode, List<String> parentUrls)
+    public void testInternalLinks(String url, int statusCode, List<String> parentUrls)
     {
         assert(statusCode == 200);
     }

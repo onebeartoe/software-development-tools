@@ -13,9 +13,12 @@
         </groups>
 
         <classes>
-            <class name="org.onebeartoe.automation.content.verification.ElectronicsOnewebOrgInternalLinksTest"/>
+            <class name="org.onebeartoe.automation.content.verification.NotTestngTest"/>
+<!--
+            <class name="org.onebeartoe.automation.content.verification.ElectronicsOnewebOrgInternalLinksTest"/>            
             <class name="org.onebeartoe.automation.content.verification.OnewebComInternalLinksTest"/>
             <class name="org.onebeartoe.automation.content.verification.OnewebNetInternalLinksTest"/>
+-->            
             <class name="org.onebeartoe.automation.content.verification.OnewebOrgInternalLinksTest"/>
         </classes>  
         
@@ -50,5 +53,12 @@
         </groups>
     </test>
 -->    
+
+    <test name="Regression-Tests" junit="true">
+        <classes>                            
+            <class name="org.onebeartoe.automation.content.verification.NotTestngTest"/>
+        </classes>        
+    </test>
+    
 </suite>
 
