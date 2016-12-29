@@ -81,6 +81,7 @@
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>${internalLinksSuiteXmlFile}</suiteXmlFile>
+                        <suiteXmlFile>testng-for-junit.xml</suiteXmlFile>
                         <!--
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                         <suiteXmlFile>${internalLinksSuiteXmlFile}</suiteXmlFile>

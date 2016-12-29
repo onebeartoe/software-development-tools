@@ -1,8 +1,10 @@
+
 package testngDemo;
 
 import org.testng.annotations.Test;
 
-public class TestGroupDemo {
+public class TestGroupDemo 
+{
 
     @Test(groups = {"Smoke"})
     public void login() {

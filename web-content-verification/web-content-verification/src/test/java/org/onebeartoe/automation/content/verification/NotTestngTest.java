@@ -1,6 +1,4 @@
-/*
 
- */
 package org.onebeartoe.automation.content.verification;
 
 import org.junit.Test;
@@ -14,6 +12,6 @@ public class NotTestngTest
     @Test
     public void pickup()
     {
-        
+        assert(true);
     }
 }
