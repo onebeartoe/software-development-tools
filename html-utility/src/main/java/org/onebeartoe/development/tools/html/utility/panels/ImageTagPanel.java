@@ -49,7 +49,9 @@ public class ImageTagPanel extends JPanel implements ActionListener
         statusPanel = new ScrollableTextArea("\n\n");
 
         // this panel holds the  buttons that start the thumbnail generation				
-        actionButton = new JButton("Resize");
+//TODO: why not just put the HTML in the TextArea for the use to copy and 
+//      paste? Why is the HTML written to a file?
+        actionButton = new JButton("Generate Image Tags");
         actionButton.addActionListener(this);
 
         // place the status and action components onto a panel
