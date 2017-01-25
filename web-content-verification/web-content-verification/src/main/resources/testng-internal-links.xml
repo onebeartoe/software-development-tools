@@ -57,9 +57,10 @@
     </test>
 -->    
 
-    <test name="Regression-Tests" junit="true">
+    <test name="Junit-Regression-Tests" junit="true">
         <classes>                            
             <class name="org.onebeartoe.automation.content.verification.NotTestngTest"/>
+            <class name="org.onebeartoe.testing.junit.JUnitArithmeticTests"/>
         </classes>        
     </test>
     
