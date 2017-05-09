@@ -18,7 +18,9 @@
 
     <properties>
         <internalLinksSuiteXmlFile>src/main/resources/testng-internal-links.xml</internalLinksSuiteXmlFile>
+        <!--
         <suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
+        -->
     </properties>
     
     <dependencies>
@@ -57,11 +59,11 @@
   <properties>
     <property>
       <name>junit</name>
-      <value>true</value>
+      <value>false</value>
     </property>
   </properties>               
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/main/resources/testng-for-junit.xml</suiteXmlFile>
+                        <suiteXmlFile>${internalLinksSuiteXmlFile}</suiteXmlFile>
                         <!--
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                         <suiteXmlFile>${internalLinksSuiteXmlFile}</suiteXmlFile>

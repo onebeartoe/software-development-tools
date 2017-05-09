@@ -51,7 +51,10 @@ public abstract class StatusHandlerCrawler extends WebCrawler
         
         String rootUrl = getRootUrl();
         
-        return !FILTERS.matcher(href).matches() && href.startsWith(rootUrl);
+        boolean visit = !FILTERS.matcher(href).matches() 
+                            && href.startsWith(rootUrl);
+        
+        return visit;
     }
 
     /**
