@@ -15,6 +15,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import org.onebeartoe.application.filesystem.FileSelectionMethods;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.swing.FileSelectionPanel;
@@ -51,6 +53,49 @@ public class JspSeederPanel extends JPanel implements ActionListener
         Border border = GUITools.factoryLineBorder("Input");
         
         targetDirectory = new JTextField();
+        System.out.println("outso");
+        targetDirectory.addActionListener( new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                System.out.println("inso");
+                replaceBackslash();
+            }
+        });
+        
+//        targetDirectory.getDocument().addDocumentListener( new DocumentListener() 
+//        {
+//            @Override
+//            public void insertUpdate(DocumentEvent e) 
+//            {
+////                replaceBackSlash();
+//            }
+//
+//            @Override
+//            public void removeUpdate(DocumentEvent e) 
+//            {
+////                replaceBackSlash();
+//            }
+//
+//            @Override
+//            public void changedUpdate(DocumentEvent e) 
+//            {
+//                replaceBackSlash();
+//            }
+//            
+//            public synchronized void replaceBackSlash()
+//            {
+//                SwingUtilities.invokeLater( new Runnable() 
+//                {
+//                    @Override
+//                    public void run() 
+//                    {
+//                
+//                    }
+//                });
+//            }
+//        });
         JPanel targetPanel = new JPanel( new GridLayout(2, 1, 5,5) );
         targetPanel.add( new JLabel("Target Path"));
         targetPanel.add(targetDirectory);
@@ -111,5 +156,13 @@ public class JspSeederPanel extends JPanel implements ActionListener
                 }
             });
         }
-    }    
+    }
+
+    private void replaceBackslash()
+    {
+        String old = targetDirectory.getText();
+        String newText = old.replace("\\", "/");
+
+        targetDirectory.setText(newText);        
+    }
 }
