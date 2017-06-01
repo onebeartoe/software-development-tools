@@ -126,11 +126,13 @@ public abstract class StatusHandlerCrawler extends WebCrawler
      * You can put whatever stuff you need here.
      */
     @Override
-    public void onBeforeExit() {
+    public void onBeforeExit() 
+    {
         dumpMyData();
     }
 
-    public void dumpMyData() {
+    public void dumpMyData() 
+    {
         int id = getMyId();
         // You can configure the log to output to file
         logger.info("Crawler {} > Processed Pages: {}", id, myCrawlStat.getTotalProcessedPages());
