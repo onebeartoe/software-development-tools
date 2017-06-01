@@ -16,6 +16,11 @@
     
     <name>onebeartoe-development-tools-html-utility</name>
     
+    <properties>
+        
+    </properties>
+
+    
     <dependencies>
         <dependency>
             <groupId>org.onebeartoe</groupId>  
@@ -65,27 +70,40 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jarsigner-plugin</artifactId>
-                <version>1.2</version>
-                <executions>
-                    <execution>
-                        <id>sign</id>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <keystore>
-                        ${keystorePath}
-                    </keystore>
-                    <alias>${keystoreAlias}</alias>
-                    <storepass>${keystorePass}</storepass>
-                    <keypass>${keystorePass}</keypass>
-                </configuration>
-            </plugin>
+
         </plugins>
     </build>
+    
+    
+    <profiles>
+        <profile>
+            <id>jarsigner</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jarsigner-plugin</artifactId>
+                        <version>1.2</version>
+                        <executions>
+                            <execution>
+                                <id>sign</id>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <keystore>
+                                ${keystorePath}
+                            </keystore>
+                            <alias>${keystoreAlias}</alias>
+                            <storepass>${keystorePass}</storepass>
+                            <keypass>${keystorePass}</keypass>                  
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>                        
+        </profile>
+    </profiles>    
 </project>
