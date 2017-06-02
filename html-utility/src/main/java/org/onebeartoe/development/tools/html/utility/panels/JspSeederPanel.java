@@ -135,7 +135,8 @@ public class JspSeederPanel extends JPanel implements ActionListener
         if (eventSource == actionButton) 
         {            
             File webRoot = fileSelectionPanel.getCurrentDirectoty();
-            String targetPath = targetDirectory.getText();
+            replaceBackslash();
+            String targetPath = targetDirectory.getText(); 
             
             SwingUtilities.invokeLater( () ->
             {
