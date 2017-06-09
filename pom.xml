@@ -22,6 +22,7 @@
     <modules>
         <module>html-utility</module>
         <module>android</module>
+        <module>jar-diff</module>
         <module>serial-plotter</module>
         <module>web-content-verification</module>
     </modules>
