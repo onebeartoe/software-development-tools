@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="internal link -Suite" parallel="none">
+    <test name="interal links Test">
+        <groups>
+            <run>
+                <include name="jar-diff-dataset" />
+                <include name="Smoke" />
+                <exclude name="Regression"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="org.onebeartoe.jar.diff.JarDiffTest"/>
+<!--
+            <class name="org.onebeartoe.automation.content.verification.NotTestngTest"/>
+-->            
+        </classes>  
+    </test>    
+</suite>
+
