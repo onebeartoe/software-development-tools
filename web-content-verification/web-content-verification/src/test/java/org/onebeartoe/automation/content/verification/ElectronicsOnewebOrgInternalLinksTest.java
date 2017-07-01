@@ -26,7 +26,8 @@ public class ElectronicsOnewebOrgInternalLinksTest
     @DataProvider(name="electronics.oneweb.org")
     public Object[][] testDataFeed() throws Exception
     {        
-        Object [][] data = webContentService.loadBadLinks(ElectronicsOnewebOrgStatusCrawler.class, ElectronicsOnewebOrgStatusCrawler.rootUrl);
+        Object [][] data = webContentService.loadBadLinks(ElectronicsOnewebOrgStatusCrawler.class, 
+                                                          ElectronicsOnewebOrgStatusCrawler.rootUrl);
         
         return data;
     }
