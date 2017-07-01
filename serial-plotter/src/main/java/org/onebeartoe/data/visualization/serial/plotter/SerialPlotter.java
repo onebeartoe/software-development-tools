@@ -60,8 +60,7 @@ public class SerialPlotter extends Application implements SerialPortEventListene
     private FXMLLoader loader;
     
     private Map<String, DataChannel> dataMap;
-    
-    
+
     private volatile List<String> messages;
 
     private BufferedReader input;
