@@ -7,8 +7,8 @@
         <groups>
             <run>
                 <include name="internal-links" />
-                <include name="Smoke" />
-                <exclude name="Regression"/>
+                <include name="smoke" />
+                <exclude name="regression"/>
             </run>
         </groups>
 
@@ -16,7 +16,7 @@
             <class name="org.onebeartoe.testng.Testing"/>
 
             <class name="org.onebeartoe.automation.content.verification.ElectronicsOnewebOrgInternalLinksTest"/>            
-            <class name="org.onebeartoe.automation.content.verification.OnewebComInternalLinksTest"/>
+<!--            <class name="org.onebeartoe.automation.content.verification.OnewebComInternalLinksTest"/>  -->
             <class name="org.onebeartoe.automation.content.verification.OnewebNetInternalLinksTest"/>
             <class name="org.onebeartoe.automation.content.verification.OnewebOrgInternalLinksTest"/>
 <!--

@@ -6,7 +6,7 @@
     <test name="Smoke-Test">
         <groups>
             <run>
-                <include name="Smoke" />
+                <include name="test-ng" />
                 <exclude name="Regression"/>
             </run>
         </groups>
@@ -18,8 +18,7 @@
 -->
     
         <classes>
-            <class name="DataDrivenTesting.TestDDT"/>
-            <class name="testngDemo.TestGroupDemo"/>
+            <class name="org.onebeartoe.testng.Testing"/>
         </classes>
     </test>
     

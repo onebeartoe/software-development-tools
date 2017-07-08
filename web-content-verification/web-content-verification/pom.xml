@@ -18,6 +18,7 @@
 
     <properties>
         <internalLinksSuiteXmlFile>src/test/resources/testng-internal-links.xml</internalLinksSuiteXmlFile>
+                     <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
         <!--
         <suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
         -->
@@ -29,7 +30,7 @@
             <artifactId>crawler4j</artifactId>
             <version>4.2</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.slf4j</groupId> 
             <artifactId>slf4j-simple</artifactId> 
