@@ -65,7 +65,7 @@
 </properties>
                     <suiteXmlFiles>
                         <suiteXmlFile>${internalLinksSuiteXmlFile}</suiteXmlFile>
-                        
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                         <!--
                         <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                         <suiteXmlFile>${internalLinksSuiteXmlFile}</suiteXmlFile>
