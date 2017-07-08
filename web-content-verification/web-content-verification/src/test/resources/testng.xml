@@ -21,7 +21,10 @@
             <class name="org.onebeartoe.testng.Testing"/>
         </classes>
     </test>
-    
+
+   
+<!-- examples follow -->        
+                
 <!--
     <test name="Regression-Tests">
         <groups>
@@ -36,4 +39,54 @@
         </groups>
     </test>
 -->    
+
+<!--
+    <test name="Junit-Regression-Tests" junit="false">
+    <test name="Junit-Regression-Tests" junit="true">
+        
+        <classes>                            
+            <class name="org.onebeartoe.automation.content.verification.NotTestngTest"/>
+            <class name="org.onebeartoe.testing.junit.JUnitArithmeticTests"/>
+        </classes>        
+    </test>
+-->
+
+
+<!--
+    <test name="Regression-Tests">
+        <groups>
+            <run>
+                <include name="Regression" />
+                <exclude name="Smoke"/>
+            </run>
+            
+            <packages>
+                <package>*</package>
+            </packages>
+        </groups>
+    </test>
+-->
+
+
+<!--        
+        <packages>
+            <package>*</package>
+        </packages>
+
+        <packages>
+            
+            <package>org.onebeartoe.automation.content.verification</package>
+        </packages>
+                
+        <classes>
+            <class name="DataDrivenTesting.TestDDT"/>
+            <class name="testngDemo.TestGroupDemo"/>
+        </classes>        
+-->
+
+
+
+
+
+
 </suite>
