@@ -4,13 +4,10 @@ package org.onebeartoe.development.tools.html.utility;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
-import org.onebeartoe.application.DesktopApplication;
-import org.onebeartoe.application.ui.WindowProperties;
 import org.onebeartoe.application.ui.swing.SwingApplication;
 import org.onebeartoe.application.ui.swing.TabbedPane;
+import org.onebeartoe.development.tools.html.utility.panels.ImageTagPanel;
 import org.onebeartoe.development.tools.html.utility.panels.JspSeederPanel;
 
 /**
@@ -21,8 +18,6 @@ import org.onebeartoe.development.tools.html.utility.panels.JspSeederPanel;
 public class HtmlUtility extends JFrame
 {
     private TabbedPane tabbedPane;
-    
-    private static WindowProperties wp;
     
     private SwingApplication guiConfig;
 
@@ -46,9 +41,9 @@ public class HtmlUtility extends JFrame
         
         applicationId = getClass().getName();
         
-        guiConfig = new SwingApplication();
+        guiConfig = loadDefaultGuiConfig();
         
-        restoreGui();
+        guiConfig.restoreWindowProperties(this);
 
         addWindowListener( new WindowAdapter() 
         {
@@ -57,9 +52,9 @@ public class HtmlUtility extends JFrame
             {
                 try 
                 {                    
-                    wp = guiConfig.currentConfiguration(HtmlUtility.this);
-                    wp.id = applicationId;
-                    guiConfig.persistWindowProperties(wp);
+                    guiConfig.setCurrentConfiguration(HtmlUtility.this);
+                    guiConfig.setApplicationId(applicationId);
+                    guiConfig.persistWindowProperties();
                 } 
                 catch (IOException ex) 
                 {
@@ -71,34 +66,41 @@ public class HtmlUtility extends JFrame
         setVisible(true);
     }
 
+    private SwingApplication loadDefaultGuiConfig()
+    {
+        SwingApplication app = new SwingApplication(applicationId) 
+        {
+            @Override
+            public int defaultX() 
+            {
+                return 100;
+            }
+            
+            @Override
+            public int defaultY() 
+            {
+                return 200;
+            }
+            
+            @Override
+            public int defaultWidth() 
+            {
+                return 900;
+            }
+            
+            @Override
+            public int defaultHeight() 
+            {
+                return 400;
+            }
+        };
+                
+        return app;
+    }
+    
     public static void main(String [] args) 
     {
         final HtmlUtility app = new HtmlUtility();
-//        app.;
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
-    }
-    
-    public void restoreGui()
-    {
-        try 
-        {
-            wp = new WindowProperties();
-            wp.id = applicationId;
-            wp = guiConfig.loadWindowProperties(wp);
-            
-            setSize(wp.width, wp.height);
-            setLocation(wp.locationX, wp.locationY);
-        } 
-        catch (IOException | ClassNotFoundException ex  ) 
-        {
-            Logger.getLogger(HtmlUtility.class.getName()).log(Level.SEVERE, null, ex);
-
-            wp = new WindowProperties();
-            wp.id = applicationId;
-            
-            // resort to default window property values
-            setSize(800, 500);
-            setLocation(215,100);
-        }
     }
 }

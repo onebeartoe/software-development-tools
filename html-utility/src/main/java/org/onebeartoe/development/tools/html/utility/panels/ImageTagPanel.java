@@ -1,5 +1,5 @@
 
-package org.onebeartoe.development.tools.html.utility;
+package org.onebeartoe.development.tools.html.utility.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -19,6 +19,7 @@ import org.onebeartoe.application.filesystem.FileSelectionMethods;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.swing.FileSelectionPanel;
 import org.onebeartoe.application.ui.swing.ScrollableTextArea;
+import org.onebeartoe.development.tools.html.utility.tasks.ImageTask;
 import org.onebeartoe.filesystem.FileType;
 
 public class ImageTagPanel extends JPanel implements ActionListener 
