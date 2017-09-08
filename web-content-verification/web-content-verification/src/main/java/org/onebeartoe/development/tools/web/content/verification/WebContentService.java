@@ -149,11 +149,11 @@ public class WebContentService
     public Object[][] loadBadLinks(Class crawlerClass, String rootUrl) throws Exception
     {
         List<BadLink> badLinks = getBadLinks(crawlerClass, rootUrl);
-        
+        int paramCount = 3;
         List<Object []> rows = badLinks.stream()
                 .map( l -> 
                 {
-                    Object [] array = new Object[3];
+                    Object [] array = new Object[paramCount];
                     
                     array[0] = l.getUrl();
                     array[1] = l.getStatusCode();
@@ -162,7 +162,7 @@ public class WebContentService
                     return array;
                 }).collect(Collectors.toList());
         
-        Object[][] data = new Object[rows.size()][3];
+        Object[][] data = new Object[rows.size()][paramCount];
         int r = 0;
         
         for(Object [] row : rows)
