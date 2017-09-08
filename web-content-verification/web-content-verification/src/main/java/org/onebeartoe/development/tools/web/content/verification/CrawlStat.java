@@ -30,7 +30,7 @@ public class CrawlStat
     
     private long totalTextSize;
     
-    private List<BadLink> badLinks;
+    private final List<BadLink> badLinks;
 
     public CrawlStat()
     {
