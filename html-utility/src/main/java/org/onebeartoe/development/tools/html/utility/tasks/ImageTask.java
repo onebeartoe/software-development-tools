@@ -49,7 +49,7 @@ public class ImageTask extends TimerTask
                     
                     String altText = image;
                     ImageTag imageTag = new ImageTag(image, 600, 400, altText);
-                    String tag = imageTag.toString();
+                    String tag = imageTag.toHtml();
                             
                     writer.println(tag);
                     writer.println("<br>\n</br>");
