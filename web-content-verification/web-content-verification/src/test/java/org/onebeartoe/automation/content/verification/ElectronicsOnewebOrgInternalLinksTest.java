@@ -2,6 +2,7 @@
 package org.onebeartoe.automation.content.verification;
 
 import java.util.List;
+import org.onebeartoe.development.tools.web.content.verification.InternalLinksTest;
 import org.onebeartoe.development.tools.web.content.verification.WebContentService;
 import org.onebeartoe.development.tools.web.content.verification.crawlers.ElectronicsOnewebOrgStatusCrawler;
 import org.testng.annotations.DataProvider;
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
  * 
  *      http://learn-automation.com/data-driven-framework-in-selenium-webdriver/
  */
-public class ElectronicsOnewebOrgInternalLinksTest 
+public class ElectronicsOnewebOrgInternalLinksTest  extends InternalLinksTest
 {
     protected WebContentService webContentService;
     
@@ -35,6 +36,8 @@ public class ElectronicsOnewebOrgInternalLinksTest
     @Test(dataProvider="electronics.oneweb.org", groups = {"internal-links"})
     public void testInternalLinks(String url, int statusCode, List<String> parentUrls)
     {
-        assert(statusCode == 200);
+        boolean badRespose = isBadHttpResponse(statusCode);
+                
+        assert( !badRespose );
     }
 }
