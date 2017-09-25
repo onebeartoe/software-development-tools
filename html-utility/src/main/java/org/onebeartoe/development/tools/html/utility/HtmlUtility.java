@@ -5,10 +5,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import org.onebeartoe.application.ui.swing.SwingApplication;
 import org.onebeartoe.application.ui.swing.TabbedPane;
 import org.onebeartoe.development.tools.html.utility.panels.ImageTagPanel;
 import org.onebeartoe.development.tools.html.utility.panels.JspSeederPanel;
+import org.onebeartoe.development.tools.html.utility.panels.ListsPanel;
 
 /**
  * 
@@ -31,10 +33,12 @@ public class HtmlUtility extends JFrame
         IndexPanel ip = new IndexPanel();
         
         JspSeederPanel jsp = new JspSeederPanel();
+        
+        JPanel listsPanel = new ListsPanel();
 
-        tabbedPane = new TabbedPane(jsp, itp, ip);
+        tabbedPane = new TabbedPane(jsp, itp, ip, listsPanel);
 
-        String [] titles = {"JSP Seeder", "Image Tagging", "Directory Listing"};
+        String [] titles = {"JSP Seeder", "Image Tagging", "Directory Listing", "Lists"};
         tabbedPane.setTabTitles(titles);
         
         getContentPane().add( tabbedPane );
