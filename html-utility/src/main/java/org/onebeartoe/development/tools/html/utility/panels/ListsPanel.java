@@ -27,13 +27,15 @@ import org.onebeartoe.application.ui.swing.ScrollableTextArea;
  */
 public class ListsPanel extends JPanel implements DocumentListener
 {
-    private JTextField targetDirectory;
+//    private JTextField targetDirectory;
 
     private final ScrollableTextArea inputTextArea;
 
     private final ScrollableTextArea outputTextArea;
 
     private JCheckBox anchorTagCheckBox;
+    
+    private JCheckBox textAsLinkCheckBox;
 
     private JCheckBox unorderedListCheckBox;
     
@@ -41,16 +43,16 @@ public class ListsPanel extends JPanel implements DocumentListener
     {
         Border border = GUITools.factoryLineBorder("Input");
         
-        targetDirectory = new JTextField();
-        targetDirectory.addActionListener( new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                System.out.println("inso");
-
-            }
-        });
+//        targetDirectory = new JTextField();
+//        targetDirectory.addActionListener( new ActionListener() 
+//        {
+//            @Override
+//            public void actionPerformed(ActionEvent e) 
+//            {
+//                System.out.println("inso");
+//
+//            }
+//        });
   
         inputTextArea = new ScrollableTextArea("");
         inputTextArea.addTextListener(this);
@@ -79,6 +81,7 @@ public class ListsPanel extends JPanel implements DocumentListener
                 updateOutput();
             }
         });
+        
         unorderedListCheckBox = new JCheckBox("Unordered List");
         unorderedListCheckBox.addActionListener( new ActionListener()
         {
@@ -88,8 +91,20 @@ public class ListsPanel extends JPanel implements DocumentListener
                 updateOutput();
             }
         });
+        
+        textAsLinkCheckBox = new JCheckBox("Text as Link");
+        textAsLinkCheckBox.addActionListener( new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                updateOutput();
+            }
+        });
+        
         JPanel checkboxPanel = new JPanel( new FlowLayout(FlowLayout.CENTER, 20, 20) );
         checkboxPanel.add(anchorTagCheckBox);
+        checkboxPanel.add(textAsLinkCheckBox);
         checkboxPanel.add(unorderedListCheckBox);
 
         // define the JFrame content layout        
@@ -138,9 +153,21 @@ public class ListsPanel extends JPanel implements DocumentListener
         List<String> list = Arrays.asList(strs);
 
         if( anchorTagCheckBox.isSelected() )
-        {
+        {            
             list = list.stream()
-                       .map(s -> "<a href=''alt=''>" + s + "</a>")
+                       .map(s -> 
+                       {
+                            String url = "";
+                            
+                            if( textAsLinkCheckBox.isSelected() )
+                            {
+                                url = s;
+                            }
+                            
+                            String link = "<a href='" + url + "'alt=''>" + s + "</a>";
+                           
+                            return link;    
+                       })
                        .collect( Collectors.toList() );
         }
         
