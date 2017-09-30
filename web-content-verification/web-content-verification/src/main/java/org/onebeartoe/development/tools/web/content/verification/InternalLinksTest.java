@@ -18,8 +18,20 @@ public class InternalLinksTest
      */
     public boolean isBadHttpResponse(int responseCode)
     {
-        boolean isBad = responseCode != 200 
-                            || responseCode != 302;
+        // assume the link is bad
+        boolean isBad = true;
+        
+        if(responseCode == 200)
+        {
+            isBad = false;
+        }
+        
+        if(responseCode == 302)
+        {
+            isBad = false;
+        }
+
+        System.out.println("response code: " + responseCode);
         
         return isBad;
     }
