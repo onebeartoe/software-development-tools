@@ -21,9 +21,10 @@
         <module>html-utility</module>
         <module>android</module>
         <module>jar-diff</module>
+        <module>keyboard-shortcuts</module>
         <module>serial-plotter</module>
+        <module>version-control</module>
         <module>web-content-verification</module>
-    <module>keyboard-shortcuts</module>
   </modules>
 
     <repositories>
