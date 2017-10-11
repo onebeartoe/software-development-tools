@@ -1,6 +1,7 @@
 
 package org.onebeartoe.tools.versioning.subversion;
 
+import org.onebeartoe.tools.versioning.subversion.log.SubversionCreationDateAppender;
 import java.io.File;
 import java.time.Instant;
 import java.util.List;

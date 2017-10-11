@@ -1,6 +1,7 @@
 
 package org.onebeartoe.tools.versioning.subversion;
 
+import org.onebeartoe.tools.versioning.subversion.service.SubversionService;
 import org.testng.annotations.Test;
 
 /**

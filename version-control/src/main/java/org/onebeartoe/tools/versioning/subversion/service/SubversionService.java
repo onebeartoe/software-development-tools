@@ -1,5 +1,5 @@
 
-package org.onebeartoe.tools.versioning.subversion;
+package org.onebeartoe.tools.versioning.subversion.service;
 
 import java.util.Arrays;
 import java.util.List;

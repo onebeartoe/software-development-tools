@@ -1,5 +1,5 @@
 
-package org.onebeartoe.tools.versioning.subversion;
+package org.onebeartoe.tools.versioning.subversion.log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.onebeartoe.io.TextFileWriter;
+import org.onebeartoe.tools.versioning.subversion.service.SubversionService;
 
 /**
  * @author Roberto Marquez
