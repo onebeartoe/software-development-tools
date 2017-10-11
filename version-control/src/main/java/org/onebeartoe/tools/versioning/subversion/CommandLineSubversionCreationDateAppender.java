@@ -2,8 +2,13 @@
 package org.onebeartoe.tools.versioning.subversion;
 
 import java.io.File;
-import java.io.IOException;
+import java.time.Instant;
 import java.util.List;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.UnrecognizedOptionException;
+import org.onebeartoe.application.duration.DurationService;
 
 /**
  * To create a creation-date.text file for a WEB/jsp/ directory use this find command:
@@ -19,6 +24,28 @@ import java.util.List;
  */
 public class CommandLineSubversionCreationDateAppender
 {
+    private static final String REVERT_MODIFIED = "revertModified";
+    
+    private DurationService durationService;
+    
+    public CommandLineSubversionCreationDateAppender()
+    {
+        durationService = new DurationService();
+    }
+    
+    private Options buildOptions()
+    {
+        Option revertModified = Option.builder()
+                    .required(false)
+                    .longOpt(REVERT_MODIFIED)
+                    .build();
+        
+        Options options = new Options();
+        options.addOption(revertModified);
+        
+        return options;
+    }
+    
     public static void main(String [] args) throws Exception
 //    public static void main(String [] args) throws IOException, Exception
     {
@@ -27,15 +54,38 @@ public class CommandLineSubversionCreationDateAppender
         
         System.out.println("The following files are set to have the creation date appended:");
     
-        SubversionCreationDateAppender appender = new SubversionCreationDateAppender();
+        CommandLineSubversionCreationDateAppender app = new CommandLineSubversionCreationDateAppender();
         
-        String inputDir = ".";
-        
-        File f = new File(inputDir);
-        System.out.println("input directory: " + f.getAbsolutePath() );
+        Options options = app.buildOptions();
+        try
+        {
+//            RunProfile runProfile = parseRunProfile(args, options);
 
-        List<File> targetFiles = appender.findTargetFiles(inputDir);
-        
-        appender.appendCreationDate(targetFiles);
+            Instant start = Instant.now();
+
+            SubversionCreationDateAppender appender = new SubversionCreationDateAppender();
+
+            String inputDir = ".";
+
+            File f = new File(inputDir);
+            System.out.println("input directory: " + f.getAbsolutePath() );
+
+            List<File> targetFiles = appender.findTargetFiles(inputDir);
+
+            appender.appendCreationDate(targetFiles);
+
+            Instant end = Instant.now();
+
+            String message = durationService.durationMessage(start, end);
+            System.out.println();
+            System.out.println(message);
+        }
+        catch(UnrecognizedOptionException uoe)
+        {
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp("java -jar openscad-test-suite.jar [path]", options);
+//            Help h = new Help();
+//            h.printHelp();
+        }        
     } 
 }

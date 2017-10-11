@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.onebeartoe.io.TextFileWriter;
@@ -39,7 +40,8 @@ public class SubversionCreationDateAppender
                                  .collect( Collectors.toList() );
         
         // validate the files
-        targetFiles.forEach( f -> 
+        targetFiles.parallelStream()
+                   .forEach( f -> 
         {
             if( !f.exists() )
             {
@@ -53,15 +55,33 @@ public class SubversionCreationDateAppender
         
     public void appendCreationDate(List<File> targetFiles) throws Exception
     {
-        for(File f: targetFiles)
+        List<String> errors = new ArrayList();
+        targetFiles.parallelStream()
+                   .forEach( f -> 
         {
-            String repositoryPath = f.toString();
-            
-            String creationDate = subversionService.creationDate(repositoryPath);
-            
-            textFileWriter.writeText(f, creationDate, true);
-            
-            System.out.println(creationDate + " - " + f.toString() );
-        };
+            try//                   {
+//        for(File f: targetFiles)
+            {
+                String repositoryPath = f.toString();
+                
+                String creationDate = subversionService.creationDate(repositoryPath);
+                String appendText = "\n" + "Date Created: " + creationDate + "\n";
+                textFileWriter.writeText(f, appendText, true);
+                
+                System.out.println(creationDate + " - " + f.toString() );
+            } catch (Exception ex)
+            {
+                ex.printStackTrace();
+                
+                errors.add(f.toString() );
+            }
+        });
+        
+        if(errors.size() > 0)
+        {
+            System.out.println("Errors occured with these files:");
+        
+            errors.forEach(System.out::println);
+        }
     }
 }
