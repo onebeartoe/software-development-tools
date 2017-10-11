@@ -16,13 +16,13 @@ import org.onebeartoe.tools.versioning.subversion.service.SubversionService;
 /**
  * @author Roberto Marquez
  */
-public class SubversionCreationDateAppender
+public class CreationDateAppender
 {
     private final SubversionService subversionService;
     
     private final TextFileWriter textFileWriter;
     
-    public SubversionCreationDateAppender()
+    public CreationDateAppender()
     {
         subversionService = new SubversionService();
         

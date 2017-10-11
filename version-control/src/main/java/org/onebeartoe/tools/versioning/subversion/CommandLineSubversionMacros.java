@@ -1,7 +1,7 @@
 
 package org.onebeartoe.tools.versioning.subversion;
 
-import org.onebeartoe.tools.versioning.subversion.log.SubversionCreationDateAppender;
+import org.onebeartoe.tools.versioning.subversion.log.CreationDateAppender;
 import java.io.File;
 import java.time.Instant;
 import java.util.List;
@@ -23,13 +23,13 @@ import org.onebeartoe.application.duration.DurationService;
  * 
  * @author Roberto Marquez
  */
-public class CommandLineSubversionCreationDateAppender
+public class CommandLineSubversionMacros
 {
     private static final String REVERT_MODIFIED = "revertModified";
     
     private DurationService durationService;
     
-    public CommandLineSubversionCreationDateAppender()
+    public CommandLineSubversionMacros()
     {
         durationService = new DurationService();
     }
@@ -55,7 +55,7 @@ public class CommandLineSubversionCreationDateAppender
         
         System.out.println("The following files are set to have the creation date appended:");
     
-        CommandLineSubversionCreationDateAppender app = new CommandLineSubversionCreationDateAppender();
+        CommandLineSubversionMacros app = new CommandLineSubversionMacros();
         
         Options options = app.buildOptions();
         try
@@ -64,7 +64,7 @@ public class CommandLineSubversionCreationDateAppender
 
             Instant start = Instant.now();
 
-            SubversionCreationDateAppender appender = new SubversionCreationDateAppender();
+            CreationDateAppender appender = new CreationDateAppender();
 
             String inputDir = ".";
 
