@@ -39,9 +39,27 @@ public class SubversionService
         SystemCommand command = new SystemCommand();
         command.setCommandProfile(profile);
         
-        String date = null;
-        
         CommandResults results = command.execute();
+        
+// results.processedStdOut is something like the following        
+//------------------------------------------------------------------------
+//r11 | fisto | 2009-05-21 13:13:35 -0500 (Thu, 21 May 2009) | 1 line
+//
+//intial import
+//------------------------------------------------------------------------        
+
+//        System.out.println("stdout: " + "\n" + results.processedStdOut);
+
+        int firstPipe = results.processedStdOut.indexOf("|") + 1;
+        int secondPipe = results.processedStdOut.indexOf("|", firstPipe ) + 1;
+        int lastPipe = results.processedStdOut.indexOf("|", secondPipe);
+        
+        int begin = secondPipe;
+        int end = lastPipe;
+        
+        String date = results.processedStdOut.substring(begin, end);
+
+        date = date.trim();
         
         return date;
     }

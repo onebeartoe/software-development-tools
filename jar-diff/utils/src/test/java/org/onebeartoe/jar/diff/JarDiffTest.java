@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import org.onebeartoe.develoment.tools.jar.diff.JarDiff;
 import org.onebeartoe.develoment.tools.jar.diff.JarDiffReport;
-//import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
