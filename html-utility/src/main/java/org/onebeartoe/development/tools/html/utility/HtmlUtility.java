@@ -6,6 +6,8 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import org.onebeartoe.application.JavaPreferencesService;
+import org.onebeartoe.application.PreferencesService;
 import org.onebeartoe.application.ui.swing.SwingApplication;
 import org.onebeartoe.application.ui.swing.TabbedPane;
 import org.onebeartoe.development.tools.html.utility.panels.ImageTagPanel;
@@ -19,6 +21,8 @@ import org.onebeartoe.development.tools.html.utility.panels.ListsPanel;
  */
 public class HtmlUtility extends JFrame
 {
+    private PreferencesService preferencesService;
+    
     private TabbedPane tabbedPane;
     
     private SwingApplication guiConfig;
@@ -28,11 +32,13 @@ public class HtmlUtility extends JFrame
     public HtmlUtility() 
     {
         super( "HtmlUtility by onebeartoe.com" );
+        
+        preferencesService = new JavaPreferencesService( getClass() );
 
         ImageTagPanel itp = new ImageTagPanel();
         IndexPanel ip = new IndexPanel();
         
-        JspSeederPanel jsp = new JspSeederPanel();
+        JspSeederPanel jsp = new JspSeederPanel(preferencesService);
         
         JPanel listsPanel = new ListsPanel();
 

@@ -1,6 +1,7 @@
 
 package org.onebeartoe.development.tools.html.utility.panels;
 
+import com.sun.istack.internal.logging.Logger;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -8,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.prefs.BackingStoreException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +18,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
+import org.onebeartoe.application.PreferencesService;
 import org.onebeartoe.application.filesystem.FileSelectionMethods;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.swing.FileSelectionPanel;
@@ -31,6 +35,8 @@ import org.onebeartoe.web.utilities.jsp.StreamedJspSeederService;
  */
 public class JspSeederPanel extends JPanel implements ActionListener
 {
+    private Logger logger;
+    
     private JTextField targetDirectory;
     
     private final JspSeederService seederService;
@@ -41,14 +47,45 @@ public class JspSeederPanel extends JPanel implements ActionListener
 
     private final ScrollableTextArea statusPanel;
     
-    public JspSeederPanel()
+    private PreferencesService preferencesService;
+    
+    private final String JSP_SEEDER_CURRENT_DIRECTORY = "JSP_SEEDER_CURRENT_DIRECTORY";
+    
+    public JspSeederPanel(PreferencesService preferencesService)
     {
+        logger = Logger.getLogger( getClass() );
+        
         seederService = new StreamedJspSeederService();
         
+        this.preferencesService = preferencesService;
+     
         // this panel gives the user a button to click to pick an input direcotyr,  it also shows which files will be worked on.
         boolean showRecursive = false;
-        fileSelectionPanel = new FileSelectionPanel(FileType.IMAGE, FileSelectionMethods.SINGLE_DIRECTORY, showRecursive);
-        Border border = GUITools.factoryLineBorder("Input");
+        
+        ActionListener preferenceSaveListener = new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String key = JSP_SEEDER_CURRENT_DIRECTORY;
+                File f = JspSeederPanel.this.fileSelectionPanel.getCurrentDirectory();
+                String path = f.getAbsolutePath();
+                
+                try
+                {
+                    preferencesService.saveProperty(key, path);
+                } 
+                catch (BackingStoreException ex)
+                {
+                    String message = "The " + JSP_SEEDER_CURRENT_DIRECTORY + " could not be saved.";
+                    logger.log(Level.SEVERE, message, ex);
+                }
+            }
+        };
+        
+        fileSelectionPanel = new FileSelectionPanel(FileType.IMAGE, FileSelectionMethods.SINGLE_DIRECTORY, showRecursive, preferenceSaveListener);
+        
+        restorePreferences();
         
         targetDirectory = new JTextField();
         targetDirectory.addActionListener( new ActionListener() 
@@ -65,6 +102,7 @@ public class JspSeederPanel extends JPanel implements ActionListener
         targetPanel.add( new JLabel("Target Path"));
         targetPanel.add(targetDirectory);
         
+        Border border = GUITools.factoryLineBorder("Input");        
         JPanel inputPanel = new JPanel(new BorderLayout());
         inputPanel.setBorder(border);
         inputPanel.add(fileSelectionPanel, BorderLayout.CENTER);
@@ -99,7 +137,7 @@ public class JspSeederPanel extends JPanel implements ActionListener
         Object eventSource = ae.getSource();
         if (eventSource == actionButton) 
         {            
-            File webRoot = fileSelectionPanel.getCurrentDirectoty();
+            File webRoot = fileSelectionPanel.getCurrentDirectory();
             replaceBackslash();
             String targetPath = targetDirectory.getText(); 
             
@@ -131,4 +169,22 @@ public class JspSeederPanel extends JPanel implements ActionListener
 
         targetDirectory.setText(newText);        
     }
+    
+    private void restorePreferences()
+    {
+        String defaultValue = null;
+        String currentDirectory = preferencesService.get(JSP_SEEDER_CURRENT_DIRECTORY, defaultValue);
+     
+        if(currentDirectory == null)
+        {
+            String noSelectionMessage = "~/Desktop/";
+            currentDirectory = noSelectionMessage;
+        }
+        
+        File d = new File(currentDirectory);
+        fileSelectionPanel.setCurrentDirectory(d);
+    
+        String message = "OpenSCAD file: " + currentDirectory;
+        logger.log(Level.INFO, message);
+    }    
 }

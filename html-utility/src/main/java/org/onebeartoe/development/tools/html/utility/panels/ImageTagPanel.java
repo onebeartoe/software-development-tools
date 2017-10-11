@@ -76,7 +76,7 @@ public class ImageTagPanel extends JPanel implements ActionListener
         Object eventSource = ae.getSource();
         if (eventSource == actionButton) 
         {            
-            File sourceDirectory = fileSelectionPanel.getCurrentDirectoty();
+            File sourceDirectory = fileSelectionPanel.getCurrentDirectory();
             TimerTask task = new ImageTask(sourceDirectory, statusPanel);
             Date date = new Date();
             Timer timer = new Timer();
