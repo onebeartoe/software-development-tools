@@ -1,7 +1,6 @@
 
 package org.onebeartoe.development.tools.html.utility.panels;
 
-import com.sun.istack.internal.logging.Logger;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -10,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -53,7 +53,7 @@ public class JspSeederPanel extends JPanel implements ActionListener
     
     public JspSeederPanel(PreferencesService preferencesService)
     {
-        logger = Logger.getLogger( getClass() );
+        logger = Logger.getLogger( getClass().getName() );
         
         seederService = new StreamedJspSeederService();
         
