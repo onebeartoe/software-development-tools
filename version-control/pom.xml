@@ -54,7 +54,7 @@
                     <archive>
                         <manifest>
                             <mainClass>
-                                org.onebeartoe.tools.versioning.subversion.CommandLineSubversionCreationDateAppender
+                                org.onebeartoe.tools.versioning.subversion.CommandLineSubversionMacros
                             </mainClass>
                         </manifest>
                     </archive>

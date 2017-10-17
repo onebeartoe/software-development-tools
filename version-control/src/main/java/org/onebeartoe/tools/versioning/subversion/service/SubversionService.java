@@ -1,8 +1,17 @@
 
 package org.onebeartoe.tools.versioning.subversion.service;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import org.onebeartoe.io.TextFileWriter;
 import org.onebeartoe.system.CommandResults;
 import org.onebeartoe.system.command.SystemCommand;
 import org.onebeartoe.system.command.SystemCommandProfile;
@@ -13,6 +22,47 @@ import org.onebeartoe.system.command.SystemCommandProfile;
  */
 public class SubversionService
 {
+//    private final SubversionService subversionService;
+    
+    private final TextFileWriter textFileWriter;
+    
+    public SubversionService()
+    {
+//        subversionService = new SubversionService();
+        
+        textFileWriter = new TextFileWriter();
+    }            
+    
+    public void appendCreationDate() throws Exception
+    {
+        List<File> targetFiles = loadTargetFiles();
+        
+        List<String> errors = new ArrayList();
+        
+        targetFiles.parallelStream()
+                   .forEach( f -> 
+        {
+            try
+            {
+                String repositoryPath = f.toString();
+                
+                String creationDate = creationDate(repositoryPath);
+                String appendText = "\n" + "Date Created: " + creationDate + "\n";
+                textFileWriter.writeText(f, appendText, true);
+                
+                System.out.println(creationDate + " - " + f.toString() );
+            } 
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+                
+                errors.add(f.toString() );
+            }
+        });
+        
+        printErrorFiles(errors);
+    }    
+    
     /**
      * This Subversion svn command returns the first revision for a repository path.
      * 
@@ -62,5 +112,89 @@ public class SubversionService
         date = date.trim();
         
         return date;
+    }
+    
+    public List<File> loadTargetFiles() throws IOException
+    {
+        Path inpath = Paths.get("creation-date-targets.text");
+        BufferedReader br = Files.newBufferedReader(inpath);
+        
+        List<File> targetFiles = br.lines()
+//                                 .filter( line -> line.trim().length() == 0 )
+                                 .map(File::new)
+                                 
+                                 .collect( Collectors.toList() );
+        
+        // validate the files
+        targetFiles.parallelStream()
+                   .forEach( f -> 
+        {
+            if( !f.exists() )
+            {
+                String message = "This input file does not exist: " + f.toString();
+                throw new IllegalArgumentException(message);
+            }
+        });
+        
+        return targetFiles;
+    }
+    
+    private void printErrorFiles(List<String> errors)
+    {
+        if(errors.size() > 0)
+        {
+            System.out.println("Errors occured with these files:");
+        
+            errors.forEach(System.out::println);
+        }        
+    }
+    
+    public void revertModified() throws IOException
+    {
+        List<File> targetFiles = loadTargetFiles();
+        
+        List<String> errors = new ArrayList();
+        
+        targetFiles.parallelStream()
+                   .forEach( f -> 
+        {
+            try
+            {
+                String repositoryPath = f.toString();
+                
+                SystemCommandProfile profile = new SystemCommandProfile();
+                String c = "svn revert " + repositoryPath;
+                String [] strs = c.split("\\s+");
+                List <String> commandAndArgs = Arrays.asList(strs);
+
+                profile.commandAndArgs = commandAndArgs;
+                profile.processStdErr = true;
+                profile.processStdOut = true;
+
+                SystemCommand command = new SystemCommand();
+                command.setCommandProfile(profile);
+
+                CommandResults results = command.execute();
+                
+                if(results.exitCode == 0)
+                {
+//                    System.out.println(repositoryPath + " - reverted");
+                }
+                else
+                {
+                    errors.add(repositoryPath);
+                }                
+            } 
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+                
+                errors.add(f.toString() );
+            }
+            
+            
+        });        
+        
+        printErrorFiles(errors);
     }
 }
