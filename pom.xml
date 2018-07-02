@@ -20,6 +20,7 @@
     <modules>
         <module>html-utility</module>
         <module>android</module>
+        <module>filesystem</module>
         <module>jar-diff</module>
         <module>keyboard-shortcuts</module>
         <module>serial-plotter</module>
