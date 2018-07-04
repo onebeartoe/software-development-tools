@@ -16,9 +16,11 @@ import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.UnrecognizedOptionException;
 
 /**
  * This class is entry point for a file system populater application.
@@ -88,30 +90,40 @@ public class FilesystemPopulater extends SimpleFileVisitor<Path>
         FilesystemPopulater populater = new FilesystemPopulater();
         
         Options options = populater.buildOptions();
-        
-        RunProfile runProfile = populater.parseRunProfile(args, options);
-        
-        Files.walkFileTree(start, populater);
-        
-        if( runProfile.onlyShowNonOpenscadDirs )
+        try
         {
-            System.out.println("Non OpenScad Directories");
-            
-            populater.nonOpenScadDirectories
-                     .forEach(System.out::println);
-        }
+            RunProfile runProfile = populater.parseRunProfile(args, options);
 
-        if( runProfile.onlyShowOpenScadDirs )
-        {
-            System.out.println("OpenScad Directories");
-            
-            populater.openScadDirectories
-                     .forEach(System.out::println);
+            Files.walkFileTree(start, populater);
+
+            if( runProfile.onlyShowNonOpenscadDirs )
+            {
+                System.out.println("Non OpenScad Directories");
+
+                populater.nonOpenScadDirectories
+                         .forEach(System.out::println);
+            }
+
+            if( runProfile.onlyShowOpenScadDirs )
+            {
+                System.out.println("OpenScad Directories");
+
+                populater.openScadDirectories
+                         .forEach(System.out::println);
+            }
+            else
+            {
+                File populationFile = runProfile.populationFile;
+                populater.populate(populationFile);
+            }        
         }
-        else
+        catch(UnrecognizedOptionException uoe)
         {
-            File populationFile = runProfile.populationFile;
-            populater.populate(populationFile);
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp("java -jar openscad-test-suite.jar [path]", options);        
+            
+            String errorMessage = uoe.getMessage();
+            System.out.println("Error details: " + errorMessage);
         }
     }
     
@@ -140,7 +152,10 @@ command.getArgList().forEach(System.out::println);
             }
             else
             {
-                throw new ParseException("A population file is needed, but missing.");
+                String message = "A population file is needed, but missing." + 
+                                   "  Use the --" + POPULATION_FILE + " option.";
+                        
+                throw new ParseException(message);
             }
         }
         
