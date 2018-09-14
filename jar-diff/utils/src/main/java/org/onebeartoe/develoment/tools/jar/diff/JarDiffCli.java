@@ -46,11 +46,11 @@ public class JarDiffCli
         
         List<String> remainingArgs = cmd.getArgList();
         
-//        System.out.println("remaining args");
-//        remainingArgs.forEach(a ->
-//        {
-//            System.out.println(a);}
-//        );
+        System.out.println("remaining args");
+        remainingArgs.forEach(a ->
+        {
+            System.out.println(a);}
+        );
         
         try
         {

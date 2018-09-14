@@ -99,6 +99,8 @@ public class SubversionService
 //------------------------------------------------------------------------        
 
         System.out.println("stdout: " + "\n" + results.processedStdOut);
+        System.out.println();
+        System.out.println("stderr: " + "\n" + results.processedStdErr);
 
         int firstPipe = results.processedStdOut.indexOf("|") + 1;
         int secondPipe = results.processedStdOut.indexOf("|", firstPipe ) + 1;
