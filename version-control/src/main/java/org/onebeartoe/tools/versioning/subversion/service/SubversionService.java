@@ -98,7 +98,7 @@ public class SubversionService
 //intial import
 //------------------------------------------------------------------------        
 
-//        System.out.println("stdout: " + "\n" + results.processedStdOut);
+        System.out.println("stdout: " + "\n" + results.processedStdOut);
 
         int firstPipe = results.processedStdOut.indexOf("|") + 1;
         int secondPipe = results.processedStdOut.indexOf("|", firstPipe ) + 1;
