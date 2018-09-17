@@ -1,6 +1,7 @@
 
 package org.onebeartoe.develoment.tools.jar.diff;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.cli.CommandLine;
@@ -82,7 +83,22 @@ public class JarDiffette extends CommandLineInterfaceApplet
         }
         
         String s1 = remainingArgs.get(0);
+        File f1 = new File(s1);
+        if( !f1.exists() || f1.isDirectory() )
+        {
+            String message = "Please ensure the first path is a file and exists";
+            
+            throw new ParseException(message);
+        }
+        
         String s2 = remainingArgs.get(1);
+        File f2 = new File(s2);
+        if( !f2.exists() || f1.isDirectory() )
+        {
+            String message = "Please ensure the second path is a file and exists";
+            
+            throw new ParseException(message);
+        }
                 
         JarDiffCliRunProfile runProfile = new JarDiffCliRunProfile();
         
@@ -92,7 +108,7 @@ public class JarDiffette extends CommandLineInterfaceApplet
         return runProfile;
     }
     
-    class JarDiffCliRunProfile extends RunProfile
+    public class JarDiffCliRunProfile extends RunProfile
     {
         String jarPath1;
         

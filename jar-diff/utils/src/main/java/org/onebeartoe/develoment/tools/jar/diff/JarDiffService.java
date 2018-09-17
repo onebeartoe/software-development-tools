@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.zip.ZipFile;
+import org.onebeartoe.develoment.tools.jar.diff.JarDiffette.JarDiffCliRunProfile;
 
 import org.onebeartoe.network.mail.AppletService;
 import org.onebeartoe.network.mail.RunProfile;
@@ -22,9 +23,9 @@ public class JarDiffService extends AppletService
 {    
     public JarDiffReport diff(String infile1, String infile2) throws IOException
     {        
-        List<String> uniqueToPojo1 = new ArrayList<String>();
-        List<String> uniqueToPojo2 = new ArrayList<String>();
-        List<String> commonToBoth = new ArrayList<String>();
+        List<String> uniqueToPojo1 = new ArrayList();
+        List<String> uniqueToPojo2 = new ArrayList();
+        List<String> commonToBoth = new ArrayList();
         
         List<String> lines1 = loadLines(infile1);
         List<String> lines2 = loadLines(infile2);
@@ -101,17 +102,31 @@ public class JarDiffService extends AppletService
     @Override
     public void serviceRequest(RunProfile runProfile) throws Exception
     {
+        //TODO: find a way to do this without having to cast!
+        JarDiffCliRunProfile jarDiffRunProfile = (JarDiffCliRunProfile) runProfile;
+                
         try
         {
-            String jar1 = null;
-            String jar2 = null;
+            String jar1 = jarDiffRunProfile.jarPath1;
+            String jar2 = jarDiffRunProfile.jarPath2;
+            
             JarDiffService diff = new JarDiffService();
             JarDiffReport report = diff.diff(jar1, jar2);
             
+            System.out.println("unique to " + jar1);
             report.uniqueToJar1.stream()
                     .forEach( System.out::println );
-            
-            report.uniqueToJar2.stream();
+
+            System.out.println();
+            System.out.println("unique to " + jar2);
+            report.uniqueToJar2.stream()
+                               .forEach( System.out::println );
+
+            System.out.println();            
+            System.out.println("common to both:");
+            report.commonToBoth
+                  .stream()
+                  .forEach(System.out::println);
         }
         catch(IndexOutOfBoundsException ioobe)
         {
