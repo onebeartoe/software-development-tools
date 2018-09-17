@@ -9,4 +9,4 @@ buildNumber.properties
 .mvn/timing.properties
 **/nbactions.xml
 **/nb-configuration.xml
-
+jar-diff/maven/target/
