@@ -12,16 +12,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.zip.ZipFile;
 
+import org.onebeartoe.network.mail.AppletService;
+import org.onebeartoe.network.mail.RunProfile;
+
 /**
  * @author Roberto Marquez
  */
-public class JarDiff 
-{
-//    public JarDiff(String infile1, String infile2)
-//    {
-//        this.
-//    }
-    
+public class JarDiffService extends AppletService
+{    
     public JarDiffReport diff(String infile1, String infile2) throws IOException
     {        
         List<String> uniqueToPojo1 = new ArrayList<String>();
@@ -98,5 +96,28 @@ public class JarDiff
         }
         
         return lines;
+    }
+    
+    @Override
+    public void serviceRequest(RunProfile runProfile) throws Exception
+    {
+        try
+        {
+            String jar1 = null;
+            String jar2 = null;
+            JarDiffService diff = new JarDiffService();
+            JarDiffReport report = diff.diff(jar1, jar2);
+            
+            report.uniqueToJar1.stream()
+                    .forEach( System.out::println );
+            
+            report.uniqueToJar2.stream();
+        }
+        catch(IndexOutOfBoundsException ioobe)
+        {
+            String message = "At leat two arguments are required: jarPath1 jarPath2";
+            System.err.println(message);
+            ioobe.printStackTrace();
+        }
     }
 }

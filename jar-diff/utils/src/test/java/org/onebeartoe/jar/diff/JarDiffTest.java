@@ -3,7 +3,7 @@ package org.onebeartoe.jar.diff;
 
 import java.io.File;
 import java.io.IOException;
-import org.onebeartoe.develoment.tools.jar.diff.JarDiff;
+import org.onebeartoe.develoment.tools.jar.diff.JarDiffService;
 import org.onebeartoe.develoment.tools.jar.diff.JarDiffReport;
 import org.testng.annotations.Test;
 
@@ -35,7 +35,7 @@ public class JarDiffTest
     @Test(groups = {"jar-diff-dataset"})
     public void sampleDataAB() throws IOException 
     {        
-        JarDiff diff = new JarDiff();
+        JarDiffService diff = new JarDiffService();
         JarDiffReport report = diff.diff(dataset.jarA, dataset.jarB);
         
         int aSize = report.uniqueToJar1.size();
@@ -53,7 +53,7 @@ public class JarDiffTest
     @Test(groups = {"jar-diff-dataset"})
     public void sampleDataBC() throws IOException
     {
-        JarDiff diff = new JarDiff();
+        JarDiffService diff = new JarDiffService();
         JarDiffReport report = diff.diff(dataset.jarB, dataset.jarC);
         
         int bSize = report.uniqueToJar1.size();
