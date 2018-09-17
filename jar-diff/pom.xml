@@ -10,7 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>onebeartoe-jar-diff</artifactId>
+    <artifactId>onebeartoe-jar-tools</artifactId>
 
     <packaging>pom</packaging>
 
@@ -18,9 +18,10 @@
 
     </properties>
 
-    <name>onebeartoe-development-tools-jar-diff-parent</name>
+    <name>onebeartoe-development-tools-jars</name>
 
     <modules>
         <module>utils</module>
+        <module>maven</module>
     </modules>
 </project>

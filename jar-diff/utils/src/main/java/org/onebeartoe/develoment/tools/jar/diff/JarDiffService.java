@@ -1,12 +1,8 @@
 
 package org.onebeartoe.develoment.tools.jar.diff;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,30 +71,7 @@ public class JarDiffService extends AppletService
 
         return entries;
     }
-    
-    /**
-     * @Relocate
-     * This is a good example of loading lines of text from a file with Java 8 try with resources.
-     * 
-     * @param inPath
-     * @return
-     * @throws IOException 
-     */
-    private List<String> loadLinesRelocate(String inPath) throws IOException
-    {
-        List<String> lines;
-        
-        File localFile = new File(inPath);
-        Path path = localFile.toPath();
-        try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8))
-        {
-            lines = reader.lines()
-                          .collect( Collectors.toList() );
-        }
-        
-        return lines;
-    }
-    
+
     @Override
     public void serviceRequest(RunProfile runProfile) throws Exception
     {
@@ -107,8 +80,8 @@ public class JarDiffService extends AppletService
                 
         try
         {
-            String jar1 = jarDiffRunProfile.jarPath1;
-            String jar2 = jarDiffRunProfile.jarPath2;
+            String jar1 = jarDiffRunProfile.getJarPath1();
+            String jar2 = jarDiffRunProfile.getJarPath2();
             
             JarDiffService diff = new JarDiffService();
             JarDiffReport report = diff.diff(jar1, jar2);

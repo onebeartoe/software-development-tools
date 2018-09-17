@@ -25,6 +25,9 @@ import org.apache.commons.cli.UnrecognizedOptionException;
 /**
  * This class is entry point for a file system populater application.
  * 
+ * This class places a user specified text file in each directory under the target 
+ * directory.
+ * 
  * For more information see the user story:
  * 
  *      https://github.com/onebeartoe/software-development-tools/issues/1

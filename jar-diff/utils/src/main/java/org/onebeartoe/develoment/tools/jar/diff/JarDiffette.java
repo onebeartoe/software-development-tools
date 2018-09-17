@@ -23,27 +23,13 @@ public class JarDiffette extends CommandLineInterfaceApplet
     @Override
     public Options buildOptions()
     {
-        Option jar1 = Option.builder()
-                        .required()
-                        .longOpt("jar1")
-                        .build();
-        
         Option outfile = Option.builder()
                         .required(false)
                         .longOpt("outfile")
                         .hasArg(true)
                         .build();
         
-        Option name = Option.builder()
-                        .hasArg(true)
-                        .required(false)
-                        .longOpt("nameA")
-                        .argName("nameB")
-                        .build();
-        
         Options options = new Options();
-//        options.addOption(jar1);
-//        options.addOption(jar2);
         options.addOption(outfile);
 
         return options;        
@@ -110,9 +96,9 @@ public class JarDiffette extends CommandLineInterfaceApplet
     
     public class JarDiffCliRunProfile extends RunProfile
     {
-        String jarPath1;
+        private String jarPath1;
         
-        String jarPath2;
+        private String jarPath2;
 
         public String getJarPath1() {
             return jarPath1;
@@ -129,7 +115,5 @@ public class JarDiffette extends CommandLineInterfaceApplet
         public void setJarPath2(String jarPath2) {
             this.jarPath2 = jarPath2;
         }
-        
-        
     }
 }
