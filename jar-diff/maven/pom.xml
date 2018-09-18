@@ -14,4 +14,12 @@
     <packaging>jar</packaging>
     
     <name>onebeartoe-development-tools-maven-jar-utils</name>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.onebeartoe</groupId>
+            <artifactId>email</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>        
+    </dependencies>
 </project>
