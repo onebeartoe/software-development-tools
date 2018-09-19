@@ -48,7 +48,9 @@ public class SystemDependenciesService extends AppletService
 
                 String name = j.getName();
 
-                String populatedTag = String.format(blankTag, artifact, name);
+                String systemPath = subPath + '/' + name;
+                
+                String populatedTag = String.format(blankTag, artifact, systemPath);
 
                 populatedTag = populatedTag.replaceAll("> <", ">\n<");
 
@@ -61,10 +63,13 @@ public class SystemDependenciesService extends AppletService
     
     public void serviceRequest(RunProfile runProfile) throws Exception
     {
-        String basePath = null;
-        String subPath = null;
+//TODO: Find a way to do this without casting objects.        
+        SystemDependenciesRunProfile dependenciesRunProfile = (SystemDependenciesRunProfile) runProfile;
         
-        List<String> tags = generateDependencyTags(basePath, subPath);
+        String projectRoot = dependenciesRunProfile.getProjectRoot();
+        String jarSubpath = dependenciesRunProfile.getJarSubpath();
+        
+        List<String> tags = generateDependencyTags(projectRoot, jarSubpath);
         
         tags.forEach( t -> 
         {

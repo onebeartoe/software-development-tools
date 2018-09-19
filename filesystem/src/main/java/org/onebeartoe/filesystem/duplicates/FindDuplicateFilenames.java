@@ -19,22 +19,26 @@ public class FindDuplicateFilenames
 {
     public static void main(String [] args) throws IOException
     {
-        String inpath = "C:\\home\\group\\all-java-files.text";
+        // the inpath is the location of the text file with a list of all the 
+        // files names to process.        
+        String inpath = args[0];
         
         File f = new File(inpath);
         Path path = f.toPath();
         List<String> allLines = Files.readAllLines(path);
         
         List<String> javaPaths = allLines.stream()
-                                         .filter(p -> p.endsWith(".java") )
+//                                         .filter(p -> p.endsWith(".java") )
+                                         .filter(p -> !p.endsWith("/")) // remove directory entries
                                          .collect( Collectors.toList() );
         
         Map<String, List<String> > nameToPaths = new HashMap();
         
         javaPaths.forEach(jp -> 
         {
+            System.out.println("jp: " + jp);
             int begin = jp.lastIndexOf("/") + 1;
-            int end = jp.length() - 5;
+            int end = jp.length() > 5 ? jp.length() - 5 : jp.length();
             
             String className = jp.substring(begin, end);
             
