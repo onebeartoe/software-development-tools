@@ -16,7 +16,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <name>onebeartoe-development-tools-parent</name>
+    <name>onebeartoe-development-tools</name>
 
     <modules>
         <module>html-utility</module>
