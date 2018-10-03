@@ -6,22 +6,18 @@
 
     <parent>
         <groupId>org.onebeartoe.development.tools</groupId>
-        <artifactId>onebeartoe-jar-tools</artifactId>
+        <artifactId>maven-tools</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>onebeartoe-jar-sign</artifactId>
+    <artifactId>onebeartoe-jar-system-dependencies</artifactId>
 
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
-    <name>onebeartoe-development-tools-jar-sign</name>
+    <properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.onebeartoe</groupId>
-            <artifactId>email</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>        
-    </dependencies>
+    </properties>
 
+    <name>onebeartoe-development-tools-system-dependencies</name>
 </project>
+
