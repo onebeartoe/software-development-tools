@@ -3,6 +3,9 @@
 package org.onebeartoe.development.tools.jar.signer;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import org.onebeartoe.network.mail.AppletService;
 import org.onebeartoe.network.mail.RunProfile;
 
@@ -12,10 +15,26 @@ import org.onebeartoe.network.mail.RunProfile;
  */
 public class JarSignerCommandService extends AppletService
 {
-    public void serviceRequest(RunProfile runProfile) throws Exception
+    private String commandFor(String jarName, JarSignerRunProfile rp) throws IOException
     {
-       System.out.println("jarsigner output") ;
-       
+        String propertiesPath = "/jarsigner.properties";
+        Properties props = new Properties();
+        InputStream instream = getClass().getResourceAsStream(propertiesPath);
+        props.load(instream);
+        String blankCommand = props.getProperty("command");        
+        
+        String populatedCommand = String.format(blankCommand,
+                                                    rp.getKeystore(),
+                                                    rp.getStorepass(),
+                                                    rp.getKeypass(),
+                                                    jarName,
+                                                    rp.getAlias());
+                
+        return populatedCommand;
+    }
+    
+    public void serviceRequest(RunProfile runProfile) throws Exception
+    {       
        JarSignerRunProfile rp = (JarSignerRunProfile) runProfile;
        
        String inpath = rp.getJarsPath();
@@ -26,7 +45,10 @@ public class JarSignerCommandService extends AppletService
        
        for(File f : jarFiles)
        {
-           System.out.println("path: " + f.getAbsolutePath() );
+           String jarsignerCommand = commandFor(f.getName(), rp);
+           
+           System.out.println(jarsignerCommand);
+           System.out.println();
        }
     }
 }
