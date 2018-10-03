@@ -16,7 +16,7 @@ import org.onebeartoe.network.mail.RunProfile;
  * @author Roberto Marquez
  */
 public class JarDiffService extends AppletService
-{    
+{
     public JarDiffReport diff(String infile1, String infile2) throws IOException
     {        
         List<String> uniqueToPojo1 = new ArrayList();
