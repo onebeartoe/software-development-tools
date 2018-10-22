@@ -21,15 +21,11 @@ import org.onebeartoe.system.command.SystemCommandProfile;
  * @author Roberto Marquez
  */
 public class SubversionService
-{
-//    private final SubversionService subversionService;
-    
+{    
     private final TextFileWriter textFileWriter;
     
     public SubversionService()
     {
-//        subversionService = new SubversionService();
-        
         textFileWriter = new TextFileWriter();
     }            
     
@@ -119,24 +115,25 @@ public class SubversionService
     public List<File> loadTargetFiles() throws IOException
     {
         Path inpath = Paths.get("creation-date-targets.text");
-        BufferedReader br = Files.newBufferedReader(inpath);
+        List<File> targetFiles;
         
-        List<File> targetFiles = br.lines()
-//                                 .filter( line -> line.trim().length() == 0 )
-                                 .map(File::new)
-                                 
-                                 .collect( Collectors.toList() );
-        
-        // validate the files
-        targetFiles.parallelStream()
-                   .forEach( f -> 
+        try( BufferedReader br = Files.newBufferedReader(inpath) )
         {
-            if( !f.exists() )
+            targetFiles = br.lines()
+                            .map(File::new)
+                            .collect( Collectors.toList() );
+
+            // validate the files
+            targetFiles.parallelStream()
+                       .forEach( f -> 
             {
-                String message = "This input file does not exist: " + f.toString();
-                throw new IllegalArgumentException(message);
-            }
-        });
+                if( !f.exists() )
+                {
+                    String message = "This input file does not exist: " + f.toString();
+                    throw new IllegalArgumentException(message);
+                }
+            });
+        }
         
         return targetFiles;
     }
