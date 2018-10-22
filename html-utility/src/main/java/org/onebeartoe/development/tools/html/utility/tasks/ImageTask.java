@@ -33,42 +33,43 @@ public class ImageTask extends TimerTask
         {
             String file_name = sourceDirectory.getPath() + File.separator + "image-tags.html";
             File outfile = new File(file_name);
-            OutputStream outstream = new FileOutputStream(outfile);
-            PrintWriter writer = new PrintWriter(outstream);
             
-            String statusMessage = "\n\n" + "outputning to: " + outfile.getAbsolutePath();
-            System.out.println(statusMessage);
-            statusPanel.appendText(statusMessage + "\n");
-            
-            File[] contents = sourceDirectory.listFiles();
-            for (int x = 0; x < contents.length; x++)
+            try( OutputStream outstream = new FileOutputStream(outfile);
+                PrintWriter writer = new PrintWriter(outstream) )
             {
-                if (FileHelper.isImageFile(contents[x].getName())) 
+                String statusMessage = "\n\n" + "outputning to: " + outfile.getAbsolutePath();
+                System.out.println(statusMessage);
+                statusPanel.appendText(statusMessage + "\n");
+
+                File[] contents = sourceDirectory.listFiles();
+                for (int x = 0; x < contents.length; x++)
                 {
-                    String image = contents[x].getName();
-                    
-                    String altText = image;
-                    ImageTag imageTag = new ImageTag(image, 600, 400, altText);
-                    String tag = imageTag.toHtml();
-                            
-                    writer.println(tag);
-                    writer.println("<br>\n</br>");
-                    
-                    statusMessage = "generating HTML for: " + contents[x].getName();
-                    System.out.println(statusMessage);
-                    statusPanel.appendText(statusMessage + "\n");
+                    if (FileHelper.isImageFile(contents[x].getName())) 
+                    {
+                        String image = contents[x].getName();
+
+                        String altText = image;
+                        ImageTag imageTag = new ImageTag(image, 600, 400, altText);
+                        String tag = imageTag.toHtml();
+
+                        writer.println(tag);
+                        writer.println("<br>\n</br>");
+
+                        statusMessage = "generating HTML for: " + contents[x].getName();
+                        System.out.println(statusMessage);
+                        statusPanel.appendText(statusMessage + "\n");
+                    }
                 }
+
+                writer.flush();
             }
             
-            writer.flush();
-            writer.close();
             
             System.out.println(" done.");
         }
         catch(Exception ioe) 
         { 
-                ioe.printStackTrace(); 
+            ioe.printStackTrace(); 
         }
-    }
-    
+    }    
 }

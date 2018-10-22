@@ -1,5 +1,3 @@
-/*
- */
 
 package org.onebeartoe.development.tools.directory.files.diff;
 
