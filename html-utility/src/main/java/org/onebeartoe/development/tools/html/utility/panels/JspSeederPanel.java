@@ -33,11 +33,11 @@ import org.onebeartoe.web.utilities.jsp.StreamedJspSeederService;
  */
 public class JspSeederPanel extends JPanel implements ActionListener
 {
-    private Logger logger;
+    private transient Logger logger;
     
     private JTextField targetDirectory;
     
-    private final JspSeederService seederService;
+    private transient final JspSeederService seederService;
     
     private final FileSelectionPanel fileSelectionPanel;
 
@@ -45,7 +45,7 @@ public class JspSeederPanel extends JPanel implements ActionListener
 
     private final ScrollableTextArea statusPanel;
     
-    private PreferencesService preferencesService;
+    private transient PreferencesService preferencesService;
     
     private final String JSP_SEEDER_CURRENT_DIRECTORY = "JSP_SEEDER_CURRENT_DIRECTORY";
     

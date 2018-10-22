@@ -21,11 +21,11 @@ import org.onebeartoe.development.tools.html.utility.panels.ListsPanel;
  */
 public class HtmlUtility extends JFrame
 {
-    private PreferencesService preferencesService;
+    private transient PreferencesService preferencesService;
     
     private TabbedPane tabbedPane;
     
-    private SwingApplication guiConfig;
+    private transient SwingApplication guiConfig;
 
     private final String applicationId;
     
