@@ -63,11 +63,15 @@ public class JarDiffService extends AppletService
     private List<String> loadLines(String inPath) throws IOException
     {
         File infile = new File(inPath);
-        ZipFile zip = new ZipFile(infile);
         
-        List<String> entries = zip.stream()
+        List<String> entries;
+        
+        try( ZipFile zip = new ZipFile(infile) )
+        {
+            entries = zip.stream()
                 .map(e -> e.getName())
                 .collect( Collectors.toList() );
+        }
 
         return entries;
     }
