@@ -6,19 +6,11 @@
 
     <parent>
         <groupId>org.onebeartoe.development.tools</groupId>
-        <artifactId>onebeartoe-development-tools-parent</artifactId>
+        <artifactId>filesystem</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-	
-    <artifactId>filesystem</artifactId>
-    
-    <packaging>pom</packaging>
-    
-    <name>onebeartoe-development-tools-filesystem</name>
 
-    <modules>
-        <module>duplicates</module>
-        <module>file-types</module>
-        <module>files-diff</module>
-    </modules>
+    <artifactId>onebeartoe-development-tools-directory-files-diff</artifactId>
+
+    <packaging>jar</packaging>
 </project>
