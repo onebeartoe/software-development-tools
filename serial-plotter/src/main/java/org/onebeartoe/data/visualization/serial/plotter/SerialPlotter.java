@@ -179,48 +179,14 @@ public class SerialPlotter extends Application implements SerialPortEventListene
                 
                 if( split.length >= 2)
                 {
-                    String dataName = split[0].trim();
-                    
-                    if( dataName.length() != 0)
-                    {
-                        String s = split[1];                    
-                        double d  = Double.valueOf(s);
-
-                        DataChannel dataChannel = dataMap.get(dataName);
-                        if(dataChannel == null)
-                        {
-                            dataChannel = new DataChannel();
-
-                            XYChart.Series chartSeries = dataChannel.getChartSeries();
-                            chartSeries.setName(dataName);                                
-
-                            Platform.runLater(
-                                    () -> {sc.getData().add(chartSeries);}
-                            );
-
-
-                            dataMap.put(dataName, dataChannel);
-                        }
-
-                        dataChannel.getDataQueue().add(d);                    
-
-                        int size = messages.size();
-                        if(size >= 50)
-                        {
-                            messages.remove(0);
-                        }
-
-                        Platform.runLater(
-                            () -> { addDataToSeries(dataName); }
-                        );
-
-                        System.out.println(inputLine + ": " + xSeriesData);
-                    }
+                    twoArgSerialEvent(split);
                 }
                 else
                 {
                     System.out.println("bad data: " + inputLine);
                 }
+            
+                System.out.println(inputLine + ": " + xSeriesData);
             } 
             catch (Exception e) 
             {
@@ -286,5 +252,44 @@ public class SerialPlotter extends Application implements SerialPortEventListene
     public void stop()
     {
         SerialPorts.shutdown(serialPort);                
+    }
+    
+    private void twoArgSerialEvent(String [] split)
+    {
+        String dataName = split[0].trim();
+
+        if( dataName.length() != 0)
+        {
+            String s = split[1];                    
+            double d  = Double.valueOf(s);
+
+            DataChannel dataChannel = dataMap.get(dataName);
+            if(dataChannel == null)
+            {
+                dataChannel = new DataChannel();
+
+                XYChart.Series chartSeries = dataChannel.getChartSeries();
+                chartSeries.setName(dataName);                                
+
+                Platform.runLater(
+                        () -> {sc.getData().add(chartSeries);}
+                );
+
+
+                dataMap.put(dataName, dataChannel);
+            }
+
+            dataChannel.getDataQueue().add(d);                    
+
+            int size = messages.size();
+            if(size >= 50)
+            {
+                messages.remove(0);
+            }
+
+            Platform.runLater(
+                () -> { addDataToSeries(dataName); }
+            );
+        }
     }
 }
