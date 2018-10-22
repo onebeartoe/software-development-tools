@@ -35,26 +35,28 @@ public class IndexTask extends TimerTask
             File source_dir = sourceDirectory;
             boolean has_index = FileHelper.hasIndexFile(source_dir);
             String file_name = source_dir.getPath() + File.separator + (has_index ? "another-index-listing.html" : "index-listing.html");
-            PrintWriter index_file = new PrintWriter( new FileWriter(file_name) );
 
-            index_file.println("<br>");
-            File [] contents = source_dir.listFiles();
-            for(int x=0; x<contents.length; x++) 
+            try( PrintWriter index_file = new PrintWriter( new FileWriter(file_name) ) )
             {
-                String link_item = contents[x].getName();
-                link_item += contents[x].isDirectory() ? "/index.html" : "";
+                index_file.println("<br>");
+                File [] contents = source_dir.listFiles();
+                for(int x=0; x<contents.length; x++) 
+                {
+                    String link_item = contents[x].getName();
+                    link_item += contents[x].isDirectory() ? "/index.html" : "";
 
-                AnchorTag tag = new AnchorTag(link_item, link_item);
-                String link = tag.toString();
-                index_file.println(link + "<br>" );
+                    AnchorTag tag = new AnchorTag(link_item, link_item);
+                    String link = tag.toString();
+                    index_file.println(link + "<br>" );
 
-                String statusMessage = "generating HTML for: " + contents[x].getName();
-                System.out.println(statusMessage);
-                statusPanel.appendText(statusMessage + "\n");                                
+                    String statusMessage = "generating HTML for: " + contents[x].getName();
+                    System.out.println(statusMessage);
+                    statusPanel.appendText(statusMessage + "\n");                                
+                }
+                index_file.close();
+
+                statusPanel.appendText("\n");
             }
-            index_file.close();
-
-            statusPanel.appendText("\n");
         }
         catch( java.io.IOException ioe ) 
         {
