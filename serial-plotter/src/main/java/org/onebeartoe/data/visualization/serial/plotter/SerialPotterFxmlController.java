@@ -32,6 +32,6 @@ public class SerialPotterFxmlController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        ;
+        // No operation is needed.
     }    
 }

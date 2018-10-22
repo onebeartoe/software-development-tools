@@ -314,6 +314,10 @@ public class RandomSamplesSerialPotter extends Application
                             
                             break;
                         }
+                        default:
+                        {
+                            System.out.println("no data name found for: " + dataName);
+                        }
                     }
                 }
                 in.close();
