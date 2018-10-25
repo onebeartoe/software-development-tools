@@ -1,5 +1,6 @@
+
 //TODO: move this to its own module
-package org.onebeartoe.filesystem;
+package org.onebeartoe.filesystem.duplicates;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,0 +1,18 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="java-libraries-development-tools-file-duplicates-test-suite" parallel="none">
+    <test name="development-tools-file-duplicates-unit-tests">
+        <groups>
+            <run>
+                <include name="unit" />
+            </run>
+        </groups>
+
+        <packages>    
+            <package name="org.onebeartoe.filesystem.duplicates"/>
+        </packages>
+    </test>    
+</suite>
