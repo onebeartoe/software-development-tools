@@ -11,6 +11,7 @@ import org.onebeartoe.application.PreferencesService;
 import org.onebeartoe.application.ui.swing.SwingApplication;
 import org.onebeartoe.application.ui.swing.TabbedPane;
 import org.onebeartoe.development.tools.html.utility.panels.ImageTagPanel;
+import org.onebeartoe.development.tools.html.utility.panels.IndexPanel;
 import org.onebeartoe.development.tools.html.utility.panels.JspSeederPanel;
 import org.onebeartoe.development.tools.html.utility.panels.ListsPanel;
 
