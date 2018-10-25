@@ -6,7 +6,9 @@
     <test name="development-tools-file-duplicates-unit-tests">
         <groups>
             <run>
-                <include>unit</include>
+                <include>
+                    <name>unit</name>
+                </include>
             </run>
         </groups>
 
