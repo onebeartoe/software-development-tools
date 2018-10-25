@@ -2,13 +2,12 @@
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="development-tools-file-duplicates-test-suite" parallel="none">
-    <test name="development-tools-file-duplicates-unit-tests">
+<suite name="development-file-duplicates-test-suite" parallel="none">
+    <test name="development-file-duplicates-unit-tests">
         <groups>
-            <run>
-                <include>
-                    <name>unit</name>
-                </include>
+            <run>                
+                <include name="unit"/>
+                <exclude name="Regression"/>    
             </run>
         </groups>
 
