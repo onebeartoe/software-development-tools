@@ -2,11 +2,11 @@
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="java-libraries-development-tools-file-duplicates-test-suite" parallel="none">
+<suite name="development-tools-file-duplicates-test-suite" parallel="none">
     <test name="development-tools-file-duplicates-unit-tests">
         <groups>
             <run>
-                <include name="unit" />
+                <include>unit</include>
             </run>
         </groups>
 
