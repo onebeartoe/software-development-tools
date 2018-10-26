@@ -33,8 +33,9 @@ public class JarSignerCommandService extends AppletService
         return populatedCommand;
     }
     
+    @Override
     public void serviceRequest(RunProfile runProfile) throws Exception
-    {       
+    {
        JarSignerRunProfile rp = (JarSignerRunProfile) runProfile;
        
        String inpath = rp.getJarsPath();

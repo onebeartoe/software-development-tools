@@ -1,24 +1,39 @@
 
 package org.onebeartoe.file.types;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.onebeartoe.network.mail.AppletService;
+import org.onebeartoe.network.mail.CommandLineInterfaceApplet;
+import org.onebeartoe.network.mail.RunProfile;
 
 /**
  * @author Roberto Marquez
  */
-public class FileTypes
+public class FileTypes extends CommandLineInterfaceApplet
 {
-    public static void main(String [] args) throws IOException, ParseException
+    @Override
+    public Options buildOptions()
+    {
+        return new Options();
+    }
+    
+    @Override
+    protected AppletService getService()
+    {
+        return new FileTypesService();
+    }
+    
+    public static void main(String [] args) throws IOException, ParseException, Exception
     {        
+        CommandLineInterfaceApplet app = new FileTypes();
+        app.execute(args);
+    }
+    
+    @Override
+    protected RunProfile parseRunProfile(final String[] args, Options options) throws ParseException
+    {
         String inpath;
         
         if(args.length == 0)
@@ -31,54 +46,9 @@ public class FileTypes
             inpath = args[0];
         }
         
-        File pwd = new File(inpath);
-        
-        Path start = pwd.toPath();
-        
-        FileTypesVisitor visitor = new FileTypesVisitor();
-        
-        Files.walkFileTree(start, visitor);
-        
-        
-        Map<String, Integer> typesWithExtention = visitor.getFiletypes();
-
-        printTally(typesWithExtention, "extensions:");
-                        
-        System.out.println();
-        System.out.println("no extenstion:");        
-        Map<String, Integer> noExtentions = visitor.getNoExtensions();
-        noExtentions.keySet()
+        FileTypesRunProfile runProfile = new FileTypesRunProfile();
+        runProfile.setInpath(inpath);
                 
-                          .forEach( k ->
-        {
-            Integer count = noExtentions.get(k);
-            System.out.println(k + " -> " + count);
-        });
-        
-        System.out.println();
-        System.out.println("others:");
-        System.out.println();
-        Map<String, Integer> others = visitor.getOthers();
-        others.keySet()
-                          .forEach( k ->
-        {
-            Integer count = others.get(k);
-            System.out.println(k + " -> " + count);
-        });
-    }
-    
-    private static void printTally(Map<String, Integer> tallies, String label)
-    {
-        Set<String> keySet = tallies.keySet();
-        List<String> list = new ArrayList(keySet);
-        
-        Collections.sort(list);
-        
-        list
-                          .forEach( k ->
-        {
-            Integer count = tallies.get(k);
-            System.out.println(k + " -> " + count);
-        });        
+        return runProfile;
     }
 }
