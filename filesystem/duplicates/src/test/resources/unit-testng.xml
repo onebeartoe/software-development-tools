@@ -4,14 +4,19 @@
 
 <suite name="development-tools-test-suite" parallel="none">
     <test name="tools-unit-tests">
-        <!--
+        
         <groups>
-            <run >
+            <run>
+                <include name="unit" />
+            </run>
+        </groups>
+        
+        <!--
+<run >
                 
                 <include name="aunit"><name>"aunit"</name></include>
                 <exclude name="Regression"><name>"Regression"</name></exclude>
-            </run>
-        </groups>
+            </run>        
 -->
         <packages>    
             <package name="org.onebeartoe.filesystem"/>
