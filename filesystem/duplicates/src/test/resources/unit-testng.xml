@@ -6,7 +6,7 @@
     <test name="tools-unit-tests">
         <groups>
             <run >
-                <include name="unit"><name>unit</name></include>
+                <include name="aunit"><name>aunit</name></include>
                 <exclude name="Regression"><name>Regression</name></exclude>
             </run>
         </groups>
