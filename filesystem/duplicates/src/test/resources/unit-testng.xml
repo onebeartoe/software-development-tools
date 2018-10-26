@@ -6,10 +6,8 @@
     <test name="tools-unit-tests">
         <groups>
             <run >
-                <include name="unit">
-                    <name>unit</name>
-                </include>
-                <exclude name="Regression"></exclude>
+                <include name="unit"><name>unit</name></include>
+                <exclude name="Regression"><name>Regression</name></exclude>
             </run>
         </groups>
 
