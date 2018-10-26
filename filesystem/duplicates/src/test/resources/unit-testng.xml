@@ -5,8 +5,10 @@
 <suite name="development-tools-test-suite" parallel="none">
     <test name="tools-unit-tests">
         <groups>
-            <run>
-                <include name="unit"></include>
+            <run >
+                <include name="unit">
+                    <name>unit</name>
+                </include>
                 <exclude name="Regression"></exclude>
             </run>
         </groups>
