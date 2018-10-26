@@ -11,15 +11,8 @@
             </run>
         </groups>
         
-        <!--
-<run >
-                
-                <include name="aunit"><name>"aunit"</name></include>
-                <exclude name="Regression"><name>"Regression"</name></exclude>
-            </run>        
--->
         <packages>    
-            <package name="org.onebeartoe.filesystem"/>
+            <package name="org.onebeartoe.filesystem.duplicates"/>
         </packages>
     </test>    
 </suite>
