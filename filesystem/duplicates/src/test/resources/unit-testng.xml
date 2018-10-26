@@ -4,6 +4,7 @@
 
 <suite name="development-tools-test-suite" parallel="none">
     <test name="tools-unit-tests">
+        <!--
         <groups>
             <run >
                 
@@ -11,7 +12,7 @@
                 <exclude name="Regression"><name>"Regression"</name></exclude>
             </run>
         </groups>
-
+-->
         <packages>    
             <package name="org.onebeartoe.filesystem"/>
         </packages>
