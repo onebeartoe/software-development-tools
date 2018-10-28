@@ -86,6 +86,11 @@
         <repository>
             <id>onebeartoe-repo</id>
             <name>onebeartoe Maven Repository</name>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+            <checksumPolicy>warn</checksumPolicy>
+          </releases>            
             <url>http://onebeartoe.org/maven/2/repository/</url>
         </repository>                
       </repositories>
