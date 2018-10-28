@@ -8,6 +8,7 @@ addons:
 jdk:
   - oraclejdk8
 script:
+  - cat $HOME/.m2/settings.xml    
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 cache:
   directories:
