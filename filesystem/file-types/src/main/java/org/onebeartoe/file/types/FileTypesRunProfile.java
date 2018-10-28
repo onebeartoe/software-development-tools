@@ -1,7 +1,7 @@
 
 package org.onebeartoe.file.types;
 
-import org.onebeartoe.network.mail.RunProfile;
+import org.onebeartoe.application.RunProfile;
 
 /**
  * @author Roberto Marquez

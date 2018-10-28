@@ -1,8 +1,7 @@
-/*
- */
+
 package org.onebeartoe.development.tools.jar.signer;
 
-import org.onebeartoe.network.mail.RunProfile;
+import org.onebeartoe.application.RunProfile;
 
 /**
  *

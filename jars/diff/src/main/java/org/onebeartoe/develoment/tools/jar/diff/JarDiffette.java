@@ -10,9 +10,9 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.onebeartoe.network.mail.AppletService;
-import org.onebeartoe.network.mail.CommandLineInterfaceApplet;
-import org.onebeartoe.network.mail.RunProfile;
+import org.onebeartoe.application.AppletService;
+import org.onebeartoe.application.CommandLineInterfaceApplet;
+import org.onebeartoe.application.RunProfile;
 
 /**
  *

@@ -1,7 +1,7 @@
 
 package org.onebeartoe.maven.system.dependencies;
 
-import org.onebeartoe.network.mail.RunProfile;
+import org.onebeartoe.application.RunProfile;
 
 public class SystemDependenciesRunProfile extends RunProfile
 {

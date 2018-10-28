@@ -7,8 +7,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.onebeartoe.network.mail.AppletService;
-import org.onebeartoe.network.mail.RunProfile;
+import org.onebeartoe.application.AppletService;
+import org.onebeartoe.application.RunProfile;
 
 /**
  *

@@ -19,5 +19,13 @@
     </properties>
 
     <name>onebeartoe-development-tools-system-dependencies</name>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.onebeartoe</groupId>
+            <artifactId>onebeartoe-application</artifactId>
+            <version>1.0</version>
+        </dependency>        
+    </dependencies>    
 </project>
 

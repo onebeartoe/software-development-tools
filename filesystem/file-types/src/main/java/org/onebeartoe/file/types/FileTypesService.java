@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.onebeartoe.network.mail.AppletService;
-import org.onebeartoe.network.mail.RunProfile;
+import org.onebeartoe.application.AppletService;
+import org.onebeartoe.application.RunProfile;
 
 /**
  * @author Roberto Marquez
