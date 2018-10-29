@@ -12,7 +12,7 @@
 
     <artifactId>onebeartoe-jar-system-dependencies</artifactId>
 
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <properties>
 
@@ -28,17 +28,18 @@
         </dependency>        
     </dependencies>    
 
-    <build>
+    <build>     
         <plugins>
             <plugin>
 		<artifactId>maven-assembly-plugin</artifactId>
 		<configuration>
 		    <archive>
 			<manifest>
-			    <mainClass>org.onebeartoe.maven.system.dependencies.SystemDependenciesFromJarDirectory</mainClass>
+			    <mainClass>
+                                org.onebeartoe.maven.system.dependencies.SystemDependenciesFromJarDirectory
+                            </mainClass>
 			</manifest>
 		    </archive>
-
 		    <descriptorRefs>
 			<descriptorRef>jar-with-dependencies</descriptorRef>
 		    </descriptorRefs>
@@ -56,4 +57,3 @@
         </plugins>
     </build>
 </project>
-
