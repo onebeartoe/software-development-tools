@@ -1,5 +1,5 @@
 
-package org.onebeartoe.filesystem.duplicates;
+package org.onebeartoe.filesystem.populator;
 
 import java.io.File;
 import java.io.IOException;
