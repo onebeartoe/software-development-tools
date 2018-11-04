@@ -1,5 +1,3 @@
-/*
- */
 
 package org.onebeartoe.filesystem.populator;
 
@@ -12,8 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.List;
 import org.onebeartoe.application.AppletService;
 import org.onebeartoe.application.RunProfile;
 
@@ -30,15 +26,15 @@ public class FilesystemPopulaterService extends AppletService
         
     }
 
-    private void populate(File populationFile) throws FileNotFoundException
+    private void populate(FilesystemPopulatorRunProfile runProfile) throws FileNotFoundException
     {
-        openScadDirectories.forEach((String d) -> 
+        runProfile.openScadDirectories.forEach((String d) -> 
         {
-            Path source = populationFile.toPath();
+            Path source = runProfile.populationFile.toPath();
             
             try 
             {
-                File outfile = new File(d, populationFile.getName() );
+                File outfile = new File(d, runProfile.populationFile.getName() );
                 
                 if( outfile.exists() )
                 {
@@ -62,13 +58,9 @@ public class FilesystemPopulaterService extends AppletService
     
     public void serviceRequest(RunProfile runProfile) throws Exception
     {
-        List<String> openScadDirectories = new ArrayList();
-    
-        List<String> nonOpenScadDirectories = new ArrayList();        
-        
         FilesystemPopulatorRunProfile fspRunProfile = (FilesystemPopulatorRunProfile) runProfile;
         
-        DirectoryVisitor populater = new DirectoryVisitor();
+        DirectoryVisitor populater = new DirectoryVisitor(fspRunProfile);
         
         File pwd = new File(".");
         
@@ -80,7 +72,7 @@ public class FilesystemPopulaterService extends AppletService
         {
             System.out.println("Non OpenScad Directories");
 
-            nonOpenScadDirectories
+            fspRunProfile.nonOpenScadDirectories
                      .forEach(System.out::println);
         }
 
@@ -88,18 +80,24 @@ public class FilesystemPopulaterService extends AppletService
         {
             System.out.println("OpenScad Directories");
 
-            openScadDirectories
+            fspRunProfile.openScadDirectories
                      .forEach(System.out::println);
         }
         else
         {
-            File populationFile = fspRunProfile.populationFile;
-            populate(populationFile);
+            populate(fspRunProfile);
         }                
     }
     
     private class DirectoryVisitor extends SimpleFileVisitor<Path>
     {
+        private FilesystemPopulatorRunProfile fspRunProfile;
+        
+        public DirectoryVisitor(FilesystemPopulatorRunProfile runProfile)
+        {
+            this.fspRunProfile = runProfile;
+        }
+        
         @Override
         public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException
         {
@@ -111,7 +109,7 @@ public class FilesystemPopulaterService extends AppletService
             {
                 if( filename.endsWith(".scad") )
                 {
-                    openScadDirectories.add( f.getPath() );
+                    fspRunProfile.openScadDirectories.add( f.getPath() );
 
                     hadOpenscadFile = true;
 
@@ -121,7 +119,7 @@ public class FilesystemPopulaterService extends AppletService
 
             if( !hadOpenscadFile )
             {
-                nonOpenScadDirectories.add(f.getPath() );
+                fspRunProfile.nonOpenScadDirectories.add(f.getPath() );
             }
 
             return FileVisitResult.CONTINUE;

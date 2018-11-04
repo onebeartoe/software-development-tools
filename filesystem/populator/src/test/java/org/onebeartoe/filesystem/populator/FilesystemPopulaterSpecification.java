@@ -1,11 +1,9 @@
 
 package org.onebeartoe.filesystem.populator;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.attribute.BasicFileAttributes;
 import org.apache.commons.cli.Options;
+import org.onebeartoe.application.AppletService;
 import org.testng.annotations.Test;
 
 /**
@@ -29,14 +27,10 @@ public class FilesystemPopulaterSpecification
     }
     
     @Test(groups = {"unit"})
-    public void preVisitdirectory() throws IOException
+    public void getService() throws IOException
     {
-        String dirPath = "target/classes";
-        File f = new File(dirPath);
-        Path dir = f.toPath();
+        AppletService service = implementation.getService();
         
-        BasicFileAttributes attributes = null;
-        
-        implementation.preVisitDirectory(dir, attributes);
+        assert(service != null);
     }
 }

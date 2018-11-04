@@ -90,7 +90,7 @@
             <enabled>true</enabled>
             <updatePolicy>always</updatePolicy>
             <checksumPolicy>warn</checksumPolicy>
-          </releases>            
+          </releases>
             <url>http://onebeartoe.org/maven/2/repository/</url>
         </repository>                
       </repositories>
