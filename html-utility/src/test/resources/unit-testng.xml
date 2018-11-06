@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="html-utility-tools-test-suite" parallel="none">
+    <test name="html-utility-tools-unit-tests">
+        
+        <groups>
+            <run>
+                <include name="unit" />
+            </run>
+        </groups>
+        
+        <packages>    
+            <package name="org.onebeartoe.development.tools.html.utility.tasks"/>
+        </packages>
+    </test>    
+</suite>

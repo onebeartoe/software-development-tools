@@ -1,5 +1,5 @@
 
-package org.onebeartoe.development.tools.html.utility;
+package org.onebeartoe.development.tools.html.utility.tasks;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +12,7 @@ import org.onebeartoe.html.AnchorTag;
 
 /**
  * 
- * author: Roberto H. Marquez
+ * author: Roberto Marquez
  * 
 */
 public class IndexTask extends TimerTask
