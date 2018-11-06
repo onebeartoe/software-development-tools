@@ -12,9 +12,17 @@ public class SubversionServiceTest
 {
     public SubversionService implementation;
     
+    public final String blankInfile = "src/test/resources/data/subversion-service/blank.text";
+    
     public SubversionServiceTest()
     {
         implementation = new SubversionService();
+    }
+    
+    @Test(groups = {"unit"})
+    public void appendCreationDate() throws Exception
+    {
+        implementation.appendCreationDate(blankInfile);
     }
     
     @Test(groups = {"unit"})
@@ -35,9 +43,7 @@ public class SubversionServiceTest
     
     @Test
     public void revertModified() throws IOException
-    {
-        String infile = "src/test/resources/data/subversion-service/blank.text";
-        
-        implementation.revertModified(infile);
+    {        
+        implementation.revertModified(blankInfile);
     }
 }
