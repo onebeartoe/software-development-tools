@@ -1,5 +1,4 @@
-/*
- */
+
 package org.onebeartoe.development.tools.jar.signer;
 
 import java.io.File;
@@ -10,7 +9,6 @@ import org.onebeartoe.application.AppletService;
 import org.onebeartoe.application.RunProfile;
 
 /**
- *
  * @author Roberto Marquez
  */
 public class JarSignerCommandService extends AppletService
