@@ -19,7 +19,7 @@ import org.onebeartoe.application.filesystem.FileSelectionMethods;
 import org.onebeartoe.application.ui.GUITools;
 import org.onebeartoe.application.ui.swing.FileSelectionPanel;
 import org.onebeartoe.application.ui.swing.ScrollableTextArea;
-import org.onebeartoe.development.tools.html.utility.IndexTask;
+import org.onebeartoe.development.tools.html.utility.tasks.IndexTask;
 import org.onebeartoe.filesystem.FileType;
 
 public class IndexPanel extends JPanel implements ActionListener
