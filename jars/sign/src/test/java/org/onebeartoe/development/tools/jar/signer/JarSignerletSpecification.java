@@ -32,4 +32,6 @@ public class JarSignerletSpecification
         
         implementation.parseRunProfile(args, options);
     }
+    
+//TODO: Why not just vall implementatin.execute() to test all methods?
 }
