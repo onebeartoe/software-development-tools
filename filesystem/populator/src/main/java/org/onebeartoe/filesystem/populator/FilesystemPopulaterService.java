@@ -19,13 +19,6 @@ import org.onebeartoe.application.RunProfile;
  */
 public class FilesystemPopulaterService extends AppletService
 {
-    public FilesystemPopulaterService()
-    {
-        
-        
-        
-    }
-
     private void populate(FilesystemPopulatorRunProfile runProfile) throws FileNotFoundException
     {
         runProfile.openScadDirectories.forEach((String d) -> 
