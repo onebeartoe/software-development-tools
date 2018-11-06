@@ -21,6 +21,8 @@ public class SystemDependenciesServiceSpecification
     public void serviceRequest() throws Exception
     {
         SystemDependenciesRunProfile runProfile = new SystemDependenciesRunProfile();
+        runProfile.setProjectRoot(".");
+        runProfile.setJarSubpath("target");
         
         implementation.serviceRequest(runProfile);
     }
