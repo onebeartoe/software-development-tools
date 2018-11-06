@@ -19,6 +19,13 @@ public class FindDuplicateFilenames
 {
     public static void main(String [] args) throws IOException
     {
+        FindDuplicateFilenames app = new FindDuplicateFilenames();
+        
+        app.serviceRequest(args);
+    }
+    
+    public void serviceRequest(String [] args) throws IOException
+    {
         // the inpath is the location of the text file with a list of all the 
         // files names to process.        
         String inpath = args[0];
@@ -28,7 +35,6 @@ public class FindDuplicateFilenames
         List<String> allLines = Files.readAllLines(path);
         
         List<String> javaPaths = allLines.stream()
-//                                         .filter(p -> p.endsWith(".java") )
                                          .filter(p -> !p.endsWith("/")) // remove directory entries
                                          .collect( Collectors.toList() );
         
@@ -68,6 +74,6 @@ public class FindDuplicateFilenames
                                 System.out.println(line);
                             });
                         }
-                   });
+                   });        
     }
 }

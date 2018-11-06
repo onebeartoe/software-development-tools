@@ -2,8 +2,8 @@
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="development-tools-test-suite" parallel="none">
-    <test name="tools-unit-tests">
+<suite name="filesystem-duplicate-tools-test-suite" parallel="none">
+    <test name="filesystem-duplicate-tools-unit-tests">
         
         <groups>
             <run>
