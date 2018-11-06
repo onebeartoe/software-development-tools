@@ -126,17 +126,19 @@ public class CommandLineSubversionMacros
     
     private void service(SubversionMacrosRunProfile runProfile) throws Exception
     {
+        String infile = "creation-date-targets.text";
+        
         switch (runProfile.mode)            
         {
             case APPEND_CREATION_DATE:
             {
-                subversionService.appendCreationDate();
+                subversionService.appendCreationDate(infile);
                 
                 break;
             }
             case REVERT_MODIFIED:
             {
-                subversionService.revertModified();
+                subversionService.revertModified(infile);
                 
                 break;
             }

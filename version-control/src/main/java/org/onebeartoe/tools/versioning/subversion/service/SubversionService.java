@@ -29,9 +29,9 @@ public class SubversionService
         textFileWriter = new TextFileWriter();
     }            
     
-    public void appendCreationDate() throws Exception
+    public void appendCreationDate(String infile) throws Exception
     {
-        List<File> targetFiles = loadTargetFiles();
+        List<File> targetFiles = loadTargetFiles(infile);
         
         List<String> errors = new ArrayList();
         
@@ -112,9 +112,9 @@ public class SubversionService
         return date;
     }
     
-    public List<File> loadTargetFiles() throws IOException
+    private List<File> loadTargetFiles(String infile) throws IOException
     {
-        Path inpath = Paths.get("creation-date-targets.text");
+        Path inpath = Paths.get(infile);
         List<File> targetFiles;
         
         try( BufferedReader br = Files.newBufferedReader(inpath) )
@@ -148,9 +148,9 @@ public class SubversionService
         }        
     }
     
-    public void revertModified() throws IOException
+    public void revertModified(String infile) throws IOException
     {
-        List<File> targetFiles = loadTargetFiles();
+        List<File> targetFiles = loadTargetFiles(infile);
         
         List<String> errors = new ArrayList();
         
