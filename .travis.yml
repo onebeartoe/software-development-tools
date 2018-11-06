@@ -8,6 +8,9 @@ addons:
 jdk:
   - oraclejdk8
 script:
+  - rm $HOME/.m2/repository/org/onebeartoe/onebeartoe-application/1.0/onebeartoe-application-1.0.jar
+  - rm $HOME/.m2/repository/org/onebeartoe/onebeartoe-application/1.0/onebeartoe-application-1.0.pom
+#  
   - cat $HOME/.m2/settings.xml
 #TODO: revisit this and see if it was just the <releases> that was needed in the projet POM  
 #      this is the stackoverflow question that suggestion overwritting the .m2/settings.xml file.
