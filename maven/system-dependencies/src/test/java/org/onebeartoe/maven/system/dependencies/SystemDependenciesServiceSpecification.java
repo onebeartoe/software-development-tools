@@ -1,11 +1,9 @@
-/*
- */
+
 package org.onebeartoe.maven.system.dependencies;
 
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Roberto Marquez
  */
 public class SystemDependenciesServiceSpecification
