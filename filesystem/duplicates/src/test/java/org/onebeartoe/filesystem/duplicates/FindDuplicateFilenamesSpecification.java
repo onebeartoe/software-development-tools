@@ -17,10 +17,20 @@ public class FindDuplicateFilenamesSpecification
         implementation = new FindDuplicateFilenames();
     }
     
-    @Test(groups = {"unit"}, expectedExceptions = IOException.class)
-    public void serviceRequest_faile_IOExeption() throws IOException
+    @Test(groups = {"unit"})
+    public void serviceRequest() throws IOException
     {
-        String [] args = {"target/"};
+        String inpath = "src/test/resources/data/find-duplicate-filenames/04-duplicates.text";
+        
+        String [] args = {inpath};
+        
+        implementation.serviceRequest(args);
+    }
+    
+    @Test(groups = {"unit"}, expectedExceptions = IOException.class)
+    public void serviceRequest_fail_IOExeption() throws IOException
+    {
+        String [] args = {"target/does-not-exist.text"};
         
         implementation.serviceRequest(args);
     }
