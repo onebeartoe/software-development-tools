@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 /**
  * @author Roberto Marquez
  */
-public class FilesystemPopulaterSpecification 
+public class FilesystemPopulaterSpecification
 {
     FilesystemPopulater implementation;
     
