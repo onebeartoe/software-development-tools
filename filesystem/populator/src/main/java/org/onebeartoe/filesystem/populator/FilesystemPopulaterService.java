@@ -42,9 +42,12 @@ public class FilesystemPopulaterService extends AppletService
             } 
             catch (IOException  ex) 
             {
-                ex.printStackTrace();
+                String message = "An error occured - " 
+                                    + ex.getMessage() 
+                                    + " - "
+                                    + ex.toString();
                 
-                logger.severe("error:" + ex.toString() );
+                logger.severe(message);
             }
         });
     }    
