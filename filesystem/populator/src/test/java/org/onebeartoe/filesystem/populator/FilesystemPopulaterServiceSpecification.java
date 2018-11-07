@@ -33,6 +33,13 @@ public class FilesystemPopulaterServiceSpecification
     @Test(groups = {"unit"})
     public void serviceRequest_populate() throws Exception
     {
+        FilesystemPopulatorRunProfile runProfile = serviceRequest_populate_getRunProfile();
+
+        implementation.serviceRequest(runProfile);
+    }
+    
+    private FilesystemPopulatorRunProfile serviceRequest_populate_getRunProfile()
+    {
         FilesystemPopulatorRunProfile runProfile = new FilesystemPopulatorRunProfile();
         
         runProfile.populationFile = targetDirectory;
@@ -47,6 +54,15 @@ public class FilesystemPopulaterServiceSpecification
         
         runProfile.openScadDirectories.add(outpath);
         
-        implementation.serviceRequest(runProfile);
+        return runProfile;
+    }
+    
+    @Test(groups = {"unit"})
+    public void serviceRequest_populate_noNonScads() throws Exception
+    {
+        FilesystemPopulatorRunProfile runProfile = serviceRequest_populate_getRunProfile();
+        runProfile.showNonOpenscadDirs = false;
+        
+        implementation.serviceRequest(runProfile);        
     }
 }
