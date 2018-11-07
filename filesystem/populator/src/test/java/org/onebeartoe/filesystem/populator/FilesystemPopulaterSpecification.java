@@ -27,9 +27,9 @@ public class FilesystemPopulaterSpecification
     }
 
     @Test(groups = {"unit"})
-    public void execute()
+    public void execute() throws Exception
     {
-        String 
+        String [] args = {};
         
         implementation.execute(args);
     }
