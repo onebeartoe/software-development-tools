@@ -66,4 +66,13 @@ public class FilesystemPopulaterServiceSpecification
         
         implementation.serviceRequest(runProfile);        
     }
+    
+    @Test(groups = {"unit"})
+    public void serviceRequest_populate_fail_IOException() throws Exception
+    {
+        FilesystemPopulatorRunProfile runProfile = serviceRequest_populate_getRunProfile();
+        runProfile.populationFile = targetDirectory;
+        
+        implementation.serviceRequest(runProfile);        
+    }
 }
