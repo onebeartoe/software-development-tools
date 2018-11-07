@@ -22,6 +22,5 @@ public class JarSignerCommandServiceSpecification
        runProfile.setJarsPath("target/");
        
        implementation.serviceRequest(runProfile);
-   }
-   
+   }  
 }

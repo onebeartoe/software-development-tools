@@ -20,7 +20,7 @@ public class SystemDependenciesServiceSpecification
     {
         SystemDependenciesRunProfile runProfile = new SystemDependenciesRunProfile();
         runProfile.setProjectRoot(".");
-        runProfile.setJarSubpath("target");
+        runProfile.setJarSubpath("target/");
         
         implementation.serviceRequest(runProfile);
     }

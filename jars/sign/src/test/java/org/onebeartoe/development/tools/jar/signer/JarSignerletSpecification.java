@@ -18,20 +18,28 @@ public class JarSignerletSpecification
         implementation = new JarSignerlet();
     }
     
-    @Test(groups = {"unit"})
-    public void buildOptions()
-    {
-        implementation.buildOptions();
-    }
-    
-    @Test(groups = {"unit"})
-    public void parseRunProfile() throws ParseException
-    {
-        String [] args = {"path1"};
-        Options options = new Options();
-        
-        implementation.parseRunProfile(args, options);
-    }
+//    @Test(groups = {"unit"})
+//    public void buildOptions()
+//    {
+//        implementation.buildOptions();
+//    }
+//    
+//    @Test(groups = {"unit"})
+//    public void parseRunProfile() throws ParseException
+//    {
+//        String [] args = {"path1"};
+//        Options options = new Options();
+//        
+//        implementation.parseRunProfile(args, options);
+//    }
     
 //TODO: Why not just vall implementatin.execute() to test all methods?
+    
+    @Test(groups = {"unit"})
+    public void execute() throws Exception
+    {
+        String [] args = {"path1"};
+        
+        implementation.execute(args);
+    }
 }
