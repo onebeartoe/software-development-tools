@@ -1,12 +1,10 @@
-/*
- */
+
 package org.onebeartoe.filesystem.populator;
 
 import java.io.File;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Roberto Marquez
  */
 public class FilesystemPopulaterServiceSpecification
@@ -36,10 +34,18 @@ public class FilesystemPopulaterServiceSpecification
     public void serviceRequest_populate() throws Exception
     {
         FilesystemPopulatorRunProfile runProfile = new FilesystemPopulatorRunProfile();
+        
         runProfile.populationFile = targetDirectory;
         
         runProfile.showNonOpenscadDirs = true;
         runProfile.showOpenScadDirs = false;
+        
+        // setup a population diretory
+        String outpath = "target/data/FilesystemPopulatorRunProfile/";
+        File outputDir = new File(outpath);
+        outputDir.mkdirs();
+        
+        runProfile.openScadDirectories.add(outpath);
         
         implementation.serviceRequest(runProfile);
     }
