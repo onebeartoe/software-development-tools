@@ -13,19 +13,33 @@ public class FilesystemPopulaterServiceSpecification
 {
     private FilesystemPopulaterService implementation;
     
+    private final File targetDirectory = new File("target/");
+    
     public FilesystemPopulaterServiceSpecification()
     {
         implementation = new FilesystemPopulaterService();
     }
     
     @Test(groups = {"unit"})
-    public void serviceRequest() throws Exception
+    public void serviceRequest_showOnly() throws Exception
     {
         FilesystemPopulatorRunProfile runProfile = new FilesystemPopulatorRunProfile();
-        runProfile.populationFile = new File("target/");
+        runProfile.populationFile = targetDirectory;
         
         runProfile.showNonOpenscadDirs = true;
         runProfile.showOpenScadDirs = true;
+        
+        implementation.serviceRequest(runProfile);
+    }
+    
+    @Test(groups = {"unit"})
+    public void serviceRequest_populate() throws Exception
+    {
+        FilesystemPopulatorRunProfile runProfile = new FilesystemPopulatorRunProfile();
+        runProfile.populationFile = targetDirectory;
+        
+        runProfile.showNonOpenscadDirs = true;
+        runProfile.showOpenScadDirs = false;
         
         implementation.serviceRequest(runProfile);
     }

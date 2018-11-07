@@ -18,7 +18,7 @@
 
     </properties>
 
-    <name>onebeartoe-development-tools-jars</name>
+    <name>onebeartoe-development-tools-jar</name>
 
     <modules>
         <module>diff</module>

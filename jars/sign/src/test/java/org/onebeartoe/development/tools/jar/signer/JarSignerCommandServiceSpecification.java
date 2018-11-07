@@ -20,8 +20,6 @@ public class JarSignerCommandServiceSpecification
    {
        JarSignerRunProfile runProfile = new JarSignerRunProfile();
        runProfile.setJarsPath("target/");
-
-       
        
        implementation.serviceRequest(runProfile);
    }
