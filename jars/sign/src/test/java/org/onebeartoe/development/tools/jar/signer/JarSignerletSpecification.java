@@ -18,7 +18,9 @@ public class JarSignerletSpecification
     @Test(groups = {"unit"})
     public void execute() throws Exception
     {
-        String [] args = {"--alias", "a", "--keystore", "ks", "--storepass", "sp", "remaining-arg-0"};
+//        String [] args = {"ploop"};
+        String [] args = {"--alias", "a", "--keystore", "ks", "--storepass", "sp"};
+//        String [] args = {"--alias", "a", "--keystore", "ks", "--storepass", "sp", "remaining-arg-0"};
         
         implementation.execute(args);
     }

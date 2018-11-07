@@ -110,6 +110,7 @@ public class JarSignerlet extends CommandLineInterfaceApplet
         String keystore = cmd.getOptionValue(KEYSTORE);
         
         JarSignerRunProfile profile = new JarSignerRunProfile();        
+        
         profile.setAlias(alias);
         profile.setJarsPath(jarsPath);
         profile.setKeypass(keypass);
