@@ -42,7 +42,8 @@ public class FilesystemPopulaterServiceSpecification
     {
         FilesystemPopulatorRunProfile runProfile = new FilesystemPopulatorRunProfile();
         
-        runProfile.populationFile = targetDirectory;
+        File populationFile = new File("src/test/resources/data/FilesystemPopulaterService/population.text");
+        runProfile.populationFile = populationFile;
         
         runProfile.showNonOpenscadDirs = true;
         runProfile.showOpenScadDirs = false;
