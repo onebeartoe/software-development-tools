@@ -25,6 +25,14 @@ public class FilesystemPopulaterSpecification
         
         assert(buildOptions != null);
     }
+
+    @Test(groups = {"unit"})
+    public void execute()
+    {
+        String 
+        
+        implementation.execute(args);
+    }
     
     @Test(groups = {"unit"})
     public void getService() throws IOException

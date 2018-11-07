@@ -2,6 +2,7 @@
  */
 package org.onebeartoe.filesystem.populator;
 
+import java.io.File;
 import org.testng.annotations.Test;
 
 /**
@@ -21,6 +22,10 @@ public class FilesystemPopulaterServiceSpecification
     public void serviceRequest() throws Exception
     {
         FilesystemPopulatorRunProfile runProfile = new FilesystemPopulatorRunProfile();
+        runProfile.populationFile = new File("target/");
+        
+        runProfile.showNonOpenscadDirs = true;
+        runProfile.showOpenScadDirs = true;
         
         implementation.serviceRequest(runProfile);
     }

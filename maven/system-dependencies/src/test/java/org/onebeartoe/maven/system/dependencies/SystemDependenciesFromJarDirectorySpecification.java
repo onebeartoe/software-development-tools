@@ -22,4 +22,12 @@ public class SystemDependenciesFromJarDirectorySpecification
         
         implementation.execute(args);
     }
+    
+   @Test(groups = {"unit"})
+    public void  execute_fail() throws Exception
+    {
+        String [] args = {};
+        
+        implementation.execute(args);
+    }
 }

@@ -88,11 +88,11 @@ public class FilesystemPopulater extends CommandLineInterfaceApplet
         
         FilesystemPopulatorRunProfile runProfile = new FilesystemPopulatorRunProfile();
         
-        runProfile.onlyShowNonOpenscadDirs = command.hasOption(ONLY_SHOW_NON_OPENSCAD_DIRS);
+        runProfile.showNonOpenscadDirs = command.hasOption(ONLY_SHOW_NON_OPENSCAD_DIRS);
         
-        runProfile.onlyShowOpenScadDirs = command.hasOption(ONLY_SHOW_OPENSCAD_DIRS);
+        runProfile.showOpenScadDirs = command.hasOption(ONLY_SHOW_OPENSCAD_DIRS);
         
-        if( !runProfile.onlyShowOpenScadDirs )
+        if( !runProfile.showOpenScadDirs )
         {
             if( command.hasOption(POPULATION_FILE) )
             {

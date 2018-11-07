@@ -64,7 +64,7 @@ public class FilesystemPopulaterService extends AppletService
         
         Files.walkFileTree(start, populater);
 
-        if( fspRunProfile.onlyShowNonOpenscadDirs )
+        if( fspRunProfile.showNonOpenscadDirs )
         {
             System.out.println("Non OpenScad Directories");
 
@@ -72,7 +72,7 @@ public class FilesystemPopulaterService extends AppletService
                      .forEach(System.out::println);
         }
 
-        if( fspRunProfile.onlyShowOpenScadDirs )
+        if( fspRunProfile.showOpenScadDirs )
         {
             System.out.println("OpenScad Directories");
 

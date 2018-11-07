@@ -11,9 +11,9 @@ import org.onebeartoe.application.RunProfile;
  */
 public class FilesystemPopulatorRunProfile extends RunProfile 
 {
-    boolean onlyShowNonOpenscadDirs;
+    boolean showNonOpenscadDirs;
 
-    boolean onlyShowOpenScadDirs;
+    boolean showOpenScadDirs;
 
     File populationFile;
     
