@@ -1,6 +1,7 @@
 
 package org.onebeartoe.tools.versioning.subversion;
 
+import java.io.File;
 import java.io.IOException;
 import org.onebeartoe.tools.versioning.subversion.service.SubversionService;
 import org.testng.annotations.Test;
@@ -28,7 +29,6 @@ public class SubversionServiceTest
     @Test(groups = {"unit"})
     public void creationDate_pass_knownDate() throws Exception
     {
-//        final String repositoryPath = "http://svn.effbot.org/public/elementtree/";
         final String repositoryPath = "https://svn.riouxsvn.com/junit-target/";
         
         String actualDate = implementation.creationDate(repositoryPath);
@@ -43,9 +43,11 @@ public class SubversionServiceTest
         assert expectedDate.equals(actualDate);
     }
     
-    @Test(groups = {"unit"}, expectedExceptions = IllegalArgumentException.class)
-    public void revertModified_fail_blankFile() throws IOException
+    @Test(groups = {"unit"})
+    public void revertModified_oneLine() throws IOException
     {        
-        implementation.revertModified(blankInfile);
+        String sssinpath = "src/test/resources/data/subversion-service/one-line.text";
+        
+        implementation.revertModified(sssinpath);
     }
 }
