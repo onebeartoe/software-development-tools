@@ -62,34 +62,8 @@ public class CommandLineSubversionMacros
     
     public static void main(String [] args) throws Exception
     {
-        System.out.println("Welcome to the command line version of the onebeartoe" + 
-                           " Subversion creation date application.");
-        
-        System.out.println("The following files are set to have the creation date appended:");
-    
         CommandLineSubversionMacros app = new CommandLineSubversionMacros();
-        
-        Options options = app.buildOptions();
-        try
-        {
-            SubversionMacrosRunProfile runProfile = app.parseRunProfile(args, options);
-
-            Instant start = Instant.now();
-            
-            app.service(runProfile);
-
-            Instant end = Instant.now();
-
-            DurationService durationService = new DurationService();
-            String message = durationService.durationMessage(start, end);
-            System.out.println();
-            System.out.println(message);
-        }
-        catch(UnrecognizedOptionException uoe)
-        {
-            HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp("java -jar openscad-test-suite.jar [path]", options);
-        }        
+        app.serviceRequest(args);
     }
     
     private SubversionMacrosRunProfile parseRunProfile(final String[] args, Options options) throws ParseException
@@ -149,5 +123,37 @@ public class CommandLineSubversionMacros
                 System.out.println();
             }
         }
+    }
+    
+    public void serviceRequest(String [] args) throws ParseException, Exception
+    {
+        System.out.println("Welcome to the command line version of the onebeartoe" + 
+                           " Subversion creation date application.");
+        
+        System.out.println("The following files are set to have the creation date appended:");
+    
+        CommandLineSubversionMacros app = new CommandLineSubversionMacros();
+        
+        Options options = app.buildOptions();
+        try
+        {
+            SubversionMacrosRunProfile runProfile = app.parseRunProfile(args, options);
+
+            Instant start = Instant.now();
+            
+            app.service(runProfile);
+
+            Instant end = Instant.now();
+
+            DurationService durationService = new DurationService();
+            String message = durationService.durationMessage(start, end);
+            System.out.println();
+            System.out.println(message);
+        }
+        catch(UnrecognizedOptionException uoe)
+        {
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp("java -jar openscad-test-suite.jar [path]", options);
+        }                
     }
 }
