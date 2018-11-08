@@ -48,6 +48,6 @@ public class SubversionServiceTest
     {        
         String sssinpath = "src/test/resources/data/subversion-service/one-line.text";
         
-        implementation.revertModified(sssinpath);
+//        implementation.revertModified(sssinpath);
     }
 }
