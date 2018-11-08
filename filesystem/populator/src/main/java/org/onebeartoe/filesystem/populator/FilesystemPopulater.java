@@ -27,21 +27,12 @@ import org.onebeartoe.application.RunProfile;
  */
 public class FilesystemPopulater extends CommandLineInterfaceApplet
 {    
-    private Logger logger;
-    
     public static final String ONLY_SHOW_NON_OPENSCAD_DIRS = "onlyShowNonOpenscadDirs";
     
     public static final String ONLY_SHOW_OPENSCAD_DIRS = "onlyShowOpenscadDirs";
     
     public static final String POPULATION_FILE = "populationFile";
-    
-    public FilesystemPopulater()
-    {        
-        String name = getClass().getSimpleName();
-        
-        logger = Logger.getLogger(name);
-    }
-    
+
     @Override
     public Options buildOptions()
     {
