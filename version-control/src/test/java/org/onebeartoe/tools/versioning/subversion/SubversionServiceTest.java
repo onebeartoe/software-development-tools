@@ -19,8 +19,8 @@ public class SubversionServiceTest
         implementation = new SubversionService();
     }
     
-    @Test(groups = {"unit"})
-    public void appendCreationDate() throws Exception
+    @Test(groups = {"unit"}, expectedExceptions = IllegalArgumentException.class)
+    public void appendCreationDate_fail_blankInfile() throws Exception
     {
         implementation.appendCreationDate(blankInfile);
     }
@@ -34,13 +34,13 @@ public class SubversionServiceTest
         String creationDate = implementation.creationDate(repositoryPath);
 
 
-        String expectedDate = "2018-09-14 15:40:22 +0000 (Fri, 14 Sep 2018)";
+        String expectedDate = "2018-09-14 10:40:22 -0500 (Fri, 14 Sep 2018)";
         
         assert expectedDate.equals(creationDate);
     }
     
-    @Test(groups = {"unit"})
-    public void revertModified() throws IOException
+    @Test(groups = {"unit"}, expectedExceptions = IllegalArgumentException.class)
+    public void revertModified_fail_blankFile() throws IOException
     {        
         implementation.revertModified(blankInfile);
     }
