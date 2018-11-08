@@ -31,12 +31,16 @@ public class SubversionServiceTest
 //        final String repositoryPath = "http://svn.effbot.org/public/elementtree/";
         final String repositoryPath = "https://svn.riouxsvn.com/junit-target/";
         
-        String creationDate = implementation.creationDate(repositoryPath);
+        String actualDate = implementation.creationDate(repositoryPath);
 
 
-        String expectedDate = "2018-09-14 10:40:22 -0500 (Fri, 14 Sep 2018)";
-        
-        assert expectedDate.equals(creationDate);
+        // local workspace
+//        String expectedDate = "2018-09-14 10:40:22 -0500 (Fri, 14 Sep 2018)";
+  
+        // travis-ci workspace
+        String expectedDate = "2018-09-14 15:40:22 +0000 (Fri, 14 Sep 2018)";
+
+        assert expectedDate.equals(actualDate);
     }
     
     @Test(groups = {"unit"}, expectedExceptions = IllegalArgumentException.class)
