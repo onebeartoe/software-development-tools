@@ -1,38 +1,39 @@
 
 cd /Users/lando/Versioning/owner/github
 
-pwd
+printf "\n"
 cd 3D-Modeling
+pwd
 git status
 
-printf "\n\n"
+printf "\n"
 cd ../electronics
 pwd
 git status
 
-printf "\n\n"
+printf "\n"
 cd ../java-libraries
 pwd
 git status
 
-printf "\n\n"
+printf "\n"
 cd ../productivity
 pwd
 git status
 
 pwd
-printf "\n\n"
+printf "\n"
 cd ../roller
 pwd
 git status
 
 pwd
-printf "\n\n"
+printf "\n"
 cd ../software-development-tools/
 pwd
 git status
 
-printf "\n\n"
+printf "\n"
 pwd
 cd ../system-administration
 git status
