@@ -21,7 +21,6 @@ cd ../productivity
 pwd
 git status
 
-pwd
 printf "\n"
 cd ../roller
 pwd
@@ -34,6 +33,6 @@ pwd
 git status
 
 printf "\n"
-pwd
 cd ../system-administration
+pwd
 git status
