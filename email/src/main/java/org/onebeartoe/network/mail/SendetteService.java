@@ -23,7 +23,7 @@ public class SendetteService extends AppletService
         File attachement = rp.attachment;
         String to = rp.to;
         String subject = rp.subject;
-        String body = "real far far out body";
+        String body = rp.messageText;
         
         AttSender sender = new AttSender(user, pw);        
         sender.sendMail(subject, body, to, attachement);

@@ -32,7 +32,7 @@ public class Sendette extends CommandLineInterfaceApplet
     
     // these are keys found in the SMTP properties file
     private final String SMTP_USER = "smtp.user";
-    private final String SMTP_PASSWORD = "smtp.user";
+    private final String SMTP_PASSWORD = "smtp.password";
     
     @Override
     public Options buildOptions()
