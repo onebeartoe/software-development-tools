@@ -21,6 +21,7 @@
     <modules>
         <module>html-utility</module>
         <module>android</module>
+        <module>email</module>
         <module>filesystem</module>
         <module>jars</module>
         <module>maven</module>
