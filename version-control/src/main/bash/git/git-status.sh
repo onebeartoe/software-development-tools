@@ -7,7 +7,7 @@ pwd
 git status
 
 printf "\n"
-cd chronos
+cd ../chronos
 pwd
 git status
 
