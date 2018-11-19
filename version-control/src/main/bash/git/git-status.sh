@@ -7,6 +7,11 @@ pwd
 git status
 
 printf "\n"
+cd chronos
+pwd
+git status
+
+printf "\n"
 cd ../electronics
 pwd
 git status
