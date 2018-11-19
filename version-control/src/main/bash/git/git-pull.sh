@@ -5,6 +5,11 @@ pwd
 cd 3D-Modeling
 git pull
 
+pwd
+cd ../chronos
+pwd
+git pull
+
 printf "\n\n"
 cd ../electronics
 pwd
