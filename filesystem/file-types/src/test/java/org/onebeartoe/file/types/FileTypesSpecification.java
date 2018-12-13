@@ -8,11 +8,11 @@ import org.testng.annotations.Test;
  */
 public class FileTypesSpecification
 {
-   private FileTypes implementation;
+   private FileTypesApplet implementation;
    
    public FileTypesSpecification()
    {
-       implementation = new FileTypes();
+       implementation = new FileTypesApplet();
    }
    
    @Test(groups = {"unit"})

@@ -11,7 +11,7 @@ import org.onebeartoe.application.RunProfile;
 /**
  * @author Roberto Marquez
  */
-public class FileTypes extends CommandLineInterfaceApplet
+public class FileTypesApplet extends CommandLineInterfaceApplet
 {
     @Override
     public Options buildOptions()
@@ -27,7 +27,7 @@ public class FileTypes extends CommandLineInterfaceApplet
     
     public static void main(String [] args) throws IOException, ParseException, Exception
     {        
-        CommandLineInterfaceApplet app = new FileTypes();
+        CommandLineInterfaceApplet app = new FileTypesApplet();
         app.execute(args);
     }
     
@@ -38,7 +38,7 @@ public class FileTypes extends CommandLineInterfaceApplet
         
         if(args.length == 0)
         {
-            // use the current directory if not path is given
+            // use the current directory if no path is given
             inpath = ".";
         }
         else

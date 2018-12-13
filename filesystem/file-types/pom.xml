@@ -58,7 +58,7 @@
                     <archive>
                         <manifest>
                             <mainClass>
-                                org.onebeartoe.file.types.FileTypes
+                                org.onebeartoe.file.types.FileTypesApplet
                             </mainClass>
                         </manifest>
                     </archive>
