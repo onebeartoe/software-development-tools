@@ -30,7 +30,7 @@ public class CrawlStat
     
     private long totalTextSize;
     
-    private final List<BadLink> badLinks;
+    private final List<InternalLink> badLinks;
 
     public CrawlStat()
     {
@@ -39,12 +39,12 @@ public class CrawlStat
         badLinks = new ArrayList();
     }
     
-    public void addBadLink(BadLink badLink)
+    public void addBadLink(InternalLink badLink)
     {
         badLinks.add(badLink);
     }
     
-    public List<BadLink> getBadLinks()
+    public List<InternalLink> getBadLinks()
     {
         return badLinks;
     }

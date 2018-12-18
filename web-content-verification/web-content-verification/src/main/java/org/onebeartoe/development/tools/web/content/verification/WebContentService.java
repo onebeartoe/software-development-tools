@@ -26,7 +26,7 @@ public class WebContentService
         logger = LoggerFactory.getLogger( getClass().getName() );    
     }
     
-    private List<BadLink> getBadLinks(Class crawlerClass, String rootUrl) throws Exception 
+    private List<InternalLink> getBadLinks(Class crawlerClass, String rootUrl) throws Exception 
     {
     /*
      * crawlStorageFolder is a folder where intermediate crawl data is
@@ -113,12 +113,13 @@ public class WebContentService
         long totalTextSize = 0;
         int totalProcessedPages = 0;
         long totalOkLinks = 0;
-        List<BadLink> allBadLinks = new ArrayList();
+        List<InternalLink> allBadLinks = new ArrayList();
+        
         for (Object localData : crawlersLocalData) 
         {
             CrawlStat stat = (CrawlStat) localData;
-            
-            List<BadLink> badLinks = stat.getBadLinks();
+
+            List<InternalLink> badLinks = stat.getBadLinks();
             allBadLinks.addAll(badLinks);
             
             totalLinks += stat.getTotalLinks();
@@ -148,8 +149,10 @@ public class WebContentService
     
     public Object[][] loadBadLinks(Class crawlerClass, String rootUrl) throws Exception
     {
-        List<BadLink> badLinks = getBadLinks(crawlerClass, rootUrl);
+        List<InternalLink> badLinks = getBadLinks(crawlerClass, rootUrl);
+
         int paramCount = 3;
+
         List<Object []> rows = badLinks.stream()
                 .map( l -> 
                 {
@@ -163,6 +166,7 @@ public class WebContentService
                 }).collect(Collectors.toList());
         
         Object[][] data = new Object[rows.size()][paramCount];
+
         int r = 0;
         
         for(Object [] row : rows)

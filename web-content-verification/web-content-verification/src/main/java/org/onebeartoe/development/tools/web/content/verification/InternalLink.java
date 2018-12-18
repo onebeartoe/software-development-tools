@@ -11,7 +11,7 @@ import java.util.List;
  * 
  * @author Roberto Marquez <https://www.youtube.com/user/onebeartoe>
  */
-public class BadLink 
+public class InternalLink
 {
     private String url;
     
@@ -21,7 +21,7 @@ public class BadLink
     
     private String statusCodeDescription;
     
-    public BadLink()
+    public InternalLink()
     {
         parentUrls = new ArrayList();
     }

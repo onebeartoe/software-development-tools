@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.url.WebURL;
-import org.onebeartoe.development.tools.web.content.verification.BadLink;
+import org.onebeartoe.development.tools.web.content.verification.InternalLink;
 import org.onebeartoe.development.tools.web.content.verification.CrawlStat;
 
 /**
@@ -95,20 +95,18 @@ public abstract class StatusHandlerCrawler extends WebCrawler
         {
             myCrawlStat.increateOkVisitCount();
         }
-        else
-        {
-            BadLink bl = new BadLink();
-            
-            bl.setUrl(webUrl.getURL());
-            bl.addParentUrl(webUrl.getParentUrl());
-            bl.setStatusCode(statusCode);
-            bl.setStatusCodeDescription(statusDescription);
-            
-            myCrawlStat.addBadLink(bl);
-            
-            logger.warn("Non success status for link: {} status code: {}, parent: {}, description: {}",
-                        webUrl.getURL(), statusCode, webUrl.getParentUrl(), statusDescription);
-        }
+        
+        InternalLink bl = new InternalLink();
+
+        bl.setUrl(webUrl.getURL());
+        bl.addParentUrl(webUrl.getParentUrl());
+        bl.setStatusCode(statusCode);
+        bl.setStatusCodeDescription(statusDescription);
+
+        myCrawlStat.addBadLink(bl);
+
+        logger.warn("Non success status for link: {} status code: {}, parent: {}, description: {}",
+                    webUrl.getURL(), statusCode, webUrl.getParentUrl(), statusDescription);        
     }
     
     /**
