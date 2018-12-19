@@ -47,7 +47,7 @@ public class IndexPanel extends JPanel implements ActionListener
         statusPanel = new ScrollableTextArea("\n\n");
 
         // this panel holds the  buttons that start the thumbnail generation				
-        actionButton = new JButton("Resize");
+        actionButton = new JButton("Index");
         actionButton.addActionListener(this);
 
         // place the status and action components onto a panel

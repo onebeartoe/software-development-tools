@@ -46,7 +46,7 @@ public class IndexTask extends TimerTask
                     link_item += contents[x].isDirectory() ? "/index.html" : "";
 
                     AnchorTag tag = new AnchorTag(link_item, link_item);
-                    String link = tag.toString();
+                    String link = tag.toHtml();
                     index_file.println(link + "<br>" );
 
                     String statusMessage = "generating HTML for: " + contents[x].getName();

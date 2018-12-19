@@ -105,7 +105,7 @@ public abstract class StatusHandlerCrawler extends WebCrawler
 
         myCrawlStat.addBadLink(bl);
 
-        logger.warn("Non success status for link: {} status code: {}, parent: {}, description: {}",
+        logger.warn("Status for link: {} status code: {}, parent: {}, description: {}",
                     webUrl.getURL(), statusCode, webUrl.getParentUrl(), statusDescription);        
     }
     
