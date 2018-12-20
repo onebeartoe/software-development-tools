@@ -12,10 +12,10 @@ import javax.mail.internet.AddressException;
  */
 public class SendetteService extends AppletService
 {
-    public void serviceRequest(RunProfile runProfilee) throws AddressException, MessagingException
+    public void serviceRequest(RunProfile runProfile) throws AddressException, MessagingException
     {
         // Alas, we have to cast.
-        SendetteRunProfile rp = (SendetteRunProfile) runProfilee;
+        SendetteRunProfile rp = (SendetteRunProfile) runProfile;
         
         String user = rp.smtpUser;        
         String pw = rp.smtpPassword;
