@@ -11,7 +11,8 @@
             </run>
         </groups>
         
-        <packages>    
+        <packages>
+            <package name="org.onebeartoe.development.tools.html.utility.panels"/>
             <package name="org.onebeartoe.development.tools.html.utility.tasks"/>
         </packages>
     </test>    
