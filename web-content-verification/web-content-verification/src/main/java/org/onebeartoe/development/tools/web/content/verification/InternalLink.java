@@ -1,6 +1,4 @@
-/*
 
- */
 package org.onebeartoe.development.tools.web.content.verification;
 
 import java.util.ArrayList;

@@ -1,6 +1,4 @@
-/*
 
- */
 package org.onebeartoe.development.tools.web.content.verification;
 
 /**

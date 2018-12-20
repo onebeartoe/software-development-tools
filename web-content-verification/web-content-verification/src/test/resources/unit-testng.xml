@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="content-verification-unit-test-suite" parallel="none">
+    <test name="content-verification-unit-tests">        
+        <packages>
+            <package>org.onebeartoe.development.tools.web.content.verification</package>
+        </packages>
+    </test>
+</suite>
