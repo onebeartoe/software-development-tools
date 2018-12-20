@@ -47,7 +47,6 @@ public class FileTypesService extends AppletService
         
         Files.walkFileTree(start, visitor);
         
-        
         Map<String, Integer> typesWithExtention = visitor.getFiletypes();
 
         printTally(typesWithExtention, "extensions:");
