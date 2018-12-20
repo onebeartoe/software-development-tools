@@ -1,5 +1,4 @@
-/*
- */
+
 package org.onebeartoe.development.tools.html.utility.panels;
 
 import java.awt.event.ActionEvent;
@@ -7,7 +6,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Roberto Marquez
  */
 public class IndexPanelSpecification
