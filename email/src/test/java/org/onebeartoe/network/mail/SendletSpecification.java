@@ -1,6 +1,7 @@
 
 package org.onebeartoe.network.mail;
 
+import javax.mail.AuthenticationFailedException;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -17,10 +18,15 @@ public class SendletSpecification
         implementation = new Sendlet();
     }
     
-    @Test
-    public void execute() throws Exception
+    @Test(expectedExceptions = AuthenticationFailedException.class)
+    public void execute_fail_badCredentials() throws Exception
     {
-        String [] args = {};
+        String [] args = {"--attachment", "pom.xml",
+                            "--messageText", "body",
+                            "--subject", "subject",
+                            "--smtpPropertiesPath", "src/test/resources/fake-smtp.properties",
+                            "--to", "face.recipient@fake-host.tdl"
+                         };
         
         implementation.execute(args);
     }
