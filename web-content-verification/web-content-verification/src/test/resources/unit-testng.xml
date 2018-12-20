@@ -5,7 +5,7 @@
 <suite name="content-verification-unit-test-suite" parallel="none">
     <test name="content-verification-unit-tests">        
         <packages>
-            <package>org.onebeartoe.development.tools.web.content.verification</package>
+            <package name="org.onebeartoe.development.tools.web.content.verification"/>
         </packages>
     </test>
 </suite>
