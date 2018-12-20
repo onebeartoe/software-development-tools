@@ -22,7 +22,7 @@ import org.apache.commons.cli.ParseException;
 /**
  * @author Roberto Marquez
  */
-public class Sendette extends CommandLineInterfaceApplet
+public class Sendlet extends CommandLineInterfaceApplet
 {
     private final String ATTACHMENT = "attachment";
     private final String MESSAGE_TEXT = "messageText";
@@ -84,7 +84,7 @@ public class Sendette extends CommandLineInterfaceApplet
     
     public static void main(String [] args) throws IOException, Exception
     {
-        CommandLineInterfaceApplet app = new Sendette();
+        CommandLineInterfaceApplet app = new Sendlet();
         app.execute(args);
     }
 
@@ -123,7 +123,7 @@ public class Sendette extends CommandLineInterfaceApplet
         } 
         catch (IOException ex)
         {
-            Logger.getLogger(Sendette.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sendlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         String smtpUser = props.getProperty(SMTP_USER);

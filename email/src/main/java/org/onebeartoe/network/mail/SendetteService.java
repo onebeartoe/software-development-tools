@@ -24,10 +24,17 @@ public class SendetteService extends AppletService
         String to = rp.to;
         String subject = rp.subject;
         String body = rp.messageText;
+
+        boolean checkServerIdentity = false;
         
         AttSender sender = new AttSender(user, pw);        
-        sender.sendMail(subject, body, to, attachement);
         
-        System.out.println("The sendette service is great!");
+        sender.sendMail(subject, 
+                        body, 
+                        to, 
+                        attachement,
+                        checkServerIdentity);
+        
+        logger.info("The sendette service has sent the email.");
     }
 }
