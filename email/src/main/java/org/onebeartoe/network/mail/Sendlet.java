@@ -110,15 +110,15 @@ public class Sendlet extends CommandLineInterfaceApplet
         {
             String path = cl.getOptionValue(ATTACHMENT);
             File attachement = new File(path);
-            runProfile.attachment = attachement;
+            runProfile.setAttachment(attachement);
         }
 
-        runProfile.smtpPropertiesPath = cl.getOptionValue(SMTP_PROPERTIES_PATH);
+        runProfile.setSmtpPropertiesPath( cl.getOptionValue(SMTP_PROPERTIES_PATH) );
         Properties props = new Properties();
         InputStream inStream;
         try
         {
-            inStream = new FileInputStream(runProfile.smtpPropertiesPath);
+            inStream = new FileInputStream(runProfile.getSmtpPropertiesPath() );
             props.load(inStream);
         } 
         catch (IOException ex)
@@ -142,14 +142,14 @@ public class Sendlet extends CommandLineInterfaceApplet
                                 + SMTP_PASSWORD + " variable.");
         }        
                 
-        runProfile.messageText = messageText;
-        runProfile.to = to;
-        runProfile.subject = subject;
-        runProfile.smtpUser = smtpUser;
-        runProfile.smtpPassword = pw;
+        runProfile.setMessageText(messageText);
+        runProfile.setTo(to);
+        runProfile.setSubject(subject);
+        runProfile.setSmtpUser(smtpUser);
+        runProfile.setSmtpPassword(pw);
 
-        
         List<String> remainingArgs = cl.getArgList();
+
         if(remainingArgs.size() > 0)
         {
             remainingArgs.forEach(System.out::println);

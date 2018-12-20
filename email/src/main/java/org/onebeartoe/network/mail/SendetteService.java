@@ -17,13 +17,13 @@ public class SendetteService extends AppletService
         // Alas, we have to cast.
         SendetteRunProfile rp = (SendetteRunProfile) runProfile;
         
-        String user = rp.smtpUser;        
-        String pw = rp.smtpPassword;
+        String user = rp.getSmtpUser();        
+        String pw = rp.getSmtpPassword();
         
-        File attachement = rp.attachment;
-        String to = rp.to;
-        String subject = rp.subject;
-        String body = rp.messageText;
+        File attachement = rp.getAttachment();
+        String to = rp.getTo();
+        String subject = rp.getSubject();
+        String body = rp.getMessageText();
 
         boolean checkServerIdentity = false;
         
