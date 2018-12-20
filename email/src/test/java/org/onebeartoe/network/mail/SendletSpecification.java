@@ -22,7 +22,7 @@ public class SendletSpecification
     public void execute_fail_badCredentials() throws Exception
     {
         String [] args = {"--attachment", "pom.xml",
-                            "--messageText", "body",
+                            "--messageText", "",
                             "--subject", "subject",
                             "--smtpPropertiesPath", "src/test/resources/fake-smtp.properties",
                             "--to", "face.recipient@fake-host.tdl"
