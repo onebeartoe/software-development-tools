@@ -12,7 +12,7 @@ class SendetteRunProfile extends RunProfile
     File attachment;
     String messageText;
     String subject;
-    String to;
+    String to = "";
     String smtpUser;
     String smtpPassword;
 }
