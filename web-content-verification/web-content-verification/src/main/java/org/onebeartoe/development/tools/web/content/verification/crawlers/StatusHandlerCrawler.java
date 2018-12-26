@@ -14,9 +14,13 @@ import org.onebeartoe.development.tools.web.content.verification.InternalLink;
 import org.onebeartoe.development.tools.web.content.verification.CrawlStat;
 
 /**
- * @author Yasser Ganjisaffar
+ * @author Roberto Marquez
+ * 
+ * 
+ * 
+ * This class is partially inspired by the example code provided 
+ * by Yasser Ganjisaffar.
  */
-//TODO: Rename this to BadLinkCrawer
 public abstract class StatusHandlerCrawler extends WebCrawler 
 {
     private static final Logger logger = LoggerFactory.getLogger(StatusHandlerCrawler.class);
@@ -27,26 +31,44 @@ public abstract class StatusHandlerCrawler extends WebCrawler
     
     private CrawlStat myCrawlStat;
     
-//    private String rootUrl;
-    
     public StatusHandlerCrawler()//String rootUrl)
     {
         myCrawlStat = new CrawlStat();
-        
-//        this.rootUrl = rootUrl;
     }
     
-    public abstract String getRootUrl();
+    /**
+     * Implementation of this method prodivde a default value for the URL that 
+     * is under test.
+     * 
+     * This value is overwritten if the property is found.
+     * 
+     * @return 
+     */
+    public abstract String getDefaultRootUrl();
 
+    public String getRootUrl()
+    {
+        String property = System.getProperty("root.url");
+
+        if(property == null || property.isEmpty() )
+        {
+            property = getDefaultRootUrl();
+        }
+        
+        return property;
+    }
+    
     /**
      * You should implement this function to specify whether
      * the given url should be crawled or not (based on your
      * crawling logic).
+     * @param referringPage
+     * @param url
+     * @return 
      */
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) 
     {
-//        url.get
         String href = url.getURL().toLowerCase();
         
         String rootUrl = getRootUrl();
@@ -64,23 +86,8 @@ public abstract class StatusHandlerCrawler extends WebCrawler
     @Override
     public void visit(Page page) 
     {
-//        logger.info("Visited: {}", page.getWebURL().getURL());
         myCrawlStat.incProcessedPages();
 
-// seeign how much performance increases by skipping the HTML parsing
-/*
-        if(page.getParseData() instanceof HtmlParseData) 
-        {
-            HtmlParseData parseData = (HtmlParseData) page.getParseData();
-            Set<WebURL> links = parseData.getOutgoingUrls();
-            myCrawlStat.incTotalLinks(links.size());
-            try {
-                myCrawlStat.incTotalTextSize(parseData.getText().getBytes("UTF-8").length);
-            } catch (UnsupportedEncodingException ignored) {
-                // Do nothing
-            }
-        }
-*/
         // We dump this crawler statistics after processing every 50 pages
         if ((myCrawlStat.getTotalProcessedPages() % 50) == 0) 
         {
@@ -132,7 +139,7 @@ public abstract class StatusHandlerCrawler extends WebCrawler
     public void dumpMyData() 
     {
         int id = getMyId();
-        // You can configure the log to output to file
+        
         logger.info("Crawler {} > Processed Pages: {}", id, myCrawlStat.getTotalProcessedPages());
         logger.info("Crawler {} > Total Links Found: {}", id, myCrawlStat.getTotalLinks());
         logger.info("Crawler {} > Total Text Size: {}", id, myCrawlStat.getTotalTextSize());

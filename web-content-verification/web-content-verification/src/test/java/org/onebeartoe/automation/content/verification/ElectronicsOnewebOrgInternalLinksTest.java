@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
  * 
  *      http://learn-automation.com/data-driven-framework-in-selenium-webdriver/
  */
-public class ElectronicsOnewebOrgInternalLinksTest  extends InternalLinksTest
+public class ElectronicsOnewebOrgInternalLinksTest extends InternalLinksTest
 {
     protected WebContentService webContentService;
     
@@ -26,9 +26,16 @@ public class ElectronicsOnewebOrgInternalLinksTest  extends InternalLinksTest
         
     @DataProvider(name="electronics.oneweb.org")
     public Object[][] testDataFeed() throws Exception
-    {        
-        Object [][] data = webContentService.loadBadLinks(ElectronicsOnewebOrgStatusCrawler.class, 
-                                                          ElectronicsOnewebOrgStatusCrawler.rootUrl);
+    {
+        ElectronicsOnewebOrgStatusCrawler crawler = new ElectronicsOnewebOrgStatusCrawler();
+        
+        String rootUrl = crawler.getRootUrl();
+//        String rootURL = ElectronicsOnewebOrgStatusCrawler.rootUrl;
+
+        Object [][] data = webContentService.loadBadLinks(crawler.getClass(), 
+                                                          rootUrl);
+//        Object [][] data = webContentService.loadBadLinks(ElectronicsOnewebOrgStatusCrawler.class, 
+//                                                          rootUrl);
         
         return data;
     }

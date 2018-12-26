@@ -7,10 +7,11 @@ package org.onebeartoe.development.tools.web.content.verification.crawlers;
  */
 public class OnewebComStatusCrawler extends StatusHandlerCrawler
 {
-    public static final String rootUrl = "http://www.onebeartoe.com/";
+//    public static final String rootUrl = "http://www.onebeartoe.com/";
     
-    public String getRootUrl()
+    public String getDefaultRootUrl()
     {
-        return rootUrl;
+        return "http://www.onebeartoe.com/";
+//        return rootUrl;
     }
 }

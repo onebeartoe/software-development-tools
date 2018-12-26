@@ -7,10 +7,16 @@ package org.onebeartoe.development.tools.web.content.verification.crawlers;
  */
 public class ElectronicsOnewebOrgStatusCrawler extends StatusHandlerCrawler
 {
-    public static final String rootUrl = "http://electronics.onebeartoe.org/";
+//    public static final String rootUrl = "http://electronics.onebeartoe.org/";
     
-    public String getRootUrl()
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String getDefaultRootUrl()
     {
-        return rootUrl;
+        return "http://electronics.onebeartoe.org/";
+//        return rootUrl;
     }
 }

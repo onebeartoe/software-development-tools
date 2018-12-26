@@ -25,6 +25,7 @@
         <dependency>
             <groupId>edu.uci.ics</groupId>
             <artifactId>crawler4j</artifactId>
+<!-- Consider upgrading this to the latest version. -->
             <version>4.2</version>
         </dependency>
 
@@ -66,7 +67,11 @@
     <profiles>
         <profile>
             <id>internal-links</id>
-    
+
+            <properties>
+                
+            </properties>
+            
             <build>
 
             </build>        
