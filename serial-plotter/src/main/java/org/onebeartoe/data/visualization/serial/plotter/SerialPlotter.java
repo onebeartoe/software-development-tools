@@ -61,7 +61,7 @@ public class SerialPlotter extends Application implements SerialPortEventListene
     
     private Map<String, DataChannel> dataMap;
 
-    private volatile List<String> messages;
+    private List<String> messages;
 
     private BufferedReader input;
 
