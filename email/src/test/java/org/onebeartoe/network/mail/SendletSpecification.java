@@ -12,7 +12,7 @@ public class SendletSpecification
 {
     private Sendlet implementation;
 
-    private String [] allArguements(SendetteRunProfile rp)
+    private String [] allArguments(SendetteRunProfile rp)
     {
         String [] args = {"--attachment", "pom.xml",
                             "--messageText", "",
@@ -20,6 +20,15 @@ public class SendletSpecification
                             "--smtpPropertiesPath", rp.getSmtpPropertiesPath(),
                             "--to", "face.recipient@fake-host.tdl"
                          };
+        
+        return args;
+    }
+    
+    private String [] allArgumentsRemoveMessageText(SendetteRunProfile rp)
+    {
+        String [] allArgs = allArguments(rp);
+        
+        String [] args = null;
         
         return args;
     }
@@ -38,7 +47,7 @@ public class SendletSpecification
         String path = "src/test/resources/fake-smtp.properties";
         rp.setSmtpPropertiesPath(path);
         
-        String[] args = allArguements(rp);
+        String[] args = allArguments(rp);
         
         implementation.execute(args);
     }
@@ -51,8 +60,25 @@ public class SendletSpecification
         String path = "src/test/resources/no-smtp.properties";
         rp.setSmtpPropertiesPath(path);
         
-        String[] args = allArguements(rp);
+        String[] args = allArguments(rp);
         
         implementation.execute(args);
-    }    
+    }
+
+    @Test
+    public void execute_noAttachment()
+    {
+        
+        String [] args = new SendletArgumentsBuilder()
+        .build();
+        
+// is this correct?
+        implementation.equals(args);
+    }
+
+    @Test
+    public void execute_noMessageText()
+    {
+        
+    }
 }

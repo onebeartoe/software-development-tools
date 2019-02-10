@@ -24,8 +24,8 @@ import org.apache.commons.cli.ParseException;
  */
 public class Sendlet extends CommandLineInterfaceApplet
 {
-    private final String ATTACHMENT = "attachment";
-    private final String MESSAGE_TEXT = "messageText";
+    public static final String ATTACHMENT = "attachment";
+    public static final String MESSAGE_TEXT = "messageText";
     private final String SMTP_PROPERTIES_PATH = "smtpPropertiesPath";
     private final String SUBJECT = "subject";
     private final String TO = "to";
