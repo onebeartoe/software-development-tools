@@ -12,6 +12,7 @@ import javax.mail.internet.AddressException;
  */
 public class SendetteService extends AppletService
 {
+    @Override
     public void serviceRequest(RunProfile runProfile) throws AddressException, MessagingException
     {
         // Alas, we have to cast.
