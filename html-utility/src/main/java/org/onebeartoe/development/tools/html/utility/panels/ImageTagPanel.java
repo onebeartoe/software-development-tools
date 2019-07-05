@@ -71,6 +71,7 @@ public class ImageTagPanel extends JPanel implements ActionListener
         add(splitPane, BorderLayout.CENTER);
     }
 
+    @Override
     public void actionPerformed(ActionEvent ae) 
     {
         Object eventSource = ae.getSource();

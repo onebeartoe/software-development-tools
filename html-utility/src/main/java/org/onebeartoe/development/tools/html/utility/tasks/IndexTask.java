@@ -46,7 +46,7 @@ public class IndexTask extends TimerTask
                     link_item += contents[x].isDirectory() ? "/index.html" : "";
 
                     AnchorTag tag = new AnchorTag(link_item, link_item);
-                    String link = tag.toHtml();
+                    String link = tag.toString();
                     index_file.println(link + "<br>" );
 
                     String statusMessage = "generating HTML for: " + contents[x].getName();
@@ -55,7 +55,7 @@ public class IndexTask extends TimerTask
                 }
                 index_file.close();
 
-                statusPanel.appendText("\n");
+                statusPanel.setText("\n");
             }
         }
         catch( java.io.IOException ioe ) 

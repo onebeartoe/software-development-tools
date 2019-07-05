@@ -2,17 +2,15 @@
 package org.onebeartoe.development.tools.html.utility.tasks;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 import org.onebeartoe.application.ui.swing.ScrollableTextArea;
 
 import org.onebeartoe.filesystem.FileHelper;
 import org.onebeartoe.html.ImageTag;
 
 /**
- * author: Roberto H. Marquez
+ * @author Roberto Marquez
  */
 public class ImageTask extends TimerTask 
 {
@@ -20,27 +18,23 @@ public class ImageTask extends TimerTask
     
     private final ScrollableTextArea statusPanel;
     
+    private Logger logger;
+    
     public ImageTask(File sourceDirectory, ScrollableTextArea statusPanel)
     {
         this.sourceDirectory = sourceDirectory;
         
         this.statusPanel = statusPanel;
+        
+        logger = Logger.getLogger( getClass().getName() );
     }
     
     public void run() 
     {
         try
         {
-            String file_name = sourceDirectory.getPath() + File.separator + "image-tags.html";
-            File outfile = new File(file_name);
-            
-            try( OutputStream outstream = new FileOutputStream(outfile);
-                PrintWriter writer = new PrintWriter(outstream) )
+            StringBuilder html = new StringBuilder();
             {
-                String statusMessage = "\n\n" + "outputning to: " + outfile.getAbsolutePath();
-                System.out.println(statusMessage);
-                statusPanel.appendText(statusMessage + "\n");
-
                 File[] contents = sourceDirectory.listFiles();
                 for (int x = 0; x < contents.length; x++)
                 {
@@ -50,22 +44,22 @@ public class ImageTask extends TimerTask
 
                         String altText = image;
                         ImageTag imageTag = new ImageTag(image, 600, 400, altText);
-                        String tag = imageTag.toHtml();
+                        String tag = imageTag.toString();
 
-                        writer.println(tag);
-                        writer.println("<br>\n</br>");
+                        html.append("\n");
+                        html.append(tag);
+                        html.append("\n<br>\n</br>\n");
 
-                        statusMessage = "generating HTML for: " + contents[x].getName();
-                        System.out.println(statusMessage);
-                        statusPanel.appendText(statusMessage + "\n");
+                        String statusMessage = "generating HTML for: " + contents[x].getName();
+
+                        logger.info(statusMessage);
                     }
                 }
 
-                writer.flush();
+                statusPanel.setText(html.toString() + "\n");
             }
-            
-            
-            System.out.println(" done.");
+
+            logger.info(" done.");
         }
         catch(Exception ioe) 
         { 
