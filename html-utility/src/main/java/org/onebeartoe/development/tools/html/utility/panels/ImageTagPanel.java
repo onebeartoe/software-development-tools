@@ -11,6 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.border.Border;
@@ -33,40 +34,47 @@ public class ImageTagPanel extends JPanel implements ActionListener
     private final JButton actionButton;
 
     private final ScrollableTextArea statusPanel;
+   
+    private final JCheckBox outputToFileCheckbox;
     
     public ImageTagPanel() 
     {
         // this panel gives the user a button to click to pick an input direcotyr,  it also shows which files will be worked on.
         boolean showRecursive = true;
         fileSelectionPanel = new FileSelectionPanel(FileType.IMAGE, FileSelectionMethods.SINGLE_DIRECTORY, showRecursive);
-        Border border = GUITools.factoryLineBorder("Input Images");
-        fileSelectionPanel.setBorder(border);
+
+        outputToFileCheckbox = new JCheckBox("Include JEE path");
+        outputToFileCheckbox.setSelected(true);
         
         JPanel inputPanel = new JPanel(new BorderLayout());
+        Border border = GUITools.factoryLineBorder("Input Images");
+        inputPanel.setBorder(border);
         inputPanel.add(fileSelectionPanel, BorderLayout.CENTER);
-
+        inputPanel.add(outputToFileCheckbox, BorderLayout.SOUTH);
 
         // this panel holds the  buttons that start the thumbnail generation and displays the status of the application.  Tthis is the text area the displays the status of the application
         statusPanel = new ScrollableTextArea("\n\n");
 
         // this panel holds the  buttons that start the thumbnail generation				
-//TODO: why not just put the HTML in the TextArea for the use to copy and 
-//      paste? Why is the HTML written to a file?
         actionButton = new JButton("Generate Image Tags");
         actionButton.addActionListener(this);
 
-        // place the status and action components onto a panel
-        JPanel controlPanel = new JPanel();
-        controlPanel.setLayout(new BorderLayout());
-        controlPanel.add(statusPanel, BorderLayout.CENTER);
-        controlPanel.add(actionButton, BorderLayout.SOUTH);
-        Border border3 = GUITools.factoryLineBorder("Control and Status");
-        controlPanel.setBorder(border3);
-        controlPanel.setMinimumSize( new Dimension(300, 1) );
+        // place the status, output, and action components onto a panel
+        Border controlPanelBorder = GUITools.factoryLineBorder("Control and Status");
+        JPanel statusAndActionControlPanel = new JPanel();
+        statusAndActionControlPanel.setLayout(new BorderLayout());
+        statusAndActionControlPanel.add(statusPanel, BorderLayout.CENTER);
+        statusAndActionControlPanel.add(actionButton, BorderLayout.SOUTH);
+        statusAndActionControlPanel.setBorder(controlPanelBorder);
+        statusAndActionControlPanel.setMinimumSize( new Dimension(300, 1) );
 
+//TODO: reinstate the progress panel         
+//        outputPanel = new ScrollableTextArea("");        
+//        JSplitPane controlPanel = new JSplitPane(JSplitPane.VERTICAL_SPLIT, statusAndActionControlPanel, outputPanel);
+        
         // define the JFrame content layout        
         setLayout(new BorderLayout());
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, inputPanel, controlPanel);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, inputPanel, statusAndActionControlPanel);
         splitPane.setOneTouchExpandable(true);
         add(splitPane, BorderLayout.CENTER);
     }
@@ -78,7 +86,11 @@ public class ImageTagPanel extends JPanel implements ActionListener
         if (eventSource == actionButton) 
         {            
             File sourceDirectory = fileSelectionPanel.getCurrentDirectory();
-            TimerTask task = new ImageTask(sourceDirectory, statusPanel);
+                            
+            boolean includeJeePath = outputToFileCheckbox.isSelected();
+            
+            TimerTask task = new ImageTask(sourceDirectory, statusPanel, includeJeePath);
+            
             Date date = new Date();
             Timer timer = new Timer();
             timer.schedule(task, date);           

@@ -20,8 +20,19 @@ public class ImageTask extends TimerTask
     
     private Logger logger;
     
+    private boolean includeJeePath;
+    
     public ImageTask(File sourceDirectory, ScrollableTextArea statusPanel)
     {
+//        boolean includePath = false;
+        
+        this(sourceDirectory, statusPanel, false);
+    }
+    
+    public ImageTask(File sourceDirectory, ScrollableTextArea statusPanel, boolean includeJeePath)
+    {
+        this.includeJeePath = includeJeePath;
+        
         this.sourceDirectory = sourceDirectory;
         
         this.statusPanel = statusPanel;
@@ -34,30 +45,38 @@ public class ImageTask extends TimerTask
         try
         {
             StringBuilder html = new StringBuilder();
+            
+            File[] contents = sourceDirectory.listFiles();
+            
+            for (int x = 0; x < contents.length; x++)
             {
-                File[] contents = sourceDirectory.listFiles();
-                for (int x = 0; x < contents.length; x++)
+                if (FileHelper.isImageFile(contents[x].getName())) 
                 {
-                    if (FileHelper.isImageFile(contents[x].getName())) 
+                    String image = contents[x].getName();
+                    
+                    if(includeJeePath)
                     {
-                        String image = contents[x].getName();
-
-                        String altText = image;
-                        ImageTag imageTag = new ImageTag(image, 600, 400, altText);
-                        String tag = imageTag.toString();
-
-                        html.append("\n");
-                        html.append(tag);
-                        html.append("\n<br>\n</br>\n");
-
-                        String statusMessage = "generating HTML for: " + contents[x].getName();
-
-                        logger.info(statusMessage);
+                        String jeePath = includePath();
+                        
+                        image = jeePath + "/" + image;
                     }
-                }
 
-                statusPanel.setText(html.toString() + "\n");
+                    String altText = image;
+                    ImageTag imageTag = new ImageTag(image, 600, 400, altText);
+                    String tag = imageTag.toString();
+
+                    html.append("\n");
+                    html.append(tag);
+                    html.append("\n<br>\n</br>\n");
+
+                    String statusMessage = "generating HTML for: " + contents[x].getName();
+
+                    logger.info(statusMessage);
+                }
             }
+
+            statusPanel.setText(html.toString() + "\n");
+            
 
             logger.info(" done.");
         }
@@ -65,5 +84,25 @@ public class ImageTask extends TimerTask
         { 
             ioe.printStackTrace(); 
         }
+    }
+    
+    private String includePath()
+    {
+        String includePath = "jee/path/not/found";
+        
+        String fullPath = sourceDirectory.getAbsolutePath();
+        
+        int webappIndex = fullPath.indexOf("/webapp/");
+        
+        if(webappIndex != -1)
+        {
+            int beginIndex = webappIndex + 8;
+            
+            String contextPath = "<%= request.getContextPath() %>/";
+            
+            includePath = contextPath + fullPath.substring(beginIndex);
+        }
+        
+        return includePath;
     }    
 }
