@@ -94,7 +94,8 @@ public class Sendlet extends CommandLineInterfaceApplet
         CommandLineParser parser = new DefaultParser();
         CommandLine cl = parser.parse(options, args);
 
-        String to = cl.getOptionValue(TO);        
+        String to = cl.getOptionValue(TO);
+        
         String subject = cl.getOptionValue(SUBJECT, "Wonderful Subject");
 
         SendetteRunProfile runProfile = new SendetteRunProfile();

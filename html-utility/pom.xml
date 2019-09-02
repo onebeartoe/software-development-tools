@@ -20,8 +20,13 @@
         
     </properties>
 
-    
     <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.onebeartoe</groupId>  
             <artifactId>onebeartoe-application</artifactId>  
@@ -38,6 +43,12 @@
             <groupId>org.onebeartoe</groupId>
             <artifactId>onebeartoe-web</artifactId>
             <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     
