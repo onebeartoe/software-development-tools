@@ -23,7 +23,7 @@ public class ImageTaskServiceSpecification
     }
 
     /**
-     * Test of index method, of class ImageTaskService.
+     * Text the expected value of 2 images tagged in the resources directory.
      */
     @Test
     public void testIndex()
