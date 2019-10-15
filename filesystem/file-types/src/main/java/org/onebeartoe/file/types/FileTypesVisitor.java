@@ -1,5 +1,3 @@
-/*
- */
 
 package org.onebeartoe.file.types;
 
@@ -8,9 +6,7 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,7 +31,7 @@ public class FileTypesVisitor extends SimpleFileVisitor<Path>
     }
     
     @Override
-    public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) //throws IOException
+    public FileVisitResult visitFile(Path path, BasicFileAttributes attrs)
     {
         File file = path.toFile();
         
