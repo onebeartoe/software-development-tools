@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -86,6 +88,7 @@ public class JspSeederPanel extends JPanel implements ActionListener
         restorePreferences();
         
         targetDirectory = new JTextField();
+        
         targetDirectory.addActionListener( new ActionListener() 
         {
             @Override
@@ -95,6 +98,9 @@ public class JspSeederPanel extends JPanel implements ActionListener
                 replaceBackslash();
             }
         });
+        
+        KeyListener targetDirKeyListener = new TargetDirKeyListener();
+        targetDirectory.addKeyListener(targetDirKeyListener);
 
         JPanel targetPanel = new JPanel( new GridLayout(2, 1, 5,5) );
         targetPanel.add( new JLabel("Target Path"));
@@ -111,7 +117,7 @@ public class JspSeederPanel extends JPanel implements ActionListener
         statusPanel = new ScrollableTextArea("\n\n");
 
         // this panel holds the  buttons that start the thumbnail generation				
-        actionButton = new JButton("Index");
+        actionButton = new JButton("Seed");
         actionButton.addActionListener(this);
 
         // place the status and action components onto a panel
@@ -184,5 +190,64 @@ public class JspSeederPanel extends JPanel implements ActionListener
     
         String message = "OpenSCAD file: " + currentDirectory;
         logger.log(Level.INFO, message);
-    }    
+    }
+
+    private class TargetDirKeyListener implements KeyListener
+    {
+        @Override
+        public void keyTyped(KeyEvent e)
+        {
+            System.out.println("kt");
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e)
+        {
+            System.out.println("kp");
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) 
+        {
+            System.out.println("kr");
+
+            String path = targetDirectory.getText();
+
+            File file = new File(path);
+
+            String webapp = "webapp";
+            
+            String absolutePath = file.getAbsolutePath();
+            
+            boolean isValidWebappPath = file.exists()
+                                        && file.isAbsolute()
+                                        && file.isDirectory()
+                                        && absolutePath.contains(webapp);
+
+            if(isValidWebappPath)
+            {
+                int webappStartIndex = absolutePath.indexOf(webapp);       
+
+                int webappEndIndex = webappStartIndex + webapp.length();
+                
+                String subpath = absolutePath.substring(0, webappEndIndex);
+
+                File subpathFile = new File(subpath);
+                
+                fileSelectionPanel.setCurrentDirectory(subpathFile);
+                
+                int targetPathEndIndex = absolutePath.length();
+                
+                int targetPathStartIndex = webappEndIndex + 1;
+                
+                String targetPath = absolutePath.substring(targetPathStartIndex, targetPathEndIndex);
+                
+                targetDirectory.setText(targetPath);
+            }
+            else
+            {
+                System.out.println("not at valid webapp path");
+            }
+        }        
+    }
 }
