@@ -40,7 +40,8 @@ public class JspSeederPanel extends JPanel implements ActionListener
     // has package private for tests
     JTextField targetDirectory;
     
-    KeyListener targetDirKeyListener;
+    // has package private for tests
+    transient KeyListener targetDirKeyListener;
     
     private transient final JspSeederService seederService;
     
@@ -250,11 +251,6 @@ public class JspSeederPanel extends JPanel implements ActionListener
             else
             {
                 System.out.println("not at valid webapp path");
-                
-System.out.println("file.exists() - " + file.exists() );
-System.out.println("file.isAbsolute() - " + file.isAbsolute() );
-System.out.println("file.isDirectory() - " + file.isDirectory() );
-System.out.println("absolutePath.contains(webapp) - " + absolutePath.contains(webapp) );
             }
         }        
     }
