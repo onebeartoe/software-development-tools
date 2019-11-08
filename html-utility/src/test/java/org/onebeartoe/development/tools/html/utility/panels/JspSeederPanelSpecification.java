@@ -35,7 +35,9 @@ public class JspSeederPanelSpecification
         
         String subpath = "music/rock";
         
-        String absolutePath = pwd + "/" + webappPath + subpath;
+        String absolutePath = pwd 
+//                + "/" 
+                + webappPath + subpath;
         
         implementation.targetDirectory.setText(absolutePath);
         
