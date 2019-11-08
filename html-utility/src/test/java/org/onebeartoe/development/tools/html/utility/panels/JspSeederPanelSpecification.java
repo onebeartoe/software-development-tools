@@ -49,12 +49,24 @@ public class JspSeederPanelSpecification
         
         String expected = subpath;
         
-        assertEquals(actual, expected);        
+        assertEquals(actual, expected);
     }
     
     @Test
     public void textField_noAbsolutePath()
     {
+        String relativePath = "some/path/that/is/not/absolute";
         
+        implementation.targetDirectory.setText(relativePath);
+        
+        implementation.targetDirKeyListener.keyReleased(null);
+        
+        String targetPath = implementation.targetDirectory.getText();
+       
+        String actual = targetPath;
+        
+        String expected = relativePath;
+        
+        assertEquals(actual, expected);        
     }
 }
