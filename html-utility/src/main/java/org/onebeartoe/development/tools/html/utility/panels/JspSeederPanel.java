@@ -250,6 +250,11 @@ public class JspSeederPanel extends JPanel implements ActionListener
             else
             {
                 System.out.println("not at valid webapp path");
+                
+System.out.println("file.exists() - " + file.exists() );
+System.out.println("file.isAbsolute() - " + file.isAbsolute() );
+System.out.println("file.isDirectory() - " + file.isDirectory() );
+System.out.println("absolutePath.contains(webapp) - " + absolutePath.contains(webapp) );
             }
         }        
     }
