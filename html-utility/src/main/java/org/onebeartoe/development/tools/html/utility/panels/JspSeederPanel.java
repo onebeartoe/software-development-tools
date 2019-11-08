@@ -37,7 +37,10 @@ public class JspSeederPanel extends JPanel implements ActionListener
 {
     private transient Logger logger;
     
-    private JTextField targetDirectory;
+    // has package private for tests
+    JTextField targetDirectory;
+    
+    KeyListener targetDirKeyListener;
     
     private transient final JspSeederService seederService;
     
@@ -99,7 +102,7 @@ public class JspSeederPanel extends JPanel implements ActionListener
             }
         });
         
-        KeyListener targetDirKeyListener = new TargetDirKeyListener();
+        targetDirKeyListener = new TargetDirKeyListener();
         targetDirectory.addKeyListener(targetDirKeyListener);
 
         JPanel targetPanel = new JPanel( new GridLayout(2, 1, 5,5) );
