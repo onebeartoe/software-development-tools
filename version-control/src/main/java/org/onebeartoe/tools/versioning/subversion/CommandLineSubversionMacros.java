@@ -3,6 +3,7 @@ package org.onebeartoe.tools.versioning.subversion;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -12,6 +13,8 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.UnrecognizedOptionException;
 import org.onebeartoe.application.duration.DurationService;
+import org.onebeartoe.application.io.streams.PositionalAwkette;
+import org.onebeartoe.application.logging.SysoutLoggerFactory;
 import org.onebeartoe.tools.versioning.subversion.service.SubversionService;
 
 /**
@@ -36,8 +39,12 @@ public class CommandLineSubversionMacros
     
     private final SubversionService subversionService;
     
+    private final Logger logger;
+    
     public CommandLineSubversionMacros()
     {
+        logger = SysoutLoggerFactory.getLogger( getClass().getName() );
+        
         subversionService = new SubversionService();
     }
     
@@ -146,9 +153,8 @@ public class CommandLineSubversionMacros
             Instant end = Instant.now();
 
             DurationService durationService = new DurationService();
-            String message = durationService.durationMessage(start, end);
-            System.out.println();
-            System.out.println(message);
+            String message = "The application ran for " + durationService.durationMessage(start, end) + "\n";
+            logger.info(message);
         }
         catch(UnrecognizedOptionException uoe)
         {
