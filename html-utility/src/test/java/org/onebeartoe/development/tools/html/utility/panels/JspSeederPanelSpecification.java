@@ -45,7 +45,7 @@ public class JspSeederPanelSpecification
         
         String targetPath = implementation.targetDirectory.getText();
        
-        String actual = targetPath;
+        String actual = targetPath.replace('\\', '/');
         
         String expected = subpath;
         
