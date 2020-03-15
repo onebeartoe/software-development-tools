@@ -1,3 +1,4 @@
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -10,5 +11,7 @@ buildNumber.properties
 **/nbactions.xml
 **/nb-configuration.xml
 **/.DS_Store
+**/.classpath
+**/.project
+**/.settings/
 jar-diff/maven/target/
-
