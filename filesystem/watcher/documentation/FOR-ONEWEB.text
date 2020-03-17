@@ -1,16 +1,80 @@
 
-Overview                               -                                                                                 -                                                         -
-Hardware                               -                                                                                 -                                                         -
-Assembly                               -                                                                                 -                                                         -
-	Instructions                -                                                                                 -                                                         -
-	Project Photos           -                                                                                 -                                                         -
-Software Prerequisites          -                                                                                 -                                                         -
-Software Walkthrough           -                                                                                 -                                                         -
-Usage                                    -                                                                                 -                                                         -
-	Github                        -                                                                                 -                                                         -
-Resources                             -                                                                                 -                                                         -
-	STL link to Thingiverse -                                                                              -                                                         -
-	Source code link        -                                                                                 -                                                         -
-	Project Progress Link -                                                                                 -                                                        -
-	oneweb.net - resource links -                                                                       -                                                         -
-Going Further                       -                                    
+Overview                               
+
+    This project uses 3D printing, a temperature and humidity sensor and solar power 
+     to make a birdhouse with a simple weather station attached.
+
+Hardware           
+
+    display
+
+    temperature & humidity sensor
+
+    solar panel & mounting bracket
+
+    rechargable battery
+
+    microcontroller
+
+    birdhouse
+
+Assembly                          
+
+	Instructions                
+    Assemble an Adafruit QuadAlpha Feather Wing as described 
+        here !!!!!!!!!!!!!!!!
+
+    Follow the 
+
+        Circuit diagram
+
+        to attach the temperature and humidity sensor
+
+            !!!!!!!!!!!!!!!!Project Photos
+
+    The solar panel is connected to the Voltaic bard rechargable battery.  
+
+    Then connect the rechargable battery to the microcontroller.
+
+    	Project Photos
+
+Software Prerequisites          
+
+    This project requires the Arduino IDE flash the C code to the microcontroller.
+
+Software Walkthrough           
+
+    This project used an Adafruit Huzza Feather for the microcontroller, but any Feather should work since 
+    none of the ESP3266 WiFi features are used in this version of the project.
+
+    The code uses the !!!!!!!!BMT11(is this correct?) sensor and corresponding library for 
+    temperature and humidity readings.
+
+Usage                                 
+
+	Once the hardare for this project is assembled and the firmware uploaded to the microcontroller,
+    the ussage is to place mount the solar panel in a sunny spot and place the attached 
+    microcontroller and display to a weather protected spot.
+    
+    Then you can look at the 
+    !!!!!!!!TYPE OF DISPLAY
+    and observe the temperature and humidity.                        
+
+Resources                             
+	!!!!!!!!!!11STL link to Thingiverse 
+	
+    !!!!!!!!!!11Source code link        
+	
+    !!!!!!!!!!11Project Progress Link 
+	
+    !!!!!!!!!!11oneweb.net - resource links 
+
+Going Further 
+
+    To make take this project go further:
+
+        actually use some of the ESP3266 features
+
+        
+
+
