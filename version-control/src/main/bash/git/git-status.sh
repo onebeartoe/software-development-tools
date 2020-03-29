@@ -12,6 +12,11 @@ pwd
 git status
 
 printf "\n"
+cd ../deep-learning
+pwd
+git status
+
+printf "\n"
 cd ../electronics
 pwd
 git status

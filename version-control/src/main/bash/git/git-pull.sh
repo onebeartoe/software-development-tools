@@ -10,6 +10,11 @@ cd ../chronos
 pwd
 git pull
 
+pwd
+cd ../deep-learning
+pwd
+git pull
+
 printf "\n\n"
 cd ../electronics
 pwd
