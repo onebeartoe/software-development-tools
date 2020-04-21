@@ -39,7 +39,10 @@ public class SendletSpecification
         implementation = new Sendlet();
     }
     
-    @Test(expectedExceptions = AuthenticationFailedException.class)
+    //TODO: MOVE THIS TO AN INTEGRATION TEST
+//    @Test(enabled = false)
+    @Test(enabled = false,
+        expectedExceptions = AuthenticationFailedException.class)
     public void execute_fail_badCredentials() throws Exception
     {
         SendetteRunProfile rp = new SendetteRunProfile();
