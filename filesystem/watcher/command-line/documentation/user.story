@@ -27,7 +27,8 @@ Acceptance Criteria:
 01) The runtime profile is configurable via command line arguments (a list of strings).
 
 02) The run profile is configurable via a properties file specified by a command line argument.
-        * test with minimal and full profile
+        * test with minimal
+        * full profile
 
 03) If a configuration properties file is specified with any other command line arguments, then an exception is 
     thrown and the app only prints the usage message.
