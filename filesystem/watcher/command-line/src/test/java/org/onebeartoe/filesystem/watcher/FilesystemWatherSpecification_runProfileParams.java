@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 import org.onebeartoe.io.TextFileReader;
 import org.onebeartoe.io.buffered.BufferedTextFileReader;
@@ -34,7 +35,6 @@ public class FilesystemWatherSpecification_runProfileParams
         
     //     FileWatcherProfile fwp = propsToProfile( classpathInfile);
 //assertFullProfile(fwp      );
-
     //  }
 
     private void assertFullProfile(FileWatcherProfile fwp)
@@ -57,12 +57,12 @@ public class FilesystemWatherSpecification_runProfileParams
     //     Duration expectedQuietPeriod2 = Duration.ofMinutes(1); 
     //     assertEquals( fwp.quietPeriod2, expectedQuietPeriod2);
         
-         String expectedLogFile = "wather.log"; 
+         String expectedLogFile = "watcher.log"; 
          assertEquals(fwp.logFile, expectedLogFile);      
     }
 
 //TODO: is this production code?
-public FileWatcherProfile propsToProfile(String classpathInfile) throws IOException, InvalidFileWatcherParamsException
+public FileWatcherProfile propsToProfile(String classpathInfile) throws IOException, InvalidFileWatcherParamsException, ParseException
 {
     String [] propsToStringArray = propsToStringArray(classpathInfile);
 
@@ -123,13 +123,13 @@ public FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcept
      * @throws InvalidFileWatcherParamsException
      */
     @Test
-    public void profileViaCommandLineArgs() throws IOException, InvalidFileWatcherParamsException 
+    public void profileViaCommandLineArgs() throws IOException, InvalidFileWatcherParamsException, ParseException 
     { 
         String [] args = fullProfilePropsToStringArray();
 
         FileWatcherApplication fwpApp = new FileWatcherApplication(); 
         
-        Options options = null;
+        Options options = fwpApp.buildOptions();
 
         FileWatcherProfile profile = fwpApp.parseRunProfile(args, options);
     
