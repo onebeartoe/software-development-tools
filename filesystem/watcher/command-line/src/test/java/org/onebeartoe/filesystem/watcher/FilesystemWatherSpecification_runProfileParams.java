@@ -1,22 +1,16 @@
 
 package org.onebeartoe.filesystem.watcher;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-
 import org.onebeartoe.io.TextFileReader;
 import org.onebeartoe.io.buffered.BufferedTextFileReader;
-
-import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
 
 public class FilesystemWatherSpecification_runProfileParams 
 {

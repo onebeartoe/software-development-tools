@@ -1,16 +1,12 @@
 package org.onebeartoe.filesystem.watcher;
 
 import java.io.IOException;
-import java.text.ParseException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
-
 import org.apache.commons.cli.Options;
 import org.onebeartoe.application.CommandLineInterfaceApplet;
-import org.onebeartoe.application.RunProfile;
-import org.onebeartoe.application.logging.SysoutLoggerFactory;
 
 public class FileWatcherApplication extends CommandLineInterfaceApplet
 {
