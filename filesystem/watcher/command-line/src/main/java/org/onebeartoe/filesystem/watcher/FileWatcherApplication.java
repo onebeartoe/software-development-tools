@@ -1,6 +1,5 @@
 package org.onebeartoe.filesystem.watcher;
 
-import java.io.IOException;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
