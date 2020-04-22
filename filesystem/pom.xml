@@ -21,5 +21,6 @@
         <module>file-types</module>
         <module>files-diff</module>
         <module>populator</module>
+        <module>watcher</module>
     </modules>
 </project>
