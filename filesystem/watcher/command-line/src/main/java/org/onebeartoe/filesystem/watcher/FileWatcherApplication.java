@@ -6,6 +6,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.onebeartoe.application.CommandLineInterfaceApplet;
 
 public class FileWatcherApplication extends CommandLineInterfaceApplet
@@ -75,7 +76,7 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         return options;
     }
 
-    public static void main(String[] args) throws IOException, Exception
+    public static void main(String[] args) throws Exception
     {
         CommandLineInterfaceApplet app = new FileWatcherApplication();
 
@@ -83,7 +84,7 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
     }
 
     @Override
-    protected FileWatcherProfile parseRunProfile(final String[] args, Options options) throws InvalidFileWatcherParamsException, org.apache.commons.cli.ParseException
+    protected FileWatcherProfile parseRunProfile(final String[] args, Options options) throws ParseException
     {
         CommandLineParser parser = new DefaultParser();
         
