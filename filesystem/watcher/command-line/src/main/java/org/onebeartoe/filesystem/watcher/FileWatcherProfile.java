@@ -11,7 +11,7 @@ public class FileWatcherProfile extends RunProfile
         public Duration quietPeriod1;
         
         public String pattern2;
-	public String expectedCommand2;
+	public String command2;
 	public Duration quietPeriod2;
 	
         public String logFile;

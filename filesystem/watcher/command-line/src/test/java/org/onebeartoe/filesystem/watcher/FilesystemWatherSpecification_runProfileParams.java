@@ -2,6 +2,7 @@
 package org.onebeartoe.filesystem.watcher;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,21 +36,26 @@ public class FilesystemWatherSpecification_runProfileParams
     {
 //TODO re-enable these assertions        
     //     String expectedPattern1 = "*.jpg"; 
-    //     assertEquals( fwp.pattern1, expectedPattern1);
-        
+    //     assertEquals( fwp.pattern1, expectedPattern1);       
         
 //TODO: re-enable
     //     String expectedCommand1 = "ls -ltr"; 
     //     assertEquals( fwp.command1, expectedCommand1);        
 
+
+        Duration expectedQuietPeriod1 = Duration.ofMinutes(21); 
+        assertEquals( fwp.quietPeriod1, expectedQuietPeriod1);        
+
+//TODO: re-enable        
     //     String expectedPattern2 = "*.java" ;
     //     assertEquals( fwp.pattern2, expectedPattern2);
-                
-    //     String expectedCommand2 = "mvn text";
-    //     assertEquals( fwp.expectedCommand2, expectedCommand2);
-//TODO: re-enable        
-    //     Duration expectedQuietPeriod2 = Duration.ofMinutes(1); 
-    //     assertEquals( fwp.quietPeriod2, expectedQuietPeriod2);
+
+
+         String expectedCommand2 = "mvn test";
+         assertEquals( fwp.command2, expectedCommand2);
+
+         Duration expectedQuietPeriod2 = Duration.ofMinutes(1); 
+         assertEquals( fwp.quietPeriod2, expectedQuietPeriod2);
         
          String expectedLogFile = "watcher.log"; 
          assertEquals(fwp.logFile, expectedLogFile);      

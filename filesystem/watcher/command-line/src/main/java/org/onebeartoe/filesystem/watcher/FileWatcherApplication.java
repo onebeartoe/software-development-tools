@@ -1,5 +1,6 @@
 package org.onebeartoe.filesystem.watcher;
 
+import java.time.Duration;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -10,22 +11,23 @@ import org.onebeartoe.application.CommandLineInterfaceApplet;
 
 public class FileWatcherApplication extends CommandLineInterfaceApplet
 {
+    final String COMMAND_1 = "command1";
 
+    final String PATTERN_1 = "pattern1";
+
+    final String QUIET_PERIOD_1 = "quietPeriod1";
+    
+    final String COMMAND_2 = "command2";
+
+    final String PATTERN_2 = "pattern2";
+
+    final String QUIET_PERIOD_2 = "quietPeriod2";
+    
+    final String LOG_FILE = "logFile";    
+    
     @Override
     public Options buildOptions()
-    {
-        final String COMMAND_1 = "command1";
-        
-        final String PATTERN_1 = "pattern1";
-        
-        final String COMMAND_2 = "command2";
-        
-        final String PATTERN_2 = "pattern2";
-        
-        final String QUIET_PERIOD_2 = "quietPeriod2";
-        
-        final String LOG_FILE = "logFile";
-        
+    {        
         Option command1 = Option.builder()
                                 .hasArg()
                                 .longOpt(COMMAND_1)
@@ -37,7 +39,12 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
                                 .longOpt(PATTERN_1)
                                 .required()
                                 .build();
-                                
+
+        Option quietPeriod1 = Option.builder()
+                                .hasArg()
+                                .longOpt(QUIET_PERIOD_1)
+                                .build();        
+        
         Option command2 = Option.builder()
                                 .hasArg()
                                 .longOpt(COMMAND_2)
@@ -64,6 +71,8 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         
         options.addOption(pattern1);
         
+        options.addOption(quietPeriod1);
+        
         options.addOption(command2);
         
         options.addOption(pattern2);
@@ -82,6 +91,35 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         app.execute(args);
     }
 
+    private Duration parseDuration(String s) throws ParseException
+    {
+        String [] tokens = s.split("-");
+        
+        String amountStr = tokens[0];
+        
+        int amount = Integer.valueOf(amountStr);
+        
+        String unit = tokens[1];
+        
+        Duration duration;
+        
+        switch (unit)        
+        {
+            case "minute":
+            {
+                duration = Duration.ofMinutes(amount);
+                
+                break;
+            }
+            default:
+            {
+                throw new ParseException("unknown duration type: " + unit);
+            }
+        }
+        
+        return duration;
+    }    
+    
     @Override
     protected FileWatcherProfile parseRunProfile(final String[] args, Options options) throws ParseException
     {
@@ -89,12 +127,37 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         
         CommandLine cl = parser.parse(options, args);
 
-        String command1 = cl.getOptionValue("--command1");
-        
-        String pattern1 = cl.getOptionValue("--pattern1");
-        
         FileWatcherProfile profile = new FileWatcherProfile();
         
+        String command1 = cl.getOptionValue("command1");
+        
+        String pattern1 = cl.getOptionValue("pattern1");
+        
+        if( cl.hasOption(QUIET_PERIOD_1) )
+        {
+            String s = cl.getOptionValue(QUIET_PERIOD_1);
+            
+            profile.quietPeriod1 = parseDuration(s);
+        }
+
+        if( cl.hasOption(PATTERN_2) )
+        {
+            profile.pattern2 = cl.getOptionValue(PATTERN_2);
+            
+            profile.command2 = cl.getOptionValue(COMMAND_2);
+            
+            
+        }
+        
+        if( cl.hasOption(QUIET_PERIOD_2) )
+        {
+            String s = cl.getOptionValue(QUIET_PERIOD_2);
+                        
+            profile.quietPeriod2 = parseDuration(s);
+            
+            
+        }
+              
         final String LOG_FILE = "logFile";
         
         if( cl.hasOption(LOG_FILE) )
