@@ -40,7 +40,7 @@ public class FilesystemWatherSpecification_runProfileParams
         
 //TODO: re-enable
     //     String expectedCommand1 = "ls -ltr"; 
-    //     assertEquals( fwp.command1, expectedCommand1);        
+    //     assertEquals( fwp.command1, expectedCommand1);
 
 
         Duration expectedQuietPeriod1 = Duration.ofMinutes(21); 
@@ -61,6 +61,15 @@ public class FilesystemWatherSpecification_runProfileParams
          assertEquals(fwp.logFile, expectedLogFile);      
     }
 
+    private void assertMinimalProfile(FileWatcherProfile profile)
+    {
+        String expectedPattern1 = "*.jpg"; 
+         assertEquals(profile.pattern1, expectedPattern1);       
+        
+         String expectedCommand1 = "ls -ltr"; 
+         assertEquals(profile.command1, expectedCommand1);
+    }    
+    
 //TODO: is this production code?
 public FileWatcherProfile propsToProfile(String classpathInfile) throws IOException, InvalidFileWatcherParamsException, ParseException
 {
@@ -114,16 +123,34 @@ public FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcept
     }
 
 
-    
-
     /**
-     * US01AC01 - profile via command line args
+     * US01AC01_minimal - profile via command line args
      * 
      * @throws IOException
      * @throws InvalidFileWatcherParamsException
      */
     @Test
-    public void profileViaCommandLineArgs() throws IOException, InvalidFileWatcherParamsException, ParseException 
+    public void profileViaCommandLineArgs_minimalProfile() throws IOException, InvalidFileWatcherParamsException, ParseException 
+    {
+        String [] args = minimalProfilePropsToStringArray();
+
+        FileWatcherApplication fwpApp = new FileWatcherApplication(); 
+        
+        Options options = fwpApp.buildOptions();
+
+        FileWatcherProfile profile = fwpApp.parseRunProfile(args, options);        
+        
+        assertMinimalProfile(profile); 
+    }
+    
+    /**
+     * US01AC01_full - profile via command line args
+     * 
+     * @throws IOException
+     * @throws InvalidFileWatcherParamsException
+     */
+    @Test
+    public void profileViaCommandLineArgs_fullProfile() throws IOException, InvalidFileWatcherParamsException, ParseException 
     { 
         String [] args = fullProfilePropsToStringArray();
 
@@ -142,6 +169,15 @@ public FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcept
         
         return propsToStringArray(classpathInfile);
     }
+
+    private String[] minimalProfilePropsToStringArray() throws IOException
+    {
+        String classpathInfile = "/run-profiles/minimal-profile.properties";
+        
+        return propsToStringArray(classpathInfile);
+    }
+
+
  
 
 

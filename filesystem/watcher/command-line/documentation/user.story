@@ -20,15 +20,19 @@ Acceptance Criteria Categories:
 
     Quiet Periods - AC06, AC09
 
-    RunProfileParams - AC01, AC02, AC03, AC04, AC05, AC07, AC08,
+    Run Profile Param Parsing - AC01, AC02, AC03, AC04, AC05, AC07, AC08,
 
 Acceptance Criteria:
 
 01) The runtime profile is configurable via command line arguments (a list of strings).
+        * test with 
+            - minimal profile
+            - full profile
 
 02) The run profile is configurable via a properties file specified by a command line argument.
-        * test with minimal
-        * full profile
+        * test with 
+            - minimal profile
+            - full profile
 
 03) If a configuration properties file is specified with any other command line arguments, then an exception is 
     thrown and the app only prints the usage message.
@@ -46,6 +50,3 @@ Acceptance Criteria:
 
 09) The quiet period for a file pattern is restarted if any matching file's content or last modified date
     changes.
-
-
-
