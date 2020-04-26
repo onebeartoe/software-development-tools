@@ -1,6 +1,7 @@
 
 package org.onebeartoe.filesystem.watcher;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -15,22 +16,49 @@ import org.testng.annotations.Test;
 
 public class FilesystemWatherSpecification_runProfileParams 
 {
-//TODO: !!!!!!!!!!!!ENABLE THIS TEST !!!!!!!!!!!!!!    
+    
     /**
-     * US01AC02_Full, US01AC04, US01AC08
+//TODO: assert this acceptance critieria!!!!!!!!!
+     * US01AC02_minimal
+     */
+    @Test
+     public void parseRunProfile_prpertiesFileOnCommandLIne_minimal() throws ParseException
+     {
+         String propertiesInfilePath = "src/test/resources/run-profiles/minimal-profile.properties";
+        
+        File infile = new File(propertiesInfilePath);
+        
+        FileWatcherProfile fwp = configFileToProfile(infile);
+        
+         assertMinimalProfile(fwp);
+     }
+    
+    
+    /**
+//TODO: assert this acceptance critieria!!!!!!!!!
+     * US01AC02_Full, 
+     * 
+//TODO: assert this acceptance critieria!!!!!!!!!
+     * US01AC04, 
+     * 
+//TODO: assert this acceptance critieria!!!!!!!!!
+     * US01AC08
      * 
      * @throws IOException
      * @throws InvalidFileWatcherParamsException
      */
-    // @Test
-    // public void prpertiesFileOnCommandLIneAndLogFileAndQuietPeriodPerFilePattern()
-    //         throws InvalidFileWatcherParamsException, IOException 
-    // { 
-    //     String classpathInfile = "/run-profiles/full-profile.properties";
+     @Test
+     public void parseRunProfile_prpertiesFileOnCommandLIneAndLogFileAndQuietPeriodPerFilePattern()
+             throws InvalidFileWatcherParamsException, IOException, ParseException 
+     { 
+        String propertiesInfilePath = "src/test/resources/run-profiles/full-profile.properties";
         
-    //     FileWatcherProfile fwp = propsToProfile( classpathInfile);
-//assertFullProfile(fwp      );
-    //  }
+        File infile = new File(propertiesInfilePath);
+        
+        FileWatcherProfile fwp = configFileToProfile(infile);
+      
+        assertFullProfile(fwp);
+      }
 
     private void assertFullProfile(FileWatcherProfile fwp)
     {
@@ -70,11 +98,12 @@ public class FilesystemWatherSpecification_runProfileParams
 //TODO: is this production code?
 private FileWatcherProfile propsToProfile(String classpathInfile) throws IOException, InvalidFileWatcherParamsException, ParseException
 {
+                                // classpathPropertiesToArgs()
     String [] propsToStringArray = propsToStringArray(classpathInfile);
 
-    Options options = null;
-
     FileWatcherApplication fwApp = new FileWatcherApplication();
+
+    Options options = fwApp.buildOptions();
 
     FileWatcherProfile profile = fwApp.parseRunProfile(propsToStringArray, options);
 
@@ -84,12 +113,13 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
 
 // TODO: is this production code?
     /**
-     * This method take an input stream and read text from it to create an array of strings
+     * This method takes a classpath path and reads text from it to create an array of strings
      * 
      * @param peropertiesFile
      * @return
      * @throws IOException
      */
+//TODO: rename this classpathPropertiesToArgs
     private String[] propsToStringArray(String classpathInfile) throws IOException
     {
         TextFileReader reader = new BufferedTextFileReader();
@@ -151,12 +181,8 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
     { 
         String [] args = fullProfilePropsToStringArray();
 
-        FileWatcherApplication fwpApp = new FileWatcherApplication(); 
+        FileWatcherProfile profile = parseArgs(args);
         
-        Options options = fwpApp.buildOptions();
-
-        FileWatcherProfile profile = fwpApp.parseRunProfile(args, options);
-    
         assertFullProfile(profile); 
     }
 
@@ -174,9 +200,26 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
         return propsToStringArray(classpathInfile);
     }
 
+    private FileWatcherProfile parseArgs(String [] args) throws ParseException
+    {
+        FileWatcherApplication fwpApp = new FileWatcherApplication(); 
+        
+        Options options = fwpApp.buildOptions();
 
- 
-
+        FileWatcherProfile profile = fwpApp.parseRunProfile(args, options);
+            
+        return profile;
+    }
+        
+    
+    private FileWatcherProfile configFileToProfile(File infile) throws ParseException
+    {
+        String path = infile.getPath();
+        
+        String [] args = {"--configFile", path};        
+    
+        return parseArgs(args);
+    }
 
  //TODO: reenable this test
 /**

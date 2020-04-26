@@ -23,11 +23,18 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
 
     final String QUIET_PERIOD_2 = "quietPeriod2";
     
-    final String LOG_FILE = "logFile";    
+    final String LOG_FILE = "logFile";
+    
+    final String CONFIG_FILE = "configFile";
     
     @Override
     public Options buildOptions()
-    {        
+    {
+        Option configFile = Option.builder()
+                                .hasArg()
+                                .longOpt(CONFIG_FILE)
+                                .build();
+        
         Option command1 = Option.builder()
                                 .hasArg()
                                 .longOpt(COMMAND_1)
@@ -81,6 +88,8 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         
         options.addOption(logFile);
         
+        options.addOption(configFile);
+        
         return options;
     }
 
@@ -128,6 +137,9 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         CommandLine cl = parser.parse(options, args);
 
         FileWatcherProfile profile = new FileWatcherProfile();
+        
+//        if()
+        
         
         String command1 = cl.getOptionValue("command1");
         
