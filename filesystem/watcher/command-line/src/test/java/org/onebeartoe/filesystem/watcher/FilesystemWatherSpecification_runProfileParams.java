@@ -34,31 +34,28 @@ public class FilesystemWatherSpecification_runProfileParams
 
     private void assertFullProfile(FileWatcherProfile fwp)
     {
-//TODO re-enable these assertions        
-    //     String expectedPattern1 = "*.jpg"; 
-    //     assertEquals( fwp.pattern1, expectedPattern1);       
+        String expectedPattern1 = "*.jpg"; 
+        assertEquals( fwp.pattern1, expectedPattern1);       
         
-//TODO: re-enable
-    //     String expectedCommand1 = "ls -ltr"; 
-    //     assertEquals( fwp.command1, expectedCommand1);
+        String expectedCommand1 = "ls -ltr"; 
+        assertEquals( fwp.command1, expectedCommand1);
 
 
         Duration expectedQuietPeriod1 = Duration.ofMinutes(21); 
         assertEquals( fwp.quietPeriod1, expectedQuietPeriod1);        
+   
+        String expectedPattern2 = "*.java" ;
+        assertEquals( fwp.pattern2, expectedPattern2);
 
-//TODO: re-enable        
-    //     String expectedPattern2 = "*.java" ;
-    //     assertEquals( fwp.pattern2, expectedPattern2);
 
+        String expectedCommand2 = "mvn test";
+        assertEquals( fwp.command2, expectedCommand2);
 
-         String expectedCommand2 = "mvn test";
-         assertEquals( fwp.command2, expectedCommand2);
-
-         Duration expectedQuietPeriod2 = Duration.ofMinutes(1); 
-         assertEquals( fwp.quietPeriod2, expectedQuietPeriod2);
+        Duration expectedQuietPeriod2 = Duration.ofMinutes(1); 
+        assertEquals( fwp.quietPeriod2, expectedQuietPeriod2);
         
-         String expectedLogFile = "watcher.log"; 
-         assertEquals(fwp.logFile, expectedLogFile);      
+        String expectedLogFile = "watcher.log"; 
+        assertEquals(fwp.logFile, expectedLogFile);      
     }
 
     private void assertMinimalProfile(FileWatcherProfile profile)
@@ -71,7 +68,7 @@ public class FilesystemWatherSpecification_runProfileParams
     }    
     
 //TODO: is this production code?
-public FileWatcherProfile propsToProfile(String classpathInfile) throws IOException, InvalidFileWatcherParamsException, ParseException
+private FileWatcherProfile propsToProfile(String classpathInfile) throws IOException, InvalidFileWatcherParamsException, ParseException
 {
     String [] propsToStringArray = propsToStringArray(classpathInfile);
 
