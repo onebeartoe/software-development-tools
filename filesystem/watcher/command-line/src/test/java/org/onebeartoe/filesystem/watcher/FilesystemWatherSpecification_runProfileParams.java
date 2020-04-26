@@ -63,10 +63,10 @@ public class FilesystemWatherSpecification_runProfileParams
 
     private void assertMinimalProfile(FileWatcherProfile profile)
     {
-        String expectedPattern1 = "*.jpg"; 
+        String expectedPattern1 = "*.text"; 
          assertEquals(profile.pattern1, expectedPattern1);       
         
-         String expectedCommand1 = "ls -ltr"; 
+         String expectedCommand1 = "wc -l"; 
          assertEquals(profile.command1, expectedCommand1);
     }    
     

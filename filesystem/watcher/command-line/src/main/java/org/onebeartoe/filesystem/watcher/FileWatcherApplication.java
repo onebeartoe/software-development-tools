@@ -131,7 +131,11 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         
         String command1 = cl.getOptionValue("command1");
         
+        profile.command1 = command1;
+        
         String pattern1 = cl.getOptionValue("pattern1");
+        
+        profile.pattern1 = pattern1;
         
         if( cl.hasOption(QUIET_PERIOD_1) )
         {
