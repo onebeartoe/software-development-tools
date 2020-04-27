@@ -196,26 +196,22 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
         return parseArgs(args);
     }
 
-//TODO: reenable this test
-/**
- * US01AC03 log file with other param{ertes
- */
-// @Test(expectedExceptions = InvalidFileWatcherParamsException.class)
-// public void logfileWithOHtreParmeters() throws InvalidFileWatcherParamsException 
-// { 
-//     String [] args =
-//     {
-//         "--fileWatrcherLogFile", "watcher.log", 
-//         "--pattern1", "*.txt", 
-//         "--command1", "ls -la"
-//     };
-  
-//     FileWatcherApplication fwApp = new FileWatcherApplication();
-  
-//     Options options = null;
 
-//     fwApp.parseRunProfile(args, options); //excepton expected here }
-// }
+/**
+ * US01AC03 log file with other paramertes
+ */
+ @Test(expectedExceptions = InvalidFileWatcherParamsException.class)
+ public void parseRunProfile_configFileWithOtherParmeters() throws ParseException 
+ { 
+     String [] args =
+     {
+         "--configFile", "watcher.properties", 
+         "--pattern1", "*.txt", 
+         "--command1", "ls -la"
+     };
+       
+     parseArgs(args); //excepton expected here
+ }
 
 
 //TODO: !!!!!!!!!!!!ENABLE THIS TEST !!!!!!!!!!!!!!    

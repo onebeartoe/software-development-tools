@@ -3,8 +3,6 @@ package org.onebeartoe.filesystem.watcher;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -152,6 +150,13 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         
         if( cli.hasOption(CONFIG_FILE) )
         {
+            if( cli.getOptions().length > 1 )
+            {
+                String message = "other options are not accepted with config file option";
+                
+                throw new InvalidFileWatcherParamsException(message);
+            }
+            
             String configPath = cli.getOptionValue(CONFIG_FILE);
             
             File infile = new File(configPath);
