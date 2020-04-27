@@ -34,8 +34,8 @@ Acceptance Criteria:
             - minimal profile
             - full profile
 
-03) If a configuration properties file is specified with any other command line arguments, then an exception is 
-    thrown and the app only prints the usage message.
+03) If a configuration properties file is specified with any other command line arguments, then an 
+    invalid argument usage exception is thrown.
 
 04) A FilesystemWatcherRunProfile parameter is configurable that specifies its log file.
 
