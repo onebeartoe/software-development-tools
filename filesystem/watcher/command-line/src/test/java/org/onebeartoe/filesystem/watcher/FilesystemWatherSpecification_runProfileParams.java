@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.onebeartoe.io.TextFileReader;
@@ -200,8 +202,8 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
 /**
  * US01AC03 log file with other paramertes
  */
- @Test(expectedExceptions = InvalidFileWatcherParamsException.class)
- public void parseRunProfile_configFileWithOtherParmeters() throws ParseException 
+ @Test//(expectedExceptions = InvalidFileWatcherParamsException.class)
+ public void parseRunProfile_configFileWithOtherParmeters() //throws ParseException 
  { 
      String [] args =
      {
@@ -210,7 +212,22 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
          "--command1", "ls -la"
      };
        
-     parseArgs(args); //excepton expected here
+     ParseException exception = null;
+     
+        try
+        {
+            parseArgs(args); //excepton expected here
+        } 
+        catch (ParseException ex)
+        {
+            exception = ex;
+        }
+        
+        String actual = exception.getMessage();
+        
+        String expected = "other options are not accepted with config file option";
+        
+        assertEquals(actual, expected);
  }
 
 
