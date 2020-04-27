@@ -198,21 +198,21 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
         return parseArgs(args);
     }
 
-
-/**
- * US01AC03 log file with other paramertes
- */
- @Test//(expectedExceptions = InvalidFileWatcherParamsException.class)
- public void parseRunProfile_configFileWithOtherParmeters() //throws ParseException 
- { 
-     String [] args =
-     {
-         "--configFile", "watcher.properties", 
-         "--pattern1", "*.txt", 
-         "--command1", "ls -la"
-     };
+    /**
+     * US01AC03 log file with other paramertes
+     */
+    @Test//(expectedExceptions = InvalidFileWatcherParamsException.class)
+    public void parseRunProfile_configFileWithOtherParmeters() //throws ParseException 
+    { 
+     
+        String [] args =
+        {
+            "--configFile", "watcher.properties", 
+            "--pattern1", "*.txt", 
+            "--command1", "ls -la"
+        };
        
-     ParseException exception = null;
+        ParseException exception = null;
      
         try
         {
@@ -228,24 +228,69 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
         String expected = "other options are not accepted with config file option";
         
         assertEquals(actual, expected);
- }
+    }
 
 
-//TODO: !!!!!!!!!!!!ENABLE THIS TEST !!!!!!!!!!!!!!    
-//    @Test(expectedExceptions = InvalidFileWatcherParamsException.class)
+
+    
     /**
-     * US01AC05
+     * US01AC05_one
      */
-    // public void parseRunProfileFails_missingRequiredParams() throws Exception
-    // {
-    //         String classPath = "/run-profiles/invalid-command.propertries";
-            
-    //         String [] args = propsToStringArray(classPath);
+    @Test//(expectedExceptions = InvalidFileWatcherParamsException.class)    
+    public void parseRunProfileFails_missingRequiredParams_one() throws Exception
+    {
+        String classPath = "/run-profiles/invalid-command.propertries";
+        
+        String [] args = propsToStringArray(classPath);
 
-    //         FileWatcherApplication fwApp = new FileWatcherApplication();
+        ParseException exception = null;
+     
+        try
+        {
+            parseArgs(args); //excepton expected here
+        } 
+        catch (ParseException ex)
+        {
+            exception = ex;
+        }
+        
+        String actual = exception.getMessage();
+        
+        String expected = "pattern1 is missing command1 parameter";
+        
+        assertEquals(actual, expected);
+    }
+    
+    /**
+     * US01AC05_many
+     */
+    @Test//(expectedExceptions = InvalidFileWatcherParamsException.class)    
+    public void parseRunProfileFails_missingRequiredParams_many() throws Exception
+    {
+        String [] args = 
+        {
+            "--pattern1", "*.txt", 
+            "--command1", "ls -la",
+            "--pattern2", "*.txt", 
+            "--command2", "ls -la",
+            "--pattern3", "*.txt"
+        };
 
-    //         Options options = null;
-
-    //         fwApp.parseRunProfile(args, options); // exception expected here
-    // }
+        ParseException exception = null;
+     
+        try
+        {
+            parseArgs(args); //excepton expected here
+        } 
+        catch (ParseException ex)
+        {
+            exception = ex;
+        }
+        
+        String actual = exception.getMessage();
+                
+        String expected = "pattern3 is missing command3 parameter";
+        
+        assertEquals(actual, expected);
+    }
 }

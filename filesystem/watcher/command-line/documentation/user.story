@@ -40,6 +40,8 @@ Acceptance Criteria:
 04) A FilesystemWatcherRunProfile parameter is configurable that specifies its log file.
 
 05) Every filename pattern must have a corresponding command parameter.
+        test for one
+        test for many
 
 06) A 'quiet period' elapses before the command is executed for any given file pattern.
 
