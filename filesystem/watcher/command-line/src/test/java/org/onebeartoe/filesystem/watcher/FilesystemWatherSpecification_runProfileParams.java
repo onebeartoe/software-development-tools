@@ -17,12 +17,11 @@ public class FilesystemWatherSpecification_runProfileParams
     FilesystemWatcherService service = new FilesystemWatcherService();
 
     /**
-//TODO: assert this acceptance critieria!!!!!!!!!
      * US01AC02_minimal
      */
     @Test
-     public void parseRunProfile_prpertiesFileOnCommandLIne_minimal() throws ParseException
-     {
+    public void parseRunProfile_prpertiesFileOnCommandLIne_minimal() throws ParseException
+    {
         String propertiesInfilePath = "src/test/resources/run-profiles/minimal-profile.properties";
         
         File infile = new File(propertiesInfilePath);
@@ -30,7 +29,7 @@ public class FilesystemWatherSpecification_runProfileParams
         FileWatcherProfile fwp = configFileToProfile(infile);
         
         assertMinimalProfile(fwp);
-     }
+    }
     
     
     /**
@@ -198,7 +197,7 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
         return parseArgs(args);
     }
 
- //TODO: reenable this test
+//TODO: reenable this test
 /**
  * US01AC03 log file with other param{ertes
  */
