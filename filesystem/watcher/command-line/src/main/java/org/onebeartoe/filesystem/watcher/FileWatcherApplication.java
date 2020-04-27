@@ -38,13 +38,13 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         Option command1 = Option.builder()
                                 .hasArg()
                                 .longOpt(COMMAND_1)
-                                .required()
+//                                .required()
                                 .build();
         
         Option pattern1 = Option.builder()
                                 .hasArg()
                                 .longOpt(PATTERN_1)
-                                .required()
+//                                .required()
                                 .build();
 
         Option quietPeriod1 = Option.builder()
@@ -93,6 +93,12 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         return options;
     }
 
+    @Override
+    public FilesystemWatcherService getService()
+    {
+        return new FilesystemWatcherService();
+    }
+    
     public static void main(String[] args) throws Exception
     {
         CommandLineInterfaceApplet app = new FileWatcherApplication();
@@ -134,40 +140,44 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
     {
         CommandLineParser parser = new DefaultParser();
         
-        CommandLine cl = parser.parse(options, args);
+        CommandLine cli = parser.parse(options, args);
 
         FileWatcherProfile profile = new FileWatcherProfile();
         
-//        if()
-        
-        
-        String command1 = cl.getOptionValue("command1");
+        if( cli.hasOption(CONFIG_FILE) )
+        {
+            String configPath = cli.getOptionValue(CONFIG_FILE);
+            
+//TODO: Parse the properties file            
+        }
+                
+        String command1 = cli.getOptionValue("command1");
         
         profile.command1 = command1;
         
-        String pattern1 = cl.getOptionValue("pattern1");
+        String pattern1 = cli.getOptionValue("pattern1");
         
         profile.pattern1 = pattern1;
         
-        if( cl.hasOption(QUIET_PERIOD_1) )
+        if( cli.hasOption(QUIET_PERIOD_1) )
         {
-            String s = cl.getOptionValue(QUIET_PERIOD_1);
+            String s = cli.getOptionValue(QUIET_PERIOD_1);
             
             profile.quietPeriod1 = parseDuration(s);
         }
 
-        if( cl.hasOption(PATTERN_2) )
+        if( cli.hasOption(PATTERN_2) )
         {
-            profile.pattern2 = cl.getOptionValue(PATTERN_2);
+            profile.pattern2 = cli.getOptionValue(PATTERN_2);
             
-            profile.command2 = cl.getOptionValue(COMMAND_2);
+            profile.command2 = cli.getOptionValue(COMMAND_2);
             
             
         }
         
-        if( cl.hasOption(QUIET_PERIOD_2) )
+        if( cli.hasOption(QUIET_PERIOD_2) )
         {
-            String s = cl.getOptionValue(QUIET_PERIOD_2);
+            String s = cli.getOptionValue(QUIET_PERIOD_2);
                         
             profile.quietPeriod2 = parseDuration(s);
             
@@ -176,9 +186,9 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
               
         final String LOG_FILE = "logFile";
         
-        if( cl.hasOption(LOG_FILE) )
+        if( cli.hasOption(LOG_FILE) )
         {
-            profile.logFile = cl.getOptionValue(LOG_FILE);
+            profile.logFile = cli.getOptionValue(LOG_FILE);
         }
         
         return profile;

@@ -1,8 +1,10 @@
 
 package org.onebeartoe.filesystem.watcher;
 
+import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +26,13 @@ public class FilesystemWatherSpecification_runProfileParams
     @Test
      public void parseRunProfile_prpertiesFileOnCommandLIne_minimal() throws ParseException
      {
-         String propertiesInfilePath = "src/test/resources/run-profiles/minimal-profile.properties";
+        String propertiesInfilePath = "src/test/resources/run-profiles/minimal-profile.properties";
         
         File infile = new File(propertiesInfilePath);
         
         FileWatcherProfile fwp = configFileToProfile(infile);
         
-         assertMinimalProfile(fwp);
+        assertMinimalProfile(fwp);
      }
     
     
@@ -67,7 +69,6 @@ public class FilesystemWatherSpecification_runProfileParams
         
         String expectedCommand1 = "ls -ltr"; 
         assertEquals( fwp.command1, expectedCommand1);
-
 
         Duration expectedQuietPeriod1 = Duration.ofMinutes(21); 
         assertEquals( fwp.quietPeriod1, expectedQuietPeriod1);        
@@ -126,6 +127,11 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
 
         List<String> allLines = reader.readTextLinesFromClasspath(classpathInfile);
 
+        return linesToArgs(allLines);
+    }
+    
+    private String [] linesToArgs(List<String> allLines)
+    {
         List <String> lines = allLines
                         .stream()
                         .filter(line -> !line.startsWith("#") )        
@@ -146,7 +152,14 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
             tokens.add(split[1]);
         }
 
-        return tokens.toArray( new String[0] );
+        return tokens.toArray( new String[0] );        
+    }
+    
+    private String [] configFileToArgs(File infile) throws IOException
+    {
+        List<String> allLines = Files.readLines(infile, StandardCharsets.UTF_8);
+        
+        return linesToArgs(allLines);
     }
 
 
@@ -160,7 +173,7 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
     public void profileViaCommandLineArgs_minimalProfile() throws IOException, InvalidFileWatcherParamsException, ParseException 
     {
         String [] args = minimalProfilePropsToStringArray();
-
+//TODO: use parseArgs()
         FileWatcherApplication fwpApp = new FileWatcherApplication(); 
         
         Options options = fwpApp.buildOptions();
@@ -210,8 +223,7 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
             
         return profile;
     }
-        
-    
+            
     private FileWatcherProfile configFileToProfile(File infile) throws ParseException
     {
         String path = infile.getPath();
