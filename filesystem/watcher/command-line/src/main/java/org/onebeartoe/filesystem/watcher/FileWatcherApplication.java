@@ -169,9 +169,7 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
                 cli = parser.parse(options, configArgs);
             } 
             catch (IOException ex)
-            {
-                ex.printStackTrace();
-                
+            {                
                 logger.severe( ex.getMessage() );
             }
         }
