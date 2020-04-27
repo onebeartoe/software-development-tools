@@ -1,14 +1,10 @@
 
 package org.onebeartoe.filesystem.watcher;
 
-import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.onebeartoe.io.TextFileReader;
@@ -18,6 +14,12 @@ import org.testng.annotations.Test;
 
 public class FilesystemWatherSpecification_runProfileParams 
 {
+    FilesystemWatcherService service = new FilesystemWatcherService();
+    
+    public FilesystemWatherSpecification_runProfileParams()
+    {
+        
+    }
     
     /**
 //TODO: assert this acceptance critieria!!!!!!!!!
@@ -97,6 +99,7 @@ public class FilesystemWatherSpecification_runProfileParams
     }    
     
 //TODO: is this production code?
+//TODO: is this even used?    
 private FileWatcherProfile propsToProfile(String classpathInfile) throws IOException, InvalidFileWatcherParamsException, ParseException
 {
                                 // classpathPropertiesToArgs()
@@ -127,42 +130,9 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
 
         List<String> allLines = reader.readTextLinesFromClasspath(classpathInfile);
 
-        return linesToArgs(allLines);
+        return service.linesToArgs(allLines);
     }
     
-    private String [] linesToArgs(List<String> allLines)
-    {
-        List <String> lines = allLines
-                        .stream()
-                        .filter(line -> !line.startsWith("#") )        
-                        .collect( Collectors.toList() );
-
-        List<String> propertyLines = lines.stream()
-                                    .filter(l -> l.contains("="))
-                                    .collect( Collectors.toList() );
-
-        List<String> tokens = new ArrayList();
-
-        for(String line : propertyLines)
-        {
-            String [] split = line.split("=");
-
-            tokens .add ("--" + split[0]);
-
-            tokens.add(split[1]);
-        }
-
-        return tokens.toArray( new String[0] );        
-    }
-    
-    private String [] configFileToArgs(File infile) throws IOException
-    {
-        List<String> allLines = Files.readLines(infile, StandardCharsets.UTF_8);
-        
-        return linesToArgs(allLines);
-    }
-
-
     /**
      * US01AC01_minimal - profile via command line args
      * 

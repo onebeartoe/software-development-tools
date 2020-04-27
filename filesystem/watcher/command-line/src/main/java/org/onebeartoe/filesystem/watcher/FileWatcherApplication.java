@@ -1,6 +1,10 @@
 package org.onebeartoe.filesystem.watcher;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -26,6 +30,8 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
     final String LOG_FILE = "logFile";
     
     final String CONFIG_FILE = "configFile";
+    
+    final FilesystemWatcherService service = new FilesystemWatcherService();
     
     @Override
     public Options buildOptions()
@@ -96,7 +102,7 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
     @Override
     public FilesystemWatcherService getService()
     {
-        return new FilesystemWatcherService();
+        return service;
     }
     
     public static void main(String[] args) throws Exception
@@ -148,7 +154,21 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         {
             String configPath = cli.getOptionValue(CONFIG_FILE);
             
-//TODO: Parse the properties file            
+            File infile = new File(configPath);
+            
+            try
+            {
+                String [] configArgs = service.configFileToArgs(infile);
+                
+                // reset the command line interface with the contents of the properties file
+                cli = parser.parse(options, configArgs);
+            } 
+            catch (IOException ex)
+            {
+                ex.printStackTrace();
+                
+                logger.severe( ex.getMessage() );
+            }
         }
                 
         String command1 = cli.getOptionValue("command1");
