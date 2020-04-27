@@ -15,12 +15,7 @@ import org.testng.annotations.Test;
 public class FilesystemWatherSpecification_runProfileParams 
 {
     FilesystemWatcherService service = new FilesystemWatcherService();
-    
-    public FilesystemWatherSpecification_runProfileParams()
-    {
-        
-    }
-    
+
     /**
 //TODO: assert this acceptance critieria!!!!!!!!!
      * US01AC02_minimal
