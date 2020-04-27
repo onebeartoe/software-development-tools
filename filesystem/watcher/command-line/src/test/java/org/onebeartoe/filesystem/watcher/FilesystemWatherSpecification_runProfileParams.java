@@ -33,13 +33,10 @@ public class FilesystemWatherSpecification_runProfileParams
     
     
     /**
-//TODO: assert this acceptance critieria!!!!!!!!!
      * US01AC02_Full, 
      * 
-//TODO: assert this acceptance critieria!!!!!!!!!
      * US01AC04, 
      * 
-//TODO: assert this acceptance critieria!!!!!!!!!
      * US01AC08
      * 
      * @throws IOException
@@ -138,11 +135,13 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
     {
         String [] args = minimalProfilePropsToStringArray();
 //TODO: use parseArgs()
-        FileWatcherApplication fwpApp = new FileWatcherApplication(); 
+//        FileWatcherApplication fwpApp = new FileWatcherApplication(); 
+//        
+//        Options options = fwpApp.buildOptions();
+//
+//        FileWatcherProfile profile = fwpApp.parseRunProfile(args, options);        
         
-        Options options = fwpApp.buildOptions();
-
-        FileWatcherProfile profile = fwpApp.parseRunProfile(args, options);        
+        FileWatcherProfile profile = parseArgs(args);
         
         assertMinimalProfile(profile); 
     }
