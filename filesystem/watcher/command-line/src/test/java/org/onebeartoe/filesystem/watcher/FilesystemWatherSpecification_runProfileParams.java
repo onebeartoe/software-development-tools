@@ -17,7 +17,7 @@ public class FilesystemWatherSpecification_runProfileParams
     FilesystemWatcherService service = new FilesystemWatcherService();
 
     /**
-     * US01AC02_minimal
+     * US01AC02_minimal & US01AC07
      */
     @Test
     public void parseRunProfile_prpertiesFileOnCommandLIne_minimal() throws ParseException
@@ -83,10 +83,13 @@ public class FilesystemWatherSpecification_runProfileParams
     private void assertMinimalProfile(FileWatcherProfile profile)
     {
         String expectedPattern1 = "*.text"; 
-         assertEquals(profile.pattern1, expectedPattern1);       
+        assertEquals(profile.pattern1, expectedPattern1);       
         
-         String expectedCommand1 = "wc -l"; 
-         assertEquals(profile.command1, expectedCommand1);
+        String expectedCommand1 = "wc -l"; 
+        assertEquals(profile.command1, expectedCommand1);
+         
+        Duration actualQuitePeriod = profile.quietPeriod1;
+        assertEquals(actualQuitePeriod, Duration.ofSeconds(30) );
     }    
     
 //TODO: is this production code?

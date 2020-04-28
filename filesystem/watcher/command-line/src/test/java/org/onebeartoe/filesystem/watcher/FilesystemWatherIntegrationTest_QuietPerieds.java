@@ -14,44 +14,12 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
         }
     }
  
-    /**
-     * US01AC07 & US01AC02.minimal
-     * 
-     * This test integrates with input files on the local filesystem.
-     * 
-     * @throws InvalidFileWatcherParamsException
-     */
-//     @Test
-//     public void parseRunProfile_defaultQuietTimeAndMinialPropertiesFile_viaComamndLIne() throws InvalidFileWatcherParamsException
-//     {
-//         String [] args = null;
-        
-// //        {"patter="*.png", cmd = "ls -lta");
-
-//         Options options = null;        
-
-//         FileWatcherApplication fwpApp = new FileWatcherApplication();
-
-//         FileWatcherProfile profile = fwpApp.parseRunProfile(args, options);
-
-//         Duration quitePeriod = profile.quietPeriod1;
-
-//         assertEquals(quitePeriod, Duration.ofSeconds(30) );
-
-//         String expectedPattern = "*.png";
-
-//         assertEquals(expectedPattern, profile.pattern1);
-
-//         String expectedCommdna = "ls -lta";
-
-//         assertEquals(profile.command1, expectedCommdna);
-//     }
-
 //    @Test
 /** UNCOMMENT THIS TEST
 /** UNCOMMENT THIS TEST
 /** UNCOMMENT THIS TEST
     /**
+     * This test integrates with input files on the local filesystem.
      * US01AC06 & US01AC09
      */
 
