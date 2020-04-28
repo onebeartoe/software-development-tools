@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.onebeartoe.io.TextFileReader;
@@ -93,19 +91,19 @@ public class FilesystemWatherSpecification_runProfileParams
     
 //TODO: is this production code?
 //TODO: is this even used?    
-private FileWatcherProfile propsToProfile(String classpathInfile) throws IOException, InvalidFileWatcherParamsException, ParseException
-{
-                                // classpathPropertiesToArgs()
-    String [] propsToStringArray = propsToStringArray(classpathInfile);
-
-    FileWatcherApplication fwApp = new FileWatcherApplication();
-
-    Options options = fwApp.buildOptions();
-
-    FileWatcherProfile profile = fwApp.parseRunProfile(propsToStringArray, options);
-
-    return profile;
-}
+//private FileWatcherProfile propsToProfile(String classpathInfile) throws IOException, InvalidFileWatcherParamsException, ParseException
+//{
+//                                // classpathPropertiesToArgs()
+//    String [] propsToStringArray = propsToStringArray(classpathInfile);
+//
+//    FileWatcherApplication fwApp = new FileWatcherApplication();
+//
+//    Options options = fwApp.buildOptions();
+//
+//    FileWatcherProfile profile = fwApp.parseRunProfile(propsToStringArray, options);
+//
+//    return profile;
+//}
 
 
 // TODO: is this production code?
@@ -195,8 +193,8 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
     /**
      * US01AC03 log file with other paramertes
      */
-    @Test//(expectedExceptions = InvalidFileWatcherParamsException.class)
-    public void parseRunProfile_configFileWithOtherParmeters() //throws ParseException 
+    @Test
+    public void parseRunProfile_configFileWithOtherParmeters()
     { 
      
         String [] args =
@@ -210,7 +208,7 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
      
         try
         {
-            parseArgs(args); //excepton expected here
+            parseArgs(args); // exception expected here
         } 
         catch (ParseException ex)
         {
@@ -230,7 +228,7 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
     /**
      * US01AC05_one
      */
-    @Test//(expectedExceptions = InvalidFileWatcherParamsException.class)    
+    @Test
     public void parseRunProfileFails_missingRequiredParams_one() throws Exception
     {
         String classPath = "/run-profiles/invalid-command.propertries";
@@ -241,7 +239,7 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
      
         try
         {
-            parseArgs(args); //excepton expected here
+            parseArgs(args); // exception expected here
         } 
         catch (ParseException ex)
         {
