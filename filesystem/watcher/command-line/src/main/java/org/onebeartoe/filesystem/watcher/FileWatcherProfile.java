@@ -20,4 +20,12 @@ public class FileWatcherProfile extends RunProfile
 	
         public String logFile;
 	
+        public FileWatcherProfile()
+        {
+            Duration defaultQuietPeriod = Duration.ofSeconds(30);
+            
+            quietPeriod1 = defaultQuietPeriod;
+            quietPeriod2 = defaultQuietPeriod;
+            quietPeriod3 = defaultQuietPeriod;
+        }
 }
