@@ -25,6 +25,12 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
 
     final String QUIET_PERIOD_2 = "quietPeriod2";
     
+    final String COMMAND_3 = "command3";
+
+    final String PATTERN_3 = "pattern3";
+
+    final String QUIET_PERIOD_3 = "quietPeriod3";
+    
     final String LOG_FILE = "logFile";
     
     final String CONFIG_FILE = "configFile";
@@ -42,13 +48,11 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         Option command1 = Option.builder()
                                 .hasArg()
                                 .longOpt(COMMAND_1)
-//                                .required()
                                 .build();
         
         Option pattern1 = Option.builder()
                                 .hasArg()
                                 .longOpt(PATTERN_1)
-//                                .required()
                                 .build();
 
         Option quietPeriod1 = Option.builder()
@@ -70,6 +74,21 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
                                 .hasArg()
                                 .longOpt(QUIET_PERIOD_2)
                                 .build();
+                                
+        Option pattern3 = Option.builder()
+                                .hasArg()
+                                .longOpt(PATTERN_3)
+                                .build();
+
+        Option command3 = Option.builder()
+                                .hasArg()
+                                .longOpt(COMMAND_3)
+                                .build();
+        
+        Option quietPeriod3 = Option.builder()
+                                .hasArg()
+                                .longOpt(QUIET_PERIOD_3)
+                                .build();
         
         Option logFile = Option.builder()
                                 .hasArg()
@@ -89,6 +108,12 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         options.addOption(pattern2);
         
         options.addOption(quietPeriod2);
+        
+        options.addOption(command3);
+        
+        options.addOption(pattern3);
+        
+        options.addOption(quietPeriod3);
         
         options.addOption(logFile);
         
@@ -139,6 +164,14 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         return duration;
     }    
     
+    /**
+     * This method currently parses up to 3 pattern/command parameters.
+     * 
+     * @param args
+     * @param options
+     * @return
+     * @throws ParseException 
+     */
     @Override
     protected FileWatcherProfile parseRunProfile(final String[] args, Options options) throws ParseException
     {
@@ -182,6 +215,13 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         
         profile.pattern1 = pattern1;
         
+        if(profile.pattern1 == null)
+        {
+            String message = "pattern1 is missing command1 parameter";
+            
+            throw new ParseException(message);
+        }
+        
         if( cli.hasOption(QUIET_PERIOD_1) )
         {
             String s = cli.getOptionValue(QUIET_PERIOD_1);
@@ -195,7 +235,12 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
             
             profile.command2 = cli.getOptionValue(COMMAND_2);
             
-            
+            if(profile.command2 == null)
+            {
+                String message = "command2 is missing pattern2";
+
+                throw new ParseException(message);                
+            }
         }
         
         if( cli.hasOption(QUIET_PERIOD_2) )
@@ -203,8 +248,20 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
             String s = cli.getOptionValue(QUIET_PERIOD_2);
                         
             profile.quietPeriod2 = parseDuration(s);
+        }
+        
+        if(cli.hasOption(PATTERN_3))
+        {
+            profile.pattern3 = cli.getOptionValue(PATTERN_3);
             
+            profile.command3 = cli.getOptionValue(COMMAND_3);
             
+            if(profile.command3 == null)
+            {
+                String message = "pattern3 is missing command3 parameter";
+
+                throw new ParseException(message);                
+            }            
         }
               
         final String LOG_FILE = "logFile";
