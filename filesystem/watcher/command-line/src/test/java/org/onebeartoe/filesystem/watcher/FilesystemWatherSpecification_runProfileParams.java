@@ -136,12 +136,6 @@ private FileWatcherProfile propsToProfile(String classpathInfile) throws IOExcep
     public void profileViaCommandLineArgs_minimalProfile() throws IOException, InvalidFileWatcherParamsException, ParseException 
     {
         String [] args = minimalProfilePropsToStringArray();
-//TODO: use parseArgs()
-//        FileWatcherApplication fwpApp = new FileWatcherApplication(); 
-//        
-//        Options options = fwpApp.buildOptions();
-//
-//        FileWatcherProfile profile = fwpApp.parseRunProfile(args, options);        
         
         FileWatcherProfile profile = parseArgs(args);
         
