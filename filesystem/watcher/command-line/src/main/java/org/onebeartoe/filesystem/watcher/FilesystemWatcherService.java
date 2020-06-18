@@ -51,6 +51,7 @@ public class FilesystemWatcherService extends AppletService
         return tokens.toArray( new String[0] );        
     }
 
+    @Override
     public void serviceRequest(RunProfile runProfile) throws Exception
     {
         System.out.println("hello world");
