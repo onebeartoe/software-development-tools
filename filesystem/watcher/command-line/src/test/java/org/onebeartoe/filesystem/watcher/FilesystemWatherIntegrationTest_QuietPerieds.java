@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 public class FilesystemWatherIntegrationTest_QuietPerieds 
 {
+//TODO: remove this test test.    
     @Test
     public void proper_20_21_09()
     {
@@ -14,7 +15,7 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
         }
     }
  
-//    @Test
+
 /** UNCOMMENT THIS TEST
 /** UNCOMMENT THIS TEST
 /** UNCOMMENT THIS TEST
@@ -22,13 +23,13 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
      * This test integrates with input files on the local filesystem.
      * US01AC06 & US01AC09
      */
-
 /** UNCOMMENT THIS TEST
 /** UNCOMMENT THIS TEST
 /** UNCOMMENT THIS TEST
 /** UNCOMMENT THIS TEST
 /** UNCOMMENT THIS TEST
 /** UNCOMMENT THIS TEST
+    @Test
      public void elapesbeforeCommandIsExecuted() 
     {
         FilesystemWather implementation;
