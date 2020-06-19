@@ -47,6 +47,14 @@ Publish Template
 -	Reference images                -                                 -                                                                                                  -
 -	Copy material                       -                                 -                                                                                                  -
 -	Publish                                 -                                 -                                                                                                  -
+-       Resources
+-           Java -> NIO -> WatcherService
+-                Filesystem Watcher
+-                    Recursive example (I think)
+-                       https://docs.oracle.com/javase/tutorial/essential/io/examples/WatchDir.java
+-                    Probe content type
+-                        https://docs.oracle.com/javase/tutorial/essential/io/notification.html
+-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -	                                      -                                 -                                                   				       -
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -69,6 +77,7 @@ Publish Template
 -		Source code link        -                                                                                 -                                                         -
 -		Project Progress Link -                                                                                 -                                                        -
 -		oneweb.net - resource links -                                                                       -                                                         -
+-                   Java -> NIO -> WatcherService
 -	Going Further                       -                                                                                 -                                                         -
 -	Publish                                 -                                 -                                                                                                  -
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
