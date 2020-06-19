@@ -11,17 +11,22 @@ import org.onebeartoe.io.TextFileWriter;
 import static org.onebeartoe.system.Sleeper.sleepo;
 import org.testng.annotations.Test;
 
+
+/**
+ * 
+ * This test integrates with input files on the local filesystem.
+ */
+
 //TODO: correct the mispelled wather
 public class FilesystemWatherIntegrationTest_QuietPerieds 
 {
-    /**
-     * This test integrates with input files on the local filesystem.
-     * US01AC06 & US01AC09
-     */
     @Test
+    /**
+     * US01AC06
+     */    
      public void elapsesBeforeCommandIsExecuted() throws IOException 
     {
-        Path directory = Paths.get("src/main");
+        Path directory = Paths.get("target/src/main");
         
         boolean recursive = true;
 
@@ -85,8 +90,28 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
         assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#1");
         assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#2");
 
-// how is this needed, or is it redundant?        
-        assertFileContains(fileToWatch, echoContent);
+        assertFileToWatchContains2echoContents(fileToWatch, echoContent);
+    }
+
+//TODO: this test     
+    @Test
+    /**
+     * US01AC09
+     */
+    public void givenAnUnElapsedQuietPeriodWhenTheFilesystemIsModifiedThenQuietPeriodsRestarts()
+    {
+//TODO: implement        
+    }
+
+//TODO: this test            
+    /**
+     * 
+     * 
+     * US01AC10 
+     */
+    public void filesystemModificationOccursBeforeTheQuitePeriod()
+    {
+//TODO: implement        
     }
 
     private void append(File fileToWatch, String immediateEcho) throws IOException
@@ -119,6 +144,11 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
     }
 
     private void assertFileOnlyHasOneLineFromInitial()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void assertFileToWatchContains2echoContents(File fileToWatch, String echoContent)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
