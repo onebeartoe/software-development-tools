@@ -43,7 +43,9 @@ Acceptance Criteria:
         test for one
         test for many
 
-06) A 'quiet period' elapses before the command is executed for any given file pattern.
+06) Other than the initial startup, a 'quiet period' elapses before the command is 
+    executed for any given file pattern.  On initial startup the quite period is 
+    ignored if a filesystem modification occurs before the quite period.
 
 07) The default quiet period is 30 seconds.
 
