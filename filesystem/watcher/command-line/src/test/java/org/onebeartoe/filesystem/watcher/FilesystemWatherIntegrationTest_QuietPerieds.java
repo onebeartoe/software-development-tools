@@ -13,18 +13,6 @@ import org.testng.annotations.Test;
 //TODO: correct the mispelled wather
 public class FilesystemWatherIntegrationTest_QuietPerieds 
 {
-//TODO: remove this test test.    
-    @Test
-    public void proper_20_21_09()
-    {
-        for(int i = 0; i < 5; i++)
-        {
-            System.out.println("Go Spurs Go - this is from test 565656");
-        }
-    }
- 
-
-
     /**
      * This test integrates with input files on the local filesystem.
      * US01AC06 & US01AC09
