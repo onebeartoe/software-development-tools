@@ -81,9 +81,7 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
         // assert the quit period was restarted twice
         long restartedSleepo = quietPerion.toMillis() + Duration.ofSeconds(3).toMillis();
         sleepo(restartedSleepo);
-
         fw.terminate();
-
         assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#1");
         assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#2");
 
@@ -97,12 +95,7 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
         
         boolean append = true;
         
-        boolean failed = appender.writeText(fileToWatch, immediateEcho, append);
-        
-        if(failed)
-        {
-            throw new IOException("the write failed");
-        }
+        appender.writeText(fileToWatch, immediateEcho, append);
     }
 
     private void assertFileToWatchContains(String immediateEcho)
