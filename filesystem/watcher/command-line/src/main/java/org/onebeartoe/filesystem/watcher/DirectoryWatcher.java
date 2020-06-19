@@ -36,10 +36,15 @@ import java.util.Map;
 public class DirectoryWatcher
 {
     private final WatchService watcher;
+
     private final Map<WatchKey,Path> keys;
+
     private final boolean recursive;
+
     private boolean trace = false;
 
+    
+    
     @SuppressWarnings("unchecked")
     static <T> WatchEvent<T> cast(WatchEvent<?> event) 
     {
