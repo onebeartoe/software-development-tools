@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Date;
+import org.onebeartoe.io.TextFileWriter;
 import static org.onebeartoe.system.Sleeper.sleepo;
 import org.testng.annotations.Test;
 
@@ -54,7 +55,7 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
 //TODO: reomove fw and use 'implementation' 
         DirectoryWatcher fw = implementation;
         
-        fw.start();
+        fw.processEvents();
 
         // make sure the command DOES go off immediately after initialization 
         //      (no inital quiet period)
@@ -86,13 +87,22 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
         assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#1");
         assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#2");
 
-// how is this needed or is it redundant?        
+// how is this needed, or is it redundant?        
         assertFileContains(fileToWatch, echoContent);
     }
 
-    private void append(File fileToWatch, String immediateEcho)
+    private void append(File fileToWatch, String immediateEcho) throws IOException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TextFileWriter appender = new TextFileWriter();
+        
+        boolean append = true;
+        
+        boolean failed = appender.writeText(fileToWatch, immediateEcho, append);
+        
+        if(failed)
+        {
+            throw new IOException("the write failed");
+        }
     }
 
     private void assertFileToWatchContains(String immediateEcho)
