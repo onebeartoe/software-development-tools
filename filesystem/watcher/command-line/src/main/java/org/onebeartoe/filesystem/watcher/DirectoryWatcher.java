@@ -41,14 +41,16 @@ public class DirectoryWatcher
     private boolean trace = false;
 
     @SuppressWarnings("unchecked")
-    static <T> WatchEvent<T> cast(WatchEvent<?> event) {
+    static <T> WatchEvent<T> cast(WatchEvent<?> event) 
+    {
         return (WatchEvent<T>)event;
     }
 
     /**
      * Register the given directory with the WatchService
      */
-    private void register(Path dir) throws IOException {
+    private void register(Path dir) throws IOException 
+    {
         WatchKey key = dir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
         if (trace) {
             Path prev = keys.get(key);
@@ -115,19 +117,24 @@ public class DirectoryWatcher
         {
             // wait for key to be signalled
             WatchKey key;
-            try {
+            try 
+            {
                 key = watcher.take();
-            } catch (InterruptedException x) {
+            } 
+            catch (InterruptedException x) 
+            {
                 return;
             }
 
             Path dir = keys.get(key);
-            if (dir == null) {
+            if (dir == null) 
+            {
                 System.err.println("WatchKey not recognized!!");
                 continue;
             }
 
-            for (WatchEvent<?> event: key.pollEvents()) {
+            for (WatchEvent<?> event: key.pollEvents()) 
+            {
                 WatchEvent.Kind kind = event.kind();
 
                 // TBD - provide example of how OVERFLOW event is handled
@@ -192,15 +199,8 @@ public class DirectoryWatcher
 //        new DirectoryWatcher(dir, recursive).processEvents();
 //    }
 
-    void start()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     void terminate()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-   
 }
