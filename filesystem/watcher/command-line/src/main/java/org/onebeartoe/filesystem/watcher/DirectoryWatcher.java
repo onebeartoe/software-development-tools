@@ -43,7 +43,7 @@ public class DirectoryWatcher
 
     private boolean trace = false;
 
-    
+    private boolean processing;
     
     @SuppressWarnings("unchecked")
     static <T> WatchEvent<T> cast(WatchEvent<?> event) 
@@ -118,7 +118,7 @@ public class DirectoryWatcher
      */
     void processEvents() 
     {
-        for (;;) 
+        while (processing) 
         {
             // wait for key to be signalled
             WatchKey key;
@@ -206,6 +206,6 @@ public class DirectoryWatcher
 
     void terminate()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        processing = false;
     }
 }
