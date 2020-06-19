@@ -27,9 +27,7 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
 
         long seconds = 10;
         
-        Duration quietPerion = Duration.ofSeconds(seconds);
-
-        String echoContent = "this is echo content";
+        Duration quietPeriod = Duration.ofSeconds(seconds);
 
         String currentTime = (new Date() ).toString();
 
@@ -40,12 +38,14 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
 //TODO: rena me this to fileWatcherLogfile        
         File fwOutfile = new File("file-watcher.log");
 
-        String command = String.format("cat %s >> %s",echoContent,ftwPath);
+        String echoContent = "this is echo content";        
+        
+        String command = String.format("cat %s >> %s", echoContent, ftwPath);
 
         DirectoryWatcherProfile profile = new DirectoryWatcherProfile();
         
         profile.pattern = "*.text"; 
-        profile.quietPeriod = quietPerion;
+        profile.quietPeriod = quietPeriod;
         profile.command = command;
         profile.directory = directory;
         profile.recursive = recursive;
@@ -66,7 +66,7 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
                 
         // the quiet period just went off,
         // make sure the second command does NOT go off before the reset quiet period ends
-        long duationInMillis = quietPerion.toMillis();
+        long duationInMillis = quietPeriod.toMillis();
                 
         sleepo( duationInMillis / 2);
         touch(fileToWatch); // restart quiete perid #1
@@ -79,7 +79,7 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
         assertFileOnlyHasOneLineFromInitial();
 
         // assert the quit period was restarted twice
-        long restartedSleepo = quietPerion.toMillis() + Duration.ofSeconds(3).toMillis();
+        long restartedSleepo = quietPeriod.toMillis() + Duration.ofSeconds(3).toMillis();
         sleepo(restartedSleepo);
         fw.terminate();
         assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#1");
