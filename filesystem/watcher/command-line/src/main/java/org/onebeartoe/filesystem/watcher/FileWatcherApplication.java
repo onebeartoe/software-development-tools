@@ -132,6 +132,17 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
     {
         CommandLineInterfaceApplet app = new FileWatcherApplication();
 
+        
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            @Override
+            public void run()
+            {
+                System.out.println("Shutdown hook ran!");
+            }
+        });
+        
+        
         app.execute(args);
     }
 

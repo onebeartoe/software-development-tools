@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import com.google.common.io.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import java.util.ArrayList;
 
@@ -55,5 +57,19 @@ public class FilesystemWatcherService extends AppletService
     public void serviceRequest(RunProfile runProfile) throws Exception
     {
         System.out.println("hello world");
+        
+        Path directory = Paths.get("src/main/");
+        
+        boolean recursive = true;
+
+        DirectoryWatcherProfile profile = new DirectoryWatcherProfile();
+        
+        profile.directory = directory;
+        
+        profile.recursive = recursive;
+        
+        DirectoryWatcher watcher = new DirectoryWatcher(profile);
+        
+        watcher.processEvents();
     }
 }
