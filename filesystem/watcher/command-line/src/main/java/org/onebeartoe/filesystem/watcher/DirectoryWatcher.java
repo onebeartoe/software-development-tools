@@ -57,12 +57,16 @@ public class DirectoryWatcher
     private void register(Path dir) throws IOException 
     {
         WatchKey key = dir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
-        if (trace) {
+        if (trace) 
+        {
             Path prev = keys.get(key);
-            if (prev == null) {
+            if (prev == null) 
+            {
                 System.out.format("register: %s\n", dir);
-            } else {
-                if (!dir.equals(prev)) {
+            } else 
+            {
+                if (!dir.equals(prev)) 
+                {
                     System.out.format("update: %s -> %s\n", prev, dir);
                 }
             }
@@ -143,7 +147,8 @@ public class DirectoryWatcher
                 WatchEvent.Kind kind = event.kind();
 
                 // TBD - provide example of how OVERFLOW event is handled
-                if (kind == OVERFLOW) {
+                if (kind == OVERFLOW) 
+                {
                     continue;
                 }
 
@@ -157,12 +162,17 @@ public class DirectoryWatcher
 
                 // if directory is created, and watching recursively, then
                 // register it and its sub-directories
-                if (recursive && (kind == ENTRY_CREATE)) {
-                    try {
-                        if (Files.isDirectory(child, NOFOLLOW_LINKS)) {
+                if (recursive && (kind == ENTRY_CREATE)) 
+                {
+                    try 
+                    {
+                        if (Files.isDirectory(child, NOFOLLOW_LINKS)) 
+                        {
                             registerAll(child);
                         }
-                    } catch (IOException x) {
+                    } 
+                    catch (IOException x) 
+                    {
                         // ignore to keep sample readbale
                     }
                 }
@@ -170,11 +180,13 @@ public class DirectoryWatcher
 
             // reset key and remove from set if directory no longer accessible
             boolean valid = key.reset();
-            if (!valid) {
+            if (!valid) 
+            {
                 keys.remove(key);
 
                 // all directories are inaccessible
-                if (keys.isEmpty()) {
+                if (keys.isEmpty()) 
+                {
                     break;
                 }
             }
