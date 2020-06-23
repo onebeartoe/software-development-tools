@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import org.onebeartoe.io.TextFileWriter;
 import static org.onebeartoe.system.Sleeper.sleepo;
 import org.testng.annotations.Test;
@@ -18,57 +20,56 @@ import org.testng.annotations.Test;
  */
 
 //TODO: correct the mispelled wather
-public class FilesystemWatherIntegrationTest_QuietPerieds 
+public class FilesystemWatherIntegrationTest_QuietPerieds
 {
+    private Random random; 
+    
+    public FilesystemWatherIntegrationTest_QuietPerieds()
+    {
+        random = new Random();
+    }
+    
     @Test
     /**
      * US01AC06
      */    
-     public void elapsesBeforeCommandIsExecuted() throws IOException 
+     public void initialQuitPeriodIsIgnored() throws IOException 
     {
-        Path directory = Paths.get("target/src/main");
+        String testName = "initialQuitPeriodIsIgnored";
+                
+        String immediateEcho = "This is append text IMMIDIATELY after initialization.";
         
-        boolean recursive = true;
-
-        long seconds = 10;
-        
-        Duration quietPeriod = Duration.ofSeconds(seconds);
-
-        String currentTime = (new Date() ).toString();
-
-        String ftwPath = "watch"+currentTime+".text";
-
-        File fileToWatch = new File(ftwPath);
-
-//TODO: rena me this to fileWatcherLogfile        
-        File fwOutfile = new File("file-watcher.log");
-
-        String echoContent = "this is echo content";        
-        
-        String command = String.format("cat %s >> %s", echoContent, ftwPath);
-
-        DirectoryWatcherProfile profile = new DirectoryWatcherProfile();
-        
-        profile.pattern = "*.text"; 
-        profile.quietPeriod = quietPeriod;
-        profile.command = command;
-        profile.directory = directory;
-        profile.recursive = recursive;
+        TestDirectoryWatcherProfile profile = watchProfile(testName, immediateEcho);
 
         DirectoryWatcher implementation = new DirectoryWatcher(profile);
-
-//TODO: reomove fw and use 'implementation' 
-        DirectoryWatcher fw = implementation;
+            
+        implementation.processEvents();
         
-        fw.processEvents();
-
-        // make sure the command DOES go off immediately after initialization 
-        //      (no inital quiet period)
-        String immediateEcho = "This is append text IMMIDIATELY after initialization.";
-        append(fileToWatch, immediateEcho);
-        assertFileToWatchContains(immediateEcho);
+        File touchFile = new File(profile.directory.toFile(), "some-file.text");
         
-                
+        touch(touchFile);        
+        
+        // make sure the command goes off immediately after initialization 
+        //      (no inital quiet period)        
+        assertFileContains(touchFile, immediateEcho);
+    }
+
+//TODO: this test     
+    @Test
+    /**
+     * US01AC09
+     */
+    public void givenAnUnElapsedQuietPeriodWhenTheFilesystemIsModifiedThenQuietPeriodsRestarts() throws IOException, Exception
+    {
+//TODO: BORROW THESE VARIABLE FROM THE 'initialQuitPeriodIsIgnored' method
+Duration quietPeriod = null;
+File fileToWatch = null;
+DirectoryWatcher fw = null;
+File fwOutfile = null;
+String echoContent = null;
+//TODO:END        
+        
+        
         // the quiet period just went off,
         // make sure the second command does NOT go off before the reset quiet period ends
         long duationInMillis = quietPeriod.toMillis();
@@ -90,17 +91,11 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
         assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#1");
         assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#2");
 
-        assertFileToWatchContains2echoContents(fileToWatch, echoContent);
-    }
-
-//TODO: this test     
-    @Test
-    /**
-     * US01AC09
-     */
-    public void givenAnUnElapsedQuietPeriodWhenTheFilesystemIsModifiedThenQuietPeriodsRestarts()
-    {
+        assertFileToWatchContains2echoContents(fileToWatch, echoContent);        
+        
+        
 //TODO: implement        
+        throw new Exception("implment");
     }
 
 //TODO: this test            
@@ -109,9 +104,10 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
      * 
      * US01AC10 
      */
-    public void filesystemModificationOccursBeforeTheQuitePeriod()
+    public void filesystemModificationOccursBeforeTheQuitePeriod() throws Exception
     {
 //TODO: implement        
+        throw new Exception("implment");
     }
 
     private void append(File fileToWatch, String immediateEcho) throws IOException
@@ -123,15 +119,9 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
         appender.writeText(fileToWatch, immediateEcho, append);
     }
 
-    private void assertFileToWatchContains(String immediateEcho)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    private void touch(File fileToWatch)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
+    
 
     private void assertFileContains(File fwOutfile, String string)
     {
@@ -146,6 +136,54 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
     private void assertFileOnlyHasOneLineFromInitial()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void touch(File fileToWatch)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private File uniqueTargetDirectory(String testName)
+    {
+        long timeStamp = Calendar.getInstance().getTimeInMillis();
+        
+        int randomInt = random.nextInt();
+        
+        String path = "target/test-data/" + testName + timeStamp + '-' + randomInt;
+        
+        File directory = new File(path);
+        
+        return directory;
+    }
+
+    private TestDirectoryWatcherProfile watchProfile(String testName, String echoContent)
+    {
+        File file = uniqueTargetDirectory(testName);
+        
+//TODO: use this instead of a File for fileToWatch
+        Path directory = file.toPath();
+        
+        boolean recursive = true;
+
+        long seconds = 10;
+        
+        Duration quietPeriod = Duration.ofSeconds(seconds);
+
+        String currentTime = (new Date() ).toString();
+
+        String ftwPath = "watch"+currentTime+".text";
+        
+        String command = String.format("cat %s >> %s", echoContent, ftwPath);
+
+        TestDirectoryWatcherProfile profile = new TestDirectoryWatcherProfile();
+                        
+        profile.pattern = "*.text"; 
+        profile.quietPeriod = quietPeriod;
+        profile.command = command;
+        profile.directory = directory;
+        profile.recursive = recursive;
+
+        return profile;        
     }
 
     private void assertFileToWatchContains2echoContents(File fileToWatch, String echoContent)
