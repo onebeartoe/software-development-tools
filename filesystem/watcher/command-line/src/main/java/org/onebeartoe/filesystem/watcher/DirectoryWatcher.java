@@ -181,29 +181,6 @@ public class DirectoryWatcher
         }
     }
 
-//    static void usage() {
-//        System.err.println("usage: java DirectoryWatcher [-r] dir");
-//        System.exit(-1);
-//    }
-
-//    public static void main(String[] args) throws IOException {
-//        // parse arguments
-//        if (args.length == 0 || args.length > 2)
-//            usage();
-//        boolean recursive = false;
-//        int dirArg = 0;
-//        if (args[0].equals("-r")) {
-//            if (args.length < 2)
-//                usage();
-//            recursive = true;
-//            dirArg++;
-//        }
-//
-//        // register directory and process its events
-//        Path dir = Paths.get(args[dirArg]);
-//        new DirectoryWatcher(dir, recursive).processEvents();
-//    }
-
     void terminate()
     {
         processing = false;
