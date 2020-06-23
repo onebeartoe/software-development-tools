@@ -41,7 +41,7 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
     {
         String testName = "initialQuitPeriodIsIgnored";
                 
-        String immediateEcho = "This is append text IMMIDIATELY after initialization.";
+        String immediateEcho = "This-is-append-text-IMMIDIATELY-after-initialization.";
         
         TestDirectoryWatcherProfile profile = watchProfile(testName, immediateEcho);
 
@@ -51,11 +51,18 @@ public class FilesystemWatherIntegrationTest_QuietPerieds
         
         File touchFile = new File(profile.directory.toFile(), "some-file.text");
         
-        touch(touchFile);        
+        touch(touchFile);    
         
+        WatcherItem item = profile.watchItems.get(0);
+        
+        long sleepoMillis = item.quietPeriod.toMillis() / 4;  // wait a quarter of quite period 
+        
+        sleepo(sleepoMillis);
+                
         // make sure the command goes off immediately after initialization 
-        //      (no inital quiet period)        
-        assertFileContains(touchFile, immediateEcho);
+        //      (no inital quiet period)
+        File infile = new File(item.outpath);
+        assertFileContains(infile, immediateEcho);
     }
 
 //TODO: this test     
@@ -82,7 +89,7 @@ String echoContent = null;
         touch(fileToWatch); // restart quiete perid #1
         sleepo( duationInMillis / 2); // sleep for half the quite perid time
 
-        String appendTtextBeforeQuiretElapses = "This is append text before quiet period elapses.";
+        String appendTtextBeforeQuiretElapses = "This-is append-text-before-quiet-period-elapses.";
         append(fileToWatch, appendTtextBeforeQuiretElapses);  // modify the file again before 
                                                               // the quiet perid ends,
                                                               // restarting quiete perid #2                                                                            
@@ -124,9 +131,9 @@ String echoContent = null;
         appender.writeText(fileToWatch, immediateEcho, append);
     }
 
-    private void assertFileContains(File fwOutfile, String target) throws IOException
+    private void assertFileContains(File infile, String target) throws IOException
     {
-        byte[] bytes = Files.readAllBytes(fwOutfile.toPath() );
+        byte[] bytes = Files.readAllBytes(infile.toPath() );
         
         String content = new String(bytes);
         
@@ -181,7 +188,6 @@ String echoContent = null;
     {
         File file = uniqueTargetDirectory(testName);
         
-//TODO: use this instead of a File for fileToWatch
         Path directory = file.toPath();
         
         boolean recursive = true;
@@ -190,17 +196,21 @@ String echoContent = null;
         
         Duration quietPeriod = Duration.ofSeconds(seconds);
 
-//        String currentTime = (new Date() ).toString();
-
         String outpath = file.getAbsolutePath() + ".out";
         
-        String command = String.format("echo %s >> %s", echoContent, outpath);
+        String command = String.format("src/test/resources/integration/echo.sh %s %s", echoContent, outpath);
 
         TestDirectoryWatcherProfile profile = new TestDirectoryWatcherProfile();
                         
-        profile.pattern = "*.text"; 
-        profile.quietPeriod = quietPeriod;
-        profile.command = command;
+        WatcherItem item = new WatcherItem();
+
+        item.outpath = outpath;
+        item.pattern = "*.text"; 
+        item.quietPeriod = quietPeriod;
+        item.command = command;
+        
+        profile.watchItems.add(item);
+        
         profile.directory = directory;
         profile.recursive = recursive;
 

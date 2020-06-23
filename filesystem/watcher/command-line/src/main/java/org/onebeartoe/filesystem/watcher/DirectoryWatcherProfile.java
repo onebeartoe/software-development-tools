@@ -2,7 +2,8 @@
 package org.onebeartoe.filesystem.watcher;
 
 import java.nio.file.Path;
-import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class holds meta data for a directory watcher service.
@@ -13,9 +14,10 @@ public class DirectoryWatcherProfile
     
     boolean recursive;
     
-    String pattern;
+    List<WatcherItem> watchItems;
     
-    Duration quietPeriod;
-    
-    String command;
+    public DirectoryWatcherProfile()
+    {
+        watchItems = new ArrayList();
+    }
 }

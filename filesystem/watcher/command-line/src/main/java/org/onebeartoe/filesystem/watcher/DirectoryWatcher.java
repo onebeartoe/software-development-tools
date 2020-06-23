@@ -1,6 +1,7 @@
 
 package org.onebeartoe.filesystem.watcher;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
@@ -19,7 +20,14 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.onebeartoe.application.logging.SysoutLoggerFactory;
+import org.onebeartoe.system.Commander;
 
 
 //TODO: oneweb.net - Java -> NIO -> WatcherService -> Mention this as example code for java.nio.file.WatchService
@@ -39,11 +47,45 @@ public class DirectoryWatcher
 
     private final Map<WatchKey,Path> keys;
 
+    private List<WatcherItem> watchItems;
+    
     private final boolean recursive;
 
     private boolean trace = false;
 
-    private boolean processing;
+    private boolean processing = true;
+    
+    private Logger logger;
+
+    /**
+     * Creates a WatchService and registers the given directory
+     */
+    public DirectoryWatcher(DirectoryWatcherProfile profile) throws IOException 
+    {
+        logger = SysoutLoggerFactory.getLogger( getClass().getName() );
+        
+        this.watcher = FileSystems.getDefault().newWatchService();
+
+        this.keys = new HashMap<WatchKey,Path>();
+
+        this.recursive = profile.recursive;
+
+        this.watchItems = profile.watchItems;
+        
+        if (recursive) 
+        {
+            System.out.format("Scanning %s ...\n", profile.directory);
+            registerAll(profile.directory);
+            System.out.println("Done.");
+        } 
+        else 
+        {
+            register(profile.directory);
+        }
+
+        // enable trace after initial registration
+        this.trace = true;
+    }
     
     @SuppressWarnings("unchecked")
     static <T> WatchEvent<T> cast(WatchEvent<?> event) 
@@ -94,34 +136,28 @@ public class DirectoryWatcher
     }
 
     /**
-     * Creates a WatchService and registers the given directory
-     */
-    public DirectoryWatcher(DirectoryWatcherProfile profile) throws IOException 
-    {
-        this.watcher = FileSystems.getDefault().newWatchService();
-        this.keys = new HashMap<WatchKey,Path>();
-        this.recursive = profile.recursive;
-
-        if (recursive) 
-        {
-            System.out.format("Scanning %s ...\n", profile.directory);
-            registerAll(profile.directory);
-            System.out.println("Done.");
-        } 
-        else 
-        {
-            register(profile.directory);
-        }
-
-        // enable trace after initial registration
-        this.trace = true;
-    }
-
-    /**
      * Process all events for keys queued to the watcher
      */
-    void processEvents() 
+    public void processEvents() 
     {
+        Runnable runnable = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                processEventsLoop();
+            }
+        };
+        
+        Thread thread = new Thread(runnable);
+        
+        thread.start();
+    }
+    
+    private void processEventsLoop()
+    {
+        logger.info("processing event loop");
+        
         while (processing) 
         {
             // wait for key to be signalled
@@ -132,6 +168,8 @@ public class DirectoryWatcher
             } 
             catch (InterruptedException x) 
             {
+                x.printStackTrace();
+                
                 return;
             }
 
@@ -139,6 +177,7 @@ public class DirectoryWatcher
             if (dir == null) 
             {
                 System.err.println("WatchKey not recognized!!");
+                
                 continue;
             }
 
@@ -154,12 +193,27 @@ public class DirectoryWatcher
 
                 // Context for directory entry event is the file name of entry
                 WatchEvent<Path> ev = cast(event);
+                
                 Path name = ev.context();
+                
                 Path child = dir.resolve(name);
 
                 // print out event
-                System.out.format("%s: %s\n", event.kind().name(), child);
+                System.out.format("event: %s - %s\n", event.kind().name(), child);
 
+                try
+                {
+                    processModification(child);
+                } 
+                catch (IOException | InterruptedException ex)
+                {
+ex.printStackTrace();
+                    
+                    String message = ex.getMessage();
+                    
+                    logger.log(Level.SEVERE, message, ex);
+                }
+                
                 // if directory is created, and watching recursively, then
                 // register it and its sub-directories
                 if (recursive && (kind == ENTRY_CREATE)) 
@@ -191,7 +245,59 @@ public class DirectoryWatcher
                 }
             }
         }
+        
+        System.out.println("exiting process loop");
     }
+
+    private void processModification(Path child) throws IOException, InterruptedException
+    {
+        File file = child.toFile();
+        
+        if( file.isFile() )
+        {
+            String name = file.getName();
+            
+            for(WatcherItem item : watchItems)
+            {
+                String regularExpression = item.pattern.startsWith("*.") ? item.pattern.replace("*.", "\\\\*.") 
+                                                              : item.pattern;
+                
+                Pattern pattern = Pattern.compile(regularExpression);
+                     
+                Matcher foundMatcher = pattern.matcher(name);
+                                
+                if( foundMatcher.find() )
+                {
+                    System.out.println("we've got a match: " + name);
+                    
+                    Commander commander = new Commander();
+                    
+                    String command = item.command;
+//                    command = "/bin/cat pom.xml";
+//                    command = "/bin/echo hi";
+//                    command = "ls";                    
+//                    command = "mvn verify";
+//                    command = "src/test/resources/integration/echo.sh Gina";
+                    
+                    int exitValue = commander.executeCommand(command);
+                    
+                    System.out.println("exitValue = " + exitValue);
+                    
+                    System.out.println("error:");
+                    commander.getStderr()
+                            .forEach(System.out::println);
+                    
+                    System.out.println("sysout:");
+                    commander.getStdout()
+                            .forEach(System.out::println);
+                }
+                else
+                {
+                    System.out.println("chale tamale");
+                }
+            }
+        }
+    }    
 
     void terminate()
     {
