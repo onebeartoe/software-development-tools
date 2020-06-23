@@ -74,9 +74,11 @@ public class DirectoryWatcher
      * Register the given directory, and all its sub-directories, with the
      * WatchService.
      */
-    private void registerAll(final Path start) throws IOException {
+    private void registerAll(final Path start) throws IOException 
+    {
         // register directory and sub-directories
-        Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
+        Files.walkFileTree(start, new SimpleFileVisitor<Path>() 
+        {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
                 throws IOException
@@ -92,8 +94,6 @@ public class DirectoryWatcher
      */
     public DirectoryWatcher(DirectoryWatcherProfile profile) throws IOException 
     {
-        
-        
         this.watcher = FileSystems.getDefault().newWatchService();
         this.keys = new HashMap<WatchKey,Path>();
         this.recursive = profile.recursive;
