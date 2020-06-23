@@ -137,6 +137,11 @@ String echoContent = null;
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    private void assertFileToWatchContains2echoContents(File fileToWatch, String echoContent)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     private void touch(File file) throws IOException
     {
@@ -157,6 +162,11 @@ String echoContent = null;
         long timeStamp = Calendar.getInstance().getTimeInMillis();
         
         int randomInt = random.nextInt();
+        
+        if(randomInt < 0)
+        {
+            randomInt *= -1;  // make it a positive value to avoid the '-' 
+        }
         
         String path = "target/test-data/" + testName + '-' + timeStamp + '-' + randomInt;
         
@@ -195,10 +205,5 @@ String echoContent = null;
         profile.recursive = recursive;
 
         return profile;        
-    }
-
-    private void assertFileToWatchContains2echoContents(File fileToWatch, String echoContent)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
