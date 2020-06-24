@@ -5,18 +5,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
 import org.onebeartoe.io.TextFileWriter;
 import static org.onebeartoe.system.Sleeper.sleepo;
 import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
-
 
 /**
  * 
@@ -24,11 +21,11 @@ import org.testng.annotations.Test;
  */
 
 //TODO: correct the mispelled wather
-public class FilesystemWatherIntegrationTest_QuietPerieds
+public class FilesystemWatherIntegrationTest_quietPeriods
 {
     private Random random; 
     
-    public FilesystemWatherIntegrationTest_QuietPerieds()
+    public FilesystemWatherIntegrationTest_quietPeriods()
     {
         random = new Random();
     }
