@@ -273,11 +273,6 @@ ex.printStackTrace();
                     Commander commander = new Commander();
                     
                     String command = item.command;
-//                    command = "/bin/cat pom.xml";
-//                    command = "/bin/echo hi";
-//                    command = "ls";                    
-//                    command = "mvn verify";
-//                    command = "src/test/resources/integration/echo.sh Gina";
                     
                     int exitValue = commander.executeCommand(command);
                     
