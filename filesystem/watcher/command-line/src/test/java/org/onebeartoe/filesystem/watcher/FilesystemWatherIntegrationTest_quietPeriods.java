@@ -82,13 +82,12 @@ String echoContent = null;
         assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#2");
 
         assertFileToWatchContains2echoContents(fileToWatch, echoContent);        
-        
-        
+                
 //TODO: implement        
         throw new Exception("implment");
     }
 
-    @Test//(testName = "US01AC10")
+    @Test
     /**
      * US01AC10 
      */
@@ -128,7 +127,7 @@ String echoContent = null;
         sleepo(item.quietPeriod.toMillis() + 1000);
         
         // assert the watcher out file now contains two entrys 
-        Stream<String> postStream = Files.lines( touchFile.toPath() );
+        Stream<String> postStream = Files.lines(outpath);
         
         Object[] postArray = postStream.toArray();
         

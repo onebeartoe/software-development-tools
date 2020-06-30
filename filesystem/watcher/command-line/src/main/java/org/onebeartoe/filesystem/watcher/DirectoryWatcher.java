@@ -18,10 +18,13 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
+import java.util.Calendar;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -270,21 +273,24 @@ ex.printStackTrace();
                 {
                     System.out.println("we've got a match: " + name);
                     
-                    Commander commander = new Commander();
+                    long lastQuietPeriod = item.lastQuitePeriodEnded.getTimeInMillis();
                     
-                    String command = item.command;
+                    Calendar now = Calendar.getInstance();
                     
-                    int exitValue = commander.executeCommand(command);
+                    long nowMillis = now.getTimeInMillis();
                     
-                    System.out.println("exitValue = " + exitValue);
+                    boolean quietPeriodHasEnded = nowMillis > lastQuietPeriod + item.quietPeriod.toMillis();
                     
-                    System.out.println("error:");
-                    commander.getStderr()
-                            .forEach(System.out::println);
-                    
-                    System.out.println("sysout:");
-                    commander.getStdout()
-                            .forEach(System.out::println);
+                    if(quietPeriodHasEnded)
+                    {
+                        scheduleCommand(item, now);
+                        
+                        item.lastQuitePeriodEnded = now;
+                    }
+                    else
+                    {
+                        resetSchedule(item);
+                    }
                 }
                 else
                 {
@@ -297,5 +303,83 @@ ex.printStackTrace();
     void terminate()
     {
         processing = false;
+    }
+
+//TODO: move into ABC order    
+    private void executeCommand(WatcherItem item) throws IOException, InterruptedException
+    {
+        System.out.println("executing command");
+        
+        Commander commander = new Commander();
+
+        String command = item.command;
+
+        int exitValue = commander.executeCommand(command);
+
+        System.out.println("exitValue = " + exitValue);
+
+        System.out.println("error:");
+        commander.getStderr()
+                 .forEach(System.out::println);
+
+        System.out.println("sysout:");
+        commander.getStdout()
+                 .forEach(System.out::println);
+    }
+
+    private void scheduleCommand(WatcherItem item, Calendar when)
+    {
+        System.out.println("scheduling watch item");
+        
+        TimerTask task = new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    executeCommand(item);
+                } 
+                catch (IOException | InterruptedException ex)
+                {
+                    Logger.getLogger(DirectoryWatcher.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        
+        item.timerTask = task;
+        
+        Timer timer = new Timer();
+        
+        Calendar now = Calendar.getInstance();
+        
+        long delay = when.getTimeInMillis() - now.getTimeInMillis();
+     
+        if(delay < 0)
+        {
+            // avoid negative delay values
+            delay = 0;
+        }
+        
+        timer.schedule(task, delay);
+    }
+
+    private void resetSchedule(WatcherItem item)
+    {
+        System.out.println("resettign schedule");
+        
+        item.timerTask.cancel();
+        
+        Calendar now = Calendar.getInstance();
+        
+        long nowInMillis = now.getTimeInMillis();
+        
+        long delay = item.quietPeriod.toMillis();
+        
+        Calendar when = Calendar.getInstance();
+
+        when.setTimeInMillis(nowInMillis + delay);
+        
+        scheduleCommand(item, when);                
     }
 }
