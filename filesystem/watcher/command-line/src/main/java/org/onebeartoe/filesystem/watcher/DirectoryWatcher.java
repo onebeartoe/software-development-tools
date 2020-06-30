@@ -30,6 +30,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.onebeartoe.application.logging.SysoutLoggerFactory;
+import org.onebeartoe.io.TextFileWriter;
 import org.onebeartoe.system.Commander;
 
 
@@ -327,6 +328,26 @@ ex.printStackTrace();
                  .forEach(System.out::println);
     }
 
+    private void logReset(WatcherItem item) throws IOException
+    {
+        String message = "quitePeriodRestartMessage " + "#" + item.resetCount;
+        
+        if(item.logPath == null)
+        {
+            System.out.println("No reset log path for item: " + item.pattern);
+        }
+        else
+        {
+            File outfile = new File(item.logPath);
+
+            TextFileWriter appender = new TextFileWriter();
+
+            boolean append = true;
+
+            appender.writeText(outfile, message, append);
+        }
+    }
+
     private void scheduleCommand(WatcherItem item, Calendar when)
     {
         System.out.println("scheduling watch item");
@@ -366,9 +387,11 @@ ex.printStackTrace();
 
     private void resetSchedule(WatcherItem item)
     {
-        System.out.println("resettign schedule");
-        
+        System.out.println("resetting schedule");
+                        
         item.timerTask.cancel();
+        
+        item.resetCount++;
         
         Calendar now = Calendar.getInstance();
         
@@ -379,6 +402,15 @@ ex.printStackTrace();
         Calendar when = Calendar.getInstance();
 
         when.setTimeInMillis(nowInMillis + delay);
+        
+        try
+        {
+            logReset(item);
+        } 
+        catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
         
         scheduleCommand(item, when);                
     }

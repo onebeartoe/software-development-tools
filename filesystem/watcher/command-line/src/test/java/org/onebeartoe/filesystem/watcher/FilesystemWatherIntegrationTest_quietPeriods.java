@@ -44,47 +44,49 @@ public class FilesystemWatherIntegrationTest_quietPeriods
         TestDirectoryWatcherProfile profile = assertInitialQuitPeriodIsIgnored(testName);
     }
 
-//TODO: this test     
     @Test
     /**
      * US01AC09
      */
     public void givenAnUnElapsedQuietPeriodWhenTheFilesystemIsModifiedThenQuietPeriodsRestarts() throws IOException, Exception
     {
-//TODO: BORROW THESE VARIABLE FROM THE 'initialQuitPeriodIsIgnored' method
-Duration quietPeriod = null;
-File fileToWatch = null;
-DirectoryWatcher fw = null;
-File fwOutfile = null;
-String echoContent = null;
-//TODO:END        
+        String testName = "US01AC09";
         
+        TestDirectoryWatcherProfile profile = assertInitialQuitPeriodIsIgnored(testName);
         
+        WatcherItem item = profile.watchItems.get(0);
+        
+        Duration quietPeriod = item.quietPeriod;
+
+        File fileToWatch = new File(profile.directory.toFile(), "restart.text");
+
+        File fwOutfile = new File( item.outpath );
+
         // the quiet period just went off,
         // make sure the second command does NOT go off before the reset quiet period ends
         long duationInMillis = quietPeriod.toMillis();
                 
-        sleepo( duationInMillis / 2);
+//        sleepo( duationInMillis / 2);
         touch(fileToWatch); // restart quiete perid #1
-        sleepo( duationInMillis / 2); // sleep for half the quite perid time
+//        sleepo( duationInMillis / 2); // sleep for half the quite perid time
 
         String appendTtextBeforeQuiretElapses = "This-is append-text-before-quiet-period-elapses.";
         append(fileToWatch, appendTtextBeforeQuiretElapses);  // modify the file again before 
                                                               // the quiet perid ends,
                                                               // restarting quiete perid #2                                                                            
-        assertFileOnlyHasOneLineFromInitial();
+        assertFileOnlyHasOneLineFromInitialCommand(fwOutfile);
 
         // assert the quit period was restarted twice
         long restartedSleepo = quietPeriod.toMillis() + Duration.ofSeconds(3).toMillis();
         sleepo(restartedSleepo);
-        fw.terminate();
-        assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#1");
-        assertFileContains( fwOutfile, "quitePeriodRestartMessage " + "#2");
+        
+//TODO: does terminate() need calling?        
+//        fw.terminate();
 
-        assertFileToWatchContains2echoContents(fileToWatch, echoContent);        
-                
-//TODO: implement        
-        throw new Exception("implment");
+        File logFile = new File(item.logPath);
+
+        assertFileContains( logFile, "quitePeriodRestartMessage " + "#1");
+        assertFileContains( logFile, "quitePeriodRestartMessage " + "#2");
     }
 
     @Test
@@ -134,13 +136,13 @@ String echoContent = null;
         assertEquals(postArray.length, 2);
     }
 
-    private void append(File fileToWatch, String immediateEcho) throws IOException
+    private void append(File outfile, String text) throws IOException
     {
         TextFileWriter appender = new TextFileWriter();
         
         boolean append = true;
         
-        appender.writeText(fileToWatch, immediateEcho, append);
+        appender.writeText(outfile, text, append);
     }
 
     private void assertFileContains(File infile, String target) throws IOException
@@ -152,9 +154,18 @@ String echoContent = null;
         assertTrue( content.contains(target) );
     }
 
-    private void assertFileOnlyHasOneLineFromInitial()
+    private void assertFileOnlyHasOneLineFromInitialCommand(File infile) throws IOException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Path outpath = infile.toPath();
+        
+        Stream<String> postStream = Files.lines(outpath);
+        
+        Object[] postArray = postStream.toArray();
+
+String path = infile.getAbsolutePath();
+System.out.println("path = " + path);
+        
+        assertEquals(postArray.length, 1);
     }
 
     private void assertFileToWatchContains2echoContents(File fileToWatch, String echoContent)
@@ -213,9 +224,13 @@ String echoContent = null;
         String command = String.format("src/test/resources/integration/echo.sh %s %s", echoContent, outpath);
 
         TestDirectoryWatcherProfile profile = new TestDirectoryWatcherProfile();
-                        
+                      
+        
+        
         WatcherItem item = new WatcherItem();
 
+        item.logPath = file.getAbsolutePath() + ".log";
+        
         item.outpath = outpath;
         item.pattern = "*.text"; 
         item.quietPeriod = quietPeriod;
@@ -232,7 +247,7 @@ String echoContent = null;
     private TestDirectoryWatcherProfile assertInitialQuitPeriodIsIgnored(String testName) throws IOException
     {
 //TODO: change the value to something more generic for all the tests        
-        String immediateEcho = "This-is-append-text-IMMIDIATELY-after-initialization.";
+        String immediateEcho = "this-is-append-text-for-" + testName;
         
         TestDirectoryWatcherProfile profile = watchProfile(testName, immediateEcho);
 

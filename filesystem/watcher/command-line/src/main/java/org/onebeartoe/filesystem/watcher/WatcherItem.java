@@ -1,6 +1,7 @@
 
 package org.onebeartoe.filesystem.watcher;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.Calendar;
 import java.util.TimerTask;
@@ -21,6 +22,10 @@ class WatcherItem
     Calendar lastQuitePeriodEnded;
     
     TimerTask timerTask;
+
+    String logPath;
+    
+    int resetCount;
     
     public WatcherItem()
     {        
@@ -28,5 +33,7 @@ class WatcherItem
         
         // set to eariest time to ignore the initial quiet period
         lastQuitePeriodEnded.setTimeInMillis(0L);
+        
+        resetCount = 0;
     }
 }
