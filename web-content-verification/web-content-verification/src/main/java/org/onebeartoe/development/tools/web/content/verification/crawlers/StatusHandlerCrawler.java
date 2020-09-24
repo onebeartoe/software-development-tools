@@ -16,8 +16,6 @@ import org.onebeartoe.development.tools.web.content.verification.CrawlStat;
 /**
  * @author Roberto Marquez
  * 
- * 
- * 
  * This class is partially inspired by the example code provided 
  * by Yasser Ganjisaffar.
  */
