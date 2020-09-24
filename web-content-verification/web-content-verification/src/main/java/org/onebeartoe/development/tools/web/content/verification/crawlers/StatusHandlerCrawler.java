@@ -78,6 +78,7 @@ public abstract class StatusHandlerCrawler extends WebCrawler
         
         if(shouldNotVisit)
         {
+            System.out.println("should not visit: " + href);
 //TODO:            
 //            separate intra-oneweb and external links here
 //              if link contains.any.onweb.base.url that is not the current oneweb site)
