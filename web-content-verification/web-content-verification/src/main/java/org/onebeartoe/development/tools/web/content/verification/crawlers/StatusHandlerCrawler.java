@@ -101,7 +101,7 @@ public abstract class StatusHandlerCrawler extends WebCrawler
         // We dump this crawler statistics after processing every 50 pages
         if ((myCrawlStat.getTotalProcessedPages() % 50) == 0) 
         {
-            dumpMyData();
+            printStatistics();
         }
     }
 
@@ -143,10 +143,13 @@ public abstract class StatusHandlerCrawler extends WebCrawler
     @Override
     public void onBeforeExit() 
     {
-        dumpMyData();
+        printStatistics();
     }
 
-    public void dumpMyData() 
+    /**
+     * print total job statistics
+     */
+    public void printStatistics() 
     {
         int id = getMyId();
         
