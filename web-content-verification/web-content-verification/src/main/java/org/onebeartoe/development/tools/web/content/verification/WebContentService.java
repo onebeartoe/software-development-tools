@@ -119,7 +119,7 @@ public class WebContentService
         {
             CrawlStat stat = (CrawlStat) localData;
 
-            List<InternalLink> badLinks = stat.getBadLinks();
+            List<InternalLink> badLinks = stat.getLinks();
             allBadLinks.addAll(badLinks);
             
             totalLinks += stat.getTotalLinks();

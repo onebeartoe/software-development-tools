@@ -30,23 +30,23 @@ public class CrawlStat
     
     private long totalTextSize;
     
-    private final List<InternalLink> badLinks;
+    private final List<InternalLink> links;
 
     public CrawlStat()
     {
         okVisitCount = 0;
         
-        badLinks = new ArrayList();
+        links = new ArrayList();
     }
     
-    public void addBadLink(InternalLink badLink)
+    public void addLink(InternalLink link)
     {
-        badLinks.add(badLink);
+        links.add(link);
     }
     
-    public List<InternalLink> getBadLinks()
+    public List<InternalLink> getLinks()
     {
-        return badLinks;
+        return links;
     }
 
     public long getOkVisitCount()
