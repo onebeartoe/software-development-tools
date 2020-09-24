@@ -74,6 +74,18 @@ public abstract class StatusHandlerCrawler extends WebCrawler
         boolean visit = !FILTERS.matcher(href).matches() 
                             && href.startsWith(rootUrl);
         
+        boolean shouldNotVisit = !visit;
+        
+        if(shouldNotVisit)
+        {
+//TODO:            
+//            separate intra-oneweb and external links here
+//              if link contains.any.onweb.base.url that is not the current oneweb site)
+//                  add to oneweb-intra-links list
+//              else
+//                  add to external links list    
+        }
+        
         return visit;
     }
 

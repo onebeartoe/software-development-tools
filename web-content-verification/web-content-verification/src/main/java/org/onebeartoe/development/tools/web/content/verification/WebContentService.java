@@ -119,8 +119,11 @@ public class WebContentService
         {
             CrawlStat stat = (CrawlStat) localData;
 
+//TODO: remove 'bad connotation'            
             List<InternalLink> badLinks = stat.getLinks();
             allBadLinks.addAll(badLinks);
+            
+            
             
             totalLinks += stat.getTotalLinks();
             totalTextSize += stat.getTotalTextSize();
@@ -147,6 +150,16 @@ public class WebContentService
         return allBadLinks;
     }
     
+    
+    /**
+     * This method is syncronized to disallow indiviaual tests from staring the crawl 
+     * 
+     * @param crawlerClass
+     * @param rootUrl
+     * @return
+     * @throws Exception 
+     */    
+//TODO: remove the 'bad' connotation    
     public Object[][] loadBadLinks(Class crawlerClass, String rootUrl) throws Exception
     {
         List<InternalLink> badLinks = getBadLinks(crawlerClass, rootUrl);
