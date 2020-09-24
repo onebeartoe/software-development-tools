@@ -117,7 +117,7 @@ public class WebContentService
         
         for (Object localData : crawlersLocalData) 
         {
-            CrawlStat stat = (CrawlStat) localData;
+            CrawlStatistics stat = (CrawlStatistics) localData;
 
 //TODO: remove 'bad connotation'            
             List<InternalLink> badLinks = stat.getLinks();

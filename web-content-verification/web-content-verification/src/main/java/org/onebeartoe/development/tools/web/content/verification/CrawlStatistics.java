@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO: rename this clas to CrawlStatistics
-public class CrawlStat
+public class CrawlStatistics
 {    
     private long okVisitCount;
     
@@ -17,7 +17,7 @@ public class CrawlStat
     
     private final List<InternalLink> links;
 
-    public CrawlStat()
+    public CrawlStatistics()
     {
         okVisitCount = 0;
         

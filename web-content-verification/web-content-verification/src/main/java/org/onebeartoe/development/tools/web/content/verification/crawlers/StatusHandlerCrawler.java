@@ -11,7 +11,7 @@ import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.url.WebURL;
 import org.onebeartoe.development.tools.web.content.verification.InternalLink;
-import org.onebeartoe.development.tools.web.content.verification.CrawlStat;
+import org.onebeartoe.development.tools.web.content.verification.CrawlStatistics;
 
 /**
  * @author Roberto Marquez
