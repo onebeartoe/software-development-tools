@@ -108,7 +108,6 @@ public abstract class StatusHandlerCrawler extends WebCrawler
         bl.setStatusCode(statusCode);
         bl.setStatusCodeDescription(statusDescription);
 
-//TODO: is this really a bad link at this point?        
         myCrawlStat.addLink(bl);
 
         logger.warn("Status for link: {} status code: {}, parent: {}, description: {}",

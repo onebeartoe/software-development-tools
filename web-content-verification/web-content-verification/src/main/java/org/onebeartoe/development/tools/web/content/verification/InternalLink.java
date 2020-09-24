@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class holds the details of a bad link on a Website.
+ * This class holds the details of links of Website.
  * 
  * @author Roberto Marquez <https://www.youtube.com/user/onebeartoe>
  */
