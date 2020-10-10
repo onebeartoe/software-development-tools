@@ -58,10 +58,9 @@ public class FilesystemWatcherService extends AppletService
     {
 //TODO: make the delcartion use generics to avoid the cast!!!!!!        
 FileWatcherProfile p = (FileWatcherProfile)        runProfile;
-        
-        System.out.println("hello world");
-        
-        Path directory = Paths.get("src/main/");
+
+//TODO: fix this
+Path directory = Paths.get("src/main/");
         
         boolean recursive = true;
 
@@ -75,10 +74,10 @@ FileWatcherProfile p = (FileWatcherProfile)        runProfile;
         
         WatcherItem item = new WatcherItem();
 
-        item.logPath = d.getAbsolutePath() + ".log";
+        item.logPath = d.getAbsolutePath() + "sure.log";
         
-        item.outpath = d.getAbsolutePath() + ".out";
-        item.pattern = "*.text"; 
+        item.outpath = d.getAbsolutePath() + "sure.out";
+        item.pattern = p.pattern1;    
         item.quietPeriod = p.quietPeriod1;
         item.command = p.command1;        
 //TODO: do it            
@@ -89,3 +88,4 @@ FileWatcherProfile p = (FileWatcherProfile)        runProfile;
         watcher.processEvents();
     }
 }
+  
