@@ -56,6 +56,9 @@ public class FilesystemWatcherService extends AppletService
     @Override
     public void serviceRequest(RunProfile runProfile) throws Exception
     {
+//TODO: make the delcartion use generics to avoid the cast!!!!!!        
+FileWatcherProfile p = (FileWatcherProfile)        runProfile;
+        
         System.out.println("hello world");
         
         Path directory = Paths.get("src/main/");
@@ -68,6 +71,19 @@ public class FilesystemWatcherService extends AppletService
         
         profile.recursive = recursive;
         
+        File d = new File(".");
+        
+        WatcherItem item = new WatcherItem();
+
+        item.logPath = d.getAbsolutePath() + ".log";
+        
+        item.outpath = d.getAbsolutePath() + ".out";
+        item.pattern = "*.text"; 
+        item.quietPeriod = p.quietPeriod1;
+        item.command = p.command1;        
+//TODO: do it            
+        profile.watchItems.add(item);
+          
         DirectoryWatcher watcher = new DirectoryWatcher(profile);
         
         watcher.processEvents();
