@@ -209,9 +209,9 @@ System.out.println("path = " + path);
 
     private TestDirectoryWatcherProfile watchProfile(String testName, String echoContent)
     {
-        File file = uniqueTargetDirectory(testName);
+        File d = uniqueTargetDirectory(testName);
         
-        Path directory = file.toPath();
+        Path directory = d.toPath();
         
         boolean recursive = true;
 
@@ -219,7 +219,8 @@ System.out.println("path = " + path);
         
         Duration quietPeriod = Duration.ofSeconds(seconds);
 
-        String outpath = file.getAbsolutePath() + ".out";
+//TODO: verifiy that this is NOT a path that starts with a '.' (dot)!!!!!!!        
+        String outpath = d.getAbsolutePath() + ".out";
         
         String command = String.format("src/test/resources/integration/echo.sh %s %s", echoContent, outpath);
 
@@ -229,13 +230,14 @@ System.out.println("path = " + path);
         
         WatcherItem item = new WatcherItem();
 
-        item.logPath = file.getAbsolutePath() + ".log";
+        item.logPath = d.getAbsolutePath() + ".log";
         
         item.outpath = outpath;
         item.pattern = "*.text"; 
         item.quietPeriod = quietPeriod;
         item.command = command;
         
+//TODO: the watch item is not set in the production code!!!!!!!        
         profile.watchItems.add(item);
         
         profile.directory = directory;
