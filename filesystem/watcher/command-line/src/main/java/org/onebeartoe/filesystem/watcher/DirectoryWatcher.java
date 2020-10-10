@@ -164,6 +164,7 @@ public class DirectoryWatcher
         
         while (processing) 
         {
+System.out.println("proccessing...");   
             // wait for key to be signalled
             WatchKey key;
             try 
@@ -207,6 +208,7 @@ public class DirectoryWatcher
 
                 try
                 {
+System.out.println("proccess modification");
                     processModification(child);
                 } 
                 catch (IOException | InterruptedException ex)
@@ -261,10 +263,17 @@ ex.printStackTrace();
         {
             String name = file.getName();
             
+System.out.println("\tname: " + name);            
+
+int watchItemCount = watchItems.size();
+System.out.println("watchItemCount = " + watchItemCount);   
+
             for(WatcherItem item : watchItems)
             {
                 String regularExpression = item.pattern.startsWith("*.") ? item.pattern.replace("*.", "\\\\*.") 
                                                               : item.pattern;
+                
+System.out.println("regularExpression = " + regularExpression);   
                 
                 Pattern pattern = Pattern.compile(regularExpression);
                      
@@ -298,6 +307,10 @@ ex.printStackTrace();
                     System.out.println("chale tamale");
                 }
             }
+        }
+        else
+        {
+            System.out.println("file is not a file????   ");
         }
     }    
 
