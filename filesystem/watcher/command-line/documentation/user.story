@@ -3,13 +3,13 @@ FilesystemWatcher - User Story(ies)
 
 This project has multiple use cases as follows:
 
-As a test driven develper,
+As a test driven developer,
 I need a tool to watch source code files,
 so that unit tests are run when production code changes
     * applies to Java, OpenSCAD, C++, etc files
 
-As a disk qoata contstrained developer, 
-I need a tool to watch files under a filesystem direcory,
+As a disk quota constrained developer, 
+I need a tool to watch files under a filesystem directory,
 so that an alert is produced if the file size limit is reached.
 
 As a content writer,
