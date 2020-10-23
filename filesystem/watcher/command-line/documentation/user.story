@@ -49,7 +49,7 @@ Acceptance Criteria:
 07) The default quiet period is 30 seconds.
 
 08) A custom quiet period is configured for any file pattern via a command line argument or in a properties file.
-        (quietPeriod=5m, quiet Period4=1m)
+        (quietPeriod=5m, quietPeriod4=1m)
 
 09) Given a quiet period for a file pattern, when any matching file's content or last modified date
     changes, then the quiet period is restarted.
