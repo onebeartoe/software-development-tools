@@ -28,28 +28,30 @@ Publish Template
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 - Oneweb.com - Product                  -                                 - Oneweb.com - Product                                                                                                  -
 -                                       -                                 -     Product images                                                                                                  -
--       Content
+-                                       -                                 -     Content
 -       Executable
 -	Intra-oneweb links                -                                 -                                                                                                  -
 -           .org                        -                                       -                                                   -
 -	Embed video                        -                                 -                                                                                                  -
+-	Last Updated
 -	Publish                                 -                                 -                                                                                                  -
 -           
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -	                                      -                                 -                                                   				       -
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-- Oneweb.net - Blog                         -                                 -                                                                                                  -
--	Embed video                        -                                 -                                                                                                  -
--	Reference images                -                                 -                                                                                                  -
--	Copy material                       -                                 -                                                                                                  -
--	Publish                                 -                                 -                                                                                                  -
--       Resources
--           Java -> NIO -> WatcherService
--                Filesystem Watcher
--                    Recursive example (I think)
--                       https://docs.oracle.com/javase/tutorial/essential/io/examples/WatchDir.java
--                    Probe content type
--                        https://docs.oracle.com/javase/tutorial/essential/io/notification.html
+- Oneweb.net - Blog                         -                                 - Oneweb.net - Blog                                                                                                  -
+-	Embed video                        -                                  -                                                                                                        -
+-	Reference images                -                                     -                                                                                                  -
+-       Copy material                                      -                               -                                                                                     -
+-       onbeweb links
+-          product page (.com)
+-          project page (.org)
+-       Last Updated                       -                                -                                                                                     -
+-	Publish                                 -                             -                                                                                                  -
+-                                           -                                 -     Resources       
+-                                           -                                 -         Java -> NIO -> WatchService
+-                    
+-                    
 -
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -	                                      -                                 -                                                   				       -
@@ -58,10 +60,7 @@ Publish Template
 -	Overview                               -                                                                                 -                                           -
 -	Embed video                         -                                                                                 -                                                         -
 -	Hardware                               -                                                                                 -                                                         -
--	Assembly                               -                                                                                 -                                                         -
--		Instructions                -                                                                                 -                                                         -
--		Circuit diagram          -                                                                                 -                                                         -
--		Project Photos           -                                                                                 -                                                         -
+-	Project Photos           -                                                                                 -                                                         -
 -	Software Prerequisites          -                                                                                 -                                                         -
 -	Software Walkthrough           -                                                                                 -                                                         -
 -	Running the application         -                                                                                 -                                                         -
@@ -69,16 +68,16 @@ Publish Template
 -		Github                        -                                                                                 -                                                         -
 -		Thingiverse Customizer -                                                                             -                                                         -
 -	Resources                             -                                                                                 -                                                         -
--		STL link to Thingiverse -                                                                              -                                                         -
 -		Source code link        -                                                                                 -                                                         -
 -		Project Progress Link -                                                                                 -                                                        -
 -		oneweb.net - resource links -                                                                       -                                                         -
 -                   Java -> NIO -> WatcherService
--	Going Further                       -                                                                                 -                                                         -
--	Publish                                 -                                 -                                                                                                  -
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--	                                      -                                 -                                                   				       -
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-	Going Further
+-	Last Updated                       -                                                                                 -                                                         -
+-	Publish                                 -                                 -                                          -                                                        -
+------------------------------------------------------------------------------------------------------------------------------
+-	                                      -                                 -                                            -
+------------------------------------------------------------------------------------------------------------------------------
 - github.com                                     -                                 -                                                                                                  -
 -	readme.md                           -                                 -                                                                                                  -
 -	Root readme video embed   -                                 -                                                                                                  -
