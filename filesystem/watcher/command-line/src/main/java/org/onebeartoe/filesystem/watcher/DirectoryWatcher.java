@@ -33,12 +33,6 @@ import org.onebeartoe.application.logging.SysoutLoggerFactory;
 import org.onebeartoe.io.TextFileWriter;
 import org.onebeartoe.system.Commander;
 
-
-//TODO: oneweb.net - Java -> NIO -> WatcherService -> Mention this as example code for java.nio.file.WatchService
-//
-//           https://docs.oracle.com/javase/tutorial/essential/io/examples/WatchDir.java
-
-
 /**
  * This class provides a way to watch a filesystem for changes and run  system commands 
  * when a filesystem change occurs under the user specified directory.
