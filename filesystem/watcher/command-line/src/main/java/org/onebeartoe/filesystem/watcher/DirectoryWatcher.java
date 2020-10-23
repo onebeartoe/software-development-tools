@@ -412,9 +412,9 @@ System.out.println("regularExpression = " + regularExpression);
         
         long delay = item.quietPeriod.toMillis();
         
-        Calendar when = Calendar.getInstance();
+        Calendar whenToSchedule = Calendar.getInstance();
 
-        when.setTimeInMillis(nowInMillis + delay);
+        whenToSchedule.setTimeInMillis(nowInMillis + delay);
         
         try
         {
@@ -425,6 +425,6 @@ System.out.println("regularExpression = " + regularExpression);
             ex.printStackTrace();
         }
         
-        scheduleCommand(item, when);                
+        scheduleCommand(item, whenToSchedule);                
     }
 }
