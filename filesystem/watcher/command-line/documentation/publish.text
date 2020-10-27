@@ -8,8 +8,8 @@ Publish Template
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -  Application                              -                                 - Application                                                                                  -
 -	                                    -                                 -     Test Implementation                                                                      -
--	                                    -                                 -     User Acceptance                                                                                                  -
--	Publish                              -                                 -                                                                                                  -
+-	                                    -                                 -     User Acceptance                                                                          -
+-	                                    -                                 -     Publish                                                                                  -
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -	                                      -                                 -                                                   				       -
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -29,50 +29,48 @@ Publish Template
 - Oneweb.com - Product                  -                                 - Oneweb.com - Product                                                                                                  -
 -                                       -                                 -     Product images                                                                                                  -
 -                                       -                                 -     Content
--       Executable
--	Intra-oneweb links                -                                 -                                                                                                  -
--           .org                        -                                       -                                                   -
--	Embed video                        -                                 -                                                                                                  -
--	Last Updated
--	Publish                                 -                                 -                                                                                                  -
+-                                       -                                 -     Executable
+-	                                -                                 -     Intra-oneweb links                                                                                                  -
+-                                       -                                 -           .org                                                                             -
+-	Embed video                        -                                 -                                                                                         -
+-	                                -                                 -     Last Updated
+-	                                -                                 -     Publish                                                                                -
 -           
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -	                                      -                                 -                                                   				       -
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-- Oneweb.net - Blog                         -                                 - Oneweb.net - Blog                                                                                                  -
--	Embed video                        -                                  -                                                                                                        -
--	Reference images                -                                     -                                                                                                  -
--       Copy material                                      -                               -                                                                                     -
--       onbeweb links
--          product page (.com)
--          project page (.org)
--       Last Updated                       -                                -                                                                                     -
--	Publish                                 -                             -                                                                                                  -
--                                           -                                 -     Resources       
--                                           -                                 -         Java -> NIO -> WatchService
--                    
+- Oneweb.net - Blog                        -                                 - Oneweb.net - Blog                                                                             -
+-	Embed video                        -                                 -                                                                                               -
+-    	                                   -                                 -     Reference images                                                                          -
+-                                          -                                 -     Copy material                                                                             -
+-                                          -                                 -     onbeweb links
+-                                          -                                 -           product page (.com)
+-                                          -                                 -           project page (.org)
+-                                          -                                 -     Resources       
+-                                          -                                 -         Java -> NIO -> WatchService
+-                                          -                                 -     Last Updated                                                                              -
+-	                                   -                                 -     Publish                                                                                   -
 -                    
 -
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -	                                      -                                 -                                                   				       -
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-- Oneweb.org - Guide               -                                 -  Oneweb.org - Guide                                                       -                                           -
--	                           -                                 -      Overview                                           -
--	Embed video                         -                                                                                 -                                                         -
--	Software Prerequisites          -                                                                                 -                                                         -
--	Software Walkthrough           -                                                                                 -                                                         -
--	Running the application         -                                                                                 -                                                         -
--	Usage                                    -                                                                                 -                                                         -
--		Github                        -                                                                                 -                                                         -
--		Thingiverse Customizer -                                                                             -                                                         -
--	Resources                             -                                                                                 -                                                         -
--		Source code link        -                                                                                 -                                                         -
--		Project Progress Link -                                                                                 -                                                        -
--		oneweb.net - resource links -                                                                       -                                                         -
--                   Java -> NIO -> WatcherService
--	Going Further
--	Last Updated                       -                                                                                 -                                                         -
--	Publish                                 -                                 -                                          -                                                        -
+- Oneweb.org - Guide               -                                 -  Oneweb.org - Guide                                   -                                           -
+-	                           -                                 -      Overview                                         -
+-	Embed video                         -                                                                                -                                                         -
+-	                           -                                 -      Software Prerequisites                           -                              -
+-	                           -                                 -      Software Walkthrough                             -                            -
+-	                           -                                 -      Obtaining the Application                        -
+-	                           -                                 -      Running the Application                          -                               -
+-	                           -                                 -      Usage                                            -                                                         -
+-	                           -                                 -  Resources                                            -
+-		                   -                                 -      Source code link                                 -
+-		                   -                                 -      Project Progress Link                            -
+-		                   -                                 -      oneweb.net - resource links                      -
+-                                  -                                 -             Java -> NIO -> WatchService               -
+-	                           -                                 -      Going Further                                    -
+-	                           -                                 -      Last Updated                                     -
+-	                           -                                 -      Publish                                          -                                                        -
 ------------------------------------------------------------------------------------------------------------------------------
 -	                                      -                                 -                                            -
 ------------------------------------------------------------------------------------------------------------------------------
