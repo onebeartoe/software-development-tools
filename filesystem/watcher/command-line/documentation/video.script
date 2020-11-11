@@ -1,0 +1,28 @@
+
+
+00 - Greeting
+
+        Hi, I am Roberto Marquez.  In this video I demonstrate a software development tool 
+        watches the filesystem for changes and executes a command when changes are 
+        detected.
+
+
+01 - Software Prerequisites
+
+        This project requires a Java Runtime Environment version 8 or better.
+
+02 - User Story Review
+
+03 - Demonstrate Acceptance Criteria
+
+        Unit Tests
+
+        Image Size
+
+        Word Count
+
+04 - Outro
+
+        I hope you liked the demonstrations of the filesystem watcher tool.
+
+        Like and subscribe for more software development tool content.
