@@ -92,24 +92,6 @@ public class FilesystemWatherSpecification_runProfileParams
         assertEquals(actualQuitePeriod, Duration.ofSeconds(30) );
     }    
     
-//TODO: is this production code?
-//TODO: is this even used?    
-//private FileWatcherProfile propsToProfile(String classpathInfile) throws IOException, InvalidFileWatcherParamsException, ParseException
-//{
-//                                // classpathPropertiesToArgs()
-//    String [] propsToStringArray = propsToStringArray(classpathInfile);
-//
-//    FileWatcherApplication fwApp = new FileWatcherApplication();
-//
-//    Options options = fwApp.buildOptions();
-//
-//    FileWatcherProfile profile = fwApp.parseRunProfile(propsToStringArray, options);
-//
-//    return profile;
-//}
-
-
-// TODO: is this production code?
     /**
      * This method takes a classpath path and reads text from it to create an array of strings
      * 
@@ -118,7 +100,7 @@ public class FilesystemWatherSpecification_runProfileParams
      * @throws IOException
      */
 //TODO: rename this classpathPropertiesToArgs
-    private String[] propsToStringArray(String classpathInfile) throws IOException
+    private String[] classpathPropertiesToArgs(String classpathInfile) throws IOException
     {
         TextFileReader reader = new BufferedTextFileReader();
 
@@ -163,14 +145,14 @@ public class FilesystemWatherSpecification_runProfileParams
     {
         String classpathInfile = "/run-profiles/full-profile.properties";
         
-        return propsToStringArray(classpathInfile);
+        return classpathPropertiesToArgs(classpathInfile);
     }
 
     private String[] minimalProfilePropsToStringArray() throws IOException
     {
         String classpathInfile = "/run-profiles/minimal-profile.properties";
         
-        return propsToStringArray(classpathInfile);
+        return classpathPropertiesToArgs(classpathInfile);
     }
 
     private FileWatcherProfile parseArgs(String [] args) throws ParseException
@@ -236,7 +218,7 @@ public class FilesystemWatherSpecification_runProfileParams
     {
         String classPath = "/run-profiles/invalid-command.propertries";
         
-        String [] args = propsToStringArray(classPath);
+        String [] args = classpathPropertiesToArgs(classPath);
 
         ParseException exception = null;
      
