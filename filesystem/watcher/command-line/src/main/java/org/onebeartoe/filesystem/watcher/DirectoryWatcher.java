@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 import org.onebeartoe.application.logging.SysoutLoggerFactory;
 import org.onebeartoe.io.TextFileWriter;
 import org.onebeartoe.system.Commander;
+import org.onebeartoe.system.Filesystem;
 
 /**
  * This class provides a way to watch a filesystem for changes and run  system commands 
@@ -322,8 +323,11 @@ System.out.println("regularExpression = " + regularExpression);
 
         String command = item.command;
 
-        int exitValue = commander.executeCommand(command);
+String pwd        = Filesystem.pwd();
+System.out.println("dw.pwd = " + pwd);        
 
+int exitValue = commander.executeCommand(command);
+        
         System.out.println("exitValue = " + exitValue);
 
         System.out.println("error:");
