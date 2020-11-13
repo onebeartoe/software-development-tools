@@ -60,17 +60,20 @@ public class FilesystemWatcherService extends AppletService
 FileWatcherProfile p = (FileWatcherProfile)        runProfile;
 
 //TODO: fix this!!!!!
-Path directory = Paths.get("src/main/");
+//Path directory = Paths.get("src/main/");
         
         boolean recursive = true;
 
         DirectoryWatcherProfile profile = new DirectoryWatcherProfile();
+  
+        File d = new File(".");
         
-        profile.directory = directory;
+        profile.directory = d.toPath();
+//        profile.directory = directory;
         
         profile.recursive = recursive;
         
-        File d = new File(".");
+//        File d = new File(".");
         
         WatcherItem item = new WatcherItem();
 
