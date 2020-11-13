@@ -160,10 +160,16 @@ public class FileWatcherApplication extends CommandLineInterfaceApplet
         
         switch (unit)        
         {
-            case "minute":
+            case "minute":            
+            case "minutes":
             {
                 duration = Duration.ofMinutes(amount);
                 
+                break;
+            }
+            case "seconds":
+            {
+                duration = Duration.ofSeconds(amount);
                 break;
             }
             default:
