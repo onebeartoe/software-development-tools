@@ -3,4 +3,4 @@
 find . -name "*.text" | xargs wc -w | sed '$d' > wc.out
 
 # parse the word count file
-awk '{if($1 > 10) {print "over: ", $0; print "something else";} else print "good: " , $0;}' wc.out
+awk -f report.awk wc.out
