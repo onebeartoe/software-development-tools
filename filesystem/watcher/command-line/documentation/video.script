@@ -2,7 +2,8 @@
 
 00 - Greeting
 
-        Hi, I am Roberto Marquez.  In this video I demonstrate a software development tool 
+        Hi, I am Roberto Marquez.  In this video I demonstrate a command line 
+	software development tool I wrote.  Its main feature is that is
         watches the filesystem for changes and executes a command when changes are 
         detected.
 
@@ -17,7 +18,7 @@
 
         Unit Tests
 
-        Image Size
+        File Size
 
         Word Count
 
