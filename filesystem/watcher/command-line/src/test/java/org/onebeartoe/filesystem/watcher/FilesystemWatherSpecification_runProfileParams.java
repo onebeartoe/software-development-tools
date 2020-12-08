@@ -69,7 +69,6 @@ public class FilesystemWatherSpecification_runProfileParams
         String expectedPattern2 = "*.java" ;
         assertEquals( fwp.pattern2, expectedPattern2);
 
-
         String expectedCommand2 = "mvn test";
         assertEquals( fwp.command2, expectedCommand2);
 
