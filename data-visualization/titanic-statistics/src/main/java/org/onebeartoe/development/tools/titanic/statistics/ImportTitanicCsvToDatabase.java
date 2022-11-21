@@ -4,11 +4,7 @@ package org.onebeartoe.development.tools.titanic.statistics;
 import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -27,11 +23,14 @@ public class ImportTitanicCsvToDatabase
 
     private void populateDatabase(List<TitanicPassenger> passengers) throws SQLException 
     {
+//        Connection conn = TitanicDataSource.getConnection();
+  TitanicDataSource.persistPassengers(passengers);
+        
     
-    String dbms = "derby";
+//    String dbms = "derby";
 
     
-    String dbName = "derby" ;
+//    String dbName = "derby" ;
     //String dbName = "C:\\home\\owner\\betoland-subversion\\School\\New-Apprenticeship\\tableau-assignments\\titanic-passenengers\\db\\derby" ;
      
     
@@ -40,17 +39,17 @@ public class ImportTitanicCsvToDatabase
 // works!
 //String url = "jdbc:derby:demo;create=true";
 
-        String url = "jdbc:derby:db;";
+        //String url = "jdbc:derby:db;";
 
  //       String url = "jdbc:derby:demo;";
 
-        Connection conn = DriverManager.getConnection(url);
+      //  Connection conn = DriverManager.getConnection(url);
         
-        System.out.println("Connected to database");
+    //    System.out.println("Connected to database");
 
-        Statement statement = conn.createStatement();
+  //      Statement statement = conn.createStatement();
 
-        ResultSet rs = statement.executeQuery("SELECT * FROM app.TITANIC_PASSENGER_LIST_CSV ORDER BY NAME");    
+//        ResultSet rs = statement.executeQuery("SELECT * FROM app.TITANIC_PASSENGER_LIST_CSV ORDER BY NAME");    
                 
         System.out.println("End of run.");        
     }
@@ -67,9 +66,9 @@ public class ImportTitanicCsvToDatabase
                 .parse();
 
         beans.forEach(p -> {
-            System.out.println(p.name + " - " + p.homeDest);
+//            System.out.println(p.name + " - " + p.homeDest);
                 });
         
-        return null;
+        return beans;
     }
 }
