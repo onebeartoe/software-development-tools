@@ -29,6 +29,7 @@
         <module>serial-plotter</module>
         <module>version-control</module>
         <module>web-content-verification</module>
+        <module>data-visualization</module>
     </modules>
 
     <repositories>
