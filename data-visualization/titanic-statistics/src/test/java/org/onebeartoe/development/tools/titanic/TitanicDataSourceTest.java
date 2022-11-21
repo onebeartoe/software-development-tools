@@ -25,7 +25,8 @@ public class TitanicDataSourceTest
         
         assertEquals(expected, actual);
         
-        assertTrue(1 == 2 -1 );
+        assertTrue(1 == 2 - 1);
+        
         System.out.println("farto- d");
     }   
 }
