@@ -3,7 +3,9 @@ package org.onebeartoe.development.tools.titanic.statistics;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -20,48 +22,22 @@ public class TitanicStatistics
     public static void main(String[] args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException 
     {
         System.out.println("Hello World!");
-
-
-        
-
-//        Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-
-        
+         
         Connection conn = null;
  
-//        Class.forName("org.apache.derby.jdbc.ClientDriver");
-
-        //pwd()
-        
-//      DriverManager.registerDriver(new ClientDriver());
-//DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-
-        
-//    Properties connectionProps = new Properties();
-//    connectionProps.put("user", this.userName);
-//    connectionProps.put("password", this.password);
-
-//String driver = "org.apache.derby.jdbc.EmbeddedDriver";
-//Class.forName(driver).newInstance();
-
-//String url = "jdbc:derby:memory:demo;create=true";
-
 // works!
 //String url = "jdbc:derby:demo;create=true";
 
-String url = "jdbc:derby:demo;";
-//String url = "jdbc:derby:db;";
+        String url = "jdbc:derby:db;";
 
-//String url = "jdbc:derby:db:app;";
-//String url = "jdbc:derby:db:app;create=true";
-//String url = "jdbc:" + dbms + ":" + dbName + ":app" + ";";
+ //       String url = "jdbc:derby:demo;";
 
         conn = DriverManager.getConnection(url);
-//                           +
-//                   ";create=true",
-//                   connectionProps);
         
-            System.out.println("Connected to database");
+        System.out.println("Connected to database");
 
+        Statement statement = conn.createStatement();
+
+        ResultSet rs = statement.executeQuery("SELECT * FROM app.TITANIC_PASSENGER_LIST_CSV ORDER BY NAME");
     }
 }
