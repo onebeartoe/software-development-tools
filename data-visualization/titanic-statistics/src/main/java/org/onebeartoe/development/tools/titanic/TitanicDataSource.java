@@ -1,18 +1,15 @@
 
-package org.onebeartoe.development.tools.titanic.statistics;
+package org.onebeartoe.development.tools.titanic;
 
-import com.opencsv.bean.CsvBindByName;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.onebeartoe.development.tools.titanic.statistics.TitanicPassenger;
 
 /**
  *
@@ -21,7 +18,7 @@ public class TitanicDataSource
 {
     private static final String connectionUrl = "jdbc:derby:derby;";
     
-    static void createDatabaseTable() throws SQLException 
+    public static void createDatabaseTable() throws SQLException 
     {             
         boolean createDb = true;
         Connection conn = getConnection(createDb);
@@ -80,7 +77,7 @@ public class TitanicDataSource
         return conn;
     }
 
-    static void persistPassengers(List<TitanicPassenger> passengers) throws SQLException 
+    public static void persistPassengers(List<TitanicPassenger> passengers) throws SQLException 
     {
         Connection connection = getConnection();
         
@@ -124,7 +121,7 @@ public class TitanicDataSource
         }
     }
     
-    private List<TitanicPassenger> retrievePassengers() throws SQLException
+    public static List<TitanicPassenger> retrievePassengers() throws SQLException
     {
         Connection connection = getConnection();
 

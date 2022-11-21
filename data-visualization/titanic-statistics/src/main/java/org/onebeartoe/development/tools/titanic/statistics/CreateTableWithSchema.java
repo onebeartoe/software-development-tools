@@ -2,9 +2,8 @@
 package org.onebeartoe.development.tools.titanic.statistics;
 
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.onebeartoe.development.tools.titanic.TitanicDataSource;
 
 /**
  *
@@ -24,7 +23,7 @@ public class CreateTableWithSchema
 
     private void createDatabaseTable() throws SQLException 
     { 
-        dataSource.createDatabaseTable();
+        TitanicDataSource.createDatabaseTable();
                 
         System.out.println("End of run.");        
     }
