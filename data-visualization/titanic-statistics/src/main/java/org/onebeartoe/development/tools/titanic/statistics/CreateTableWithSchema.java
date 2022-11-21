@@ -48,8 +48,26 @@ String url = "jdbc:derby:derby;create=true";
 
         Statement statement = conn.createStatement();
 
-//        boolean execute = statement.execute("CREATE TABLE TITANIC_PASSENGER_LIST_CSV (name varchar(255))");
-//        System.out.println("execute = " + execute);
+        String create = "CREATE TABLE TITANIC_PASSENGER_LIST_CSV (name varchar(255))";
+        
+        String s = "CREATE TABLE TITANIC_PASSENGER_LIST (pclass varchar(255), " +                 
+"survived varchar(255), " + 
+"name varchar(255), " + 
+"sex varchar(255), " + 
+"age varchar(255), " + 
+"sibsp varchar(255), " + 
+"parch varchar(255), " + 
+"ticket varchar(255), " +
+"fare varchar(255), " +
+"cabin varchar(255), " +
+"embarked varchar(255), " +
+"boat  varchar(255), " +
+"body varchar(255), " +
+"home_dest  varchar(255, " +
+        ")";
+        
+        boolean execute = statement.execute(create);
+        System.out.println("execute = " + execute);
         
 //        String select = "SELECT * FROM app.TITANIC_PASSENGER_LIST_CSV ORDER BY NAME";        
         String select = "SELECT * FROM TITANIC_PASSENGER_LIST_CSV ORDER BY NAME";
