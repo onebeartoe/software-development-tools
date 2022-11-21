@@ -18,19 +18,17 @@
 
     <name>onebeartoe-development-tools-data-visualization-titanic-statistics</name>
     
-    <dependencies>        
+    <dependencies>
         <dependency>
-            <groupId>com.sample</groupId>  
-            <artifactId>samplifact</artifactId>  
-            <version>1.0</version> 
-            <scope>system</scope>
-            <systemPath>c:\opt\DBeaver\plugins\org.jkiss.dbeaver.ext.derby_1.1.176.202210092258.jar</systemPath>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.3</version>
         </dependency>
-        
+                
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
-            <version>10.8.3.0</version>
+            <version>10.16.1.1</version>
         </dependency>
     </dependencies>
 </project>

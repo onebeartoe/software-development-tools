@@ -22,8 +22,6 @@ public class TitanicStatistics
     public static void main(String[] args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException 
     {
         System.out.println("Hello World!");
-         
-        Connection conn = null;
  
 // works!
 //String url = "jdbc:derby:demo;create=true";
@@ -32,7 +30,7 @@ public class TitanicStatistics
 
  //       String url = "jdbc:derby:demo;";
 
-        conn = DriverManager.getConnection(url);
+        Connection conn = DriverManager.getConnection(url);
         
         System.out.println("Connected to database");
 
