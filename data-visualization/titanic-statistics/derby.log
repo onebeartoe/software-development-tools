@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Mon Nov 21 17:16:31 CST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-0184-9c7a-9975-00000747f588 
+Tue Nov 22 11:21:12 CST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-0184-a05b-a922-000007485be8 
 on database directory C:\home\owner\github\onebeartoe\software-development-tools\data-visualization\titanic-statistics\derby  with class loader sun.misc.Launcher$AppClassLoader@3d4eac69 
 Loaded from file:/C:/Users/roberto/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
 java.vendor=Azul Systems, Inc.
