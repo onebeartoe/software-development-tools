@@ -10,7 +10,6 @@ import org.onebeartoe.development.tools.titanic.statistics.TitanicPassenger;
 
 /**
  *
- * @author roberto
  */
 public class TitanicDataSourceTest 
 {
@@ -24,9 +23,15 @@ public class TitanicDataSourceTest
         int expected = 1309;
         
         assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void casualtiesReportTest() throws SQLException
+    {
+        CasualtyReport report = TitanicDataSource.casualtiesReport();
         
-        assertTrue(1 == 2 - 1);
+        assertTrue(report.all.survived == 500);
         
-        System.out.println("farto- d");
-    }   
+        assertTrue(report.all.perished == 809);
+    }
 }

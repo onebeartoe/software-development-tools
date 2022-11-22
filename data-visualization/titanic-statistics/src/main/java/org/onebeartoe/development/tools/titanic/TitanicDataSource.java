@@ -18,6 +18,30 @@ public class TitanicDataSource
 {
     private static final String connectionUrl = "jdbc:derby:derby;";
     
+    public static CasualtyReport casualtiesReport() throws SQLException 
+    {
+        Connection connection = getConnection();
+        
+        String SQl_SELECT = "SELECT COUNT(SURVIVED) FROM app.TITANIC_PASSENGER_LIST WHERE SURVIVED = ?";
+        
+        PreparedStatement preparedStatement = connection.prepareStatement(SQl_SELECT);
+        
+        preparedStatement.setString(1, "1");        
+        ResultSet survivedResults = preparedStatement.executeQuery();
+        survivedResults.next();
+        String survivedTally = survivedResults.getString(1);        
+        CasualtyReport report = new CasualtyReport();        
+        report.all.survived = Integer.valueOf(survivedTally);        
+        
+        preparedStatement.setString(1, "0");
+        ResultSet perishedResults = preparedStatement.executeQuery();
+        perishedResults.next();
+        String perishedTally = perishedResults.getString(1);
+        report.all.perished = Integer.valueOf(perishedTally);
+        
+        return report;
+    }
+    
     public static void createDatabaseTable() throws SQLException 
     {             
         boolean createDb = true;
@@ -26,6 +50,7 @@ public class TitanicDataSource
         System.out.println("Connected to database");
 
         Statement statement = conn.createStatement();
+        
 
 //        String create = "CREATE TABLE TITANIC_PASSENGER_LIST_CSV (name varchar(255))";
         
