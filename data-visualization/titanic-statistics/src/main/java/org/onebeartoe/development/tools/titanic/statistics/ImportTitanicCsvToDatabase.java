@@ -13,7 +13,7 @@ import org.onebeartoe.development.tools.titanic.TitanicDataSource;
  */
 public class ImportTitanicCsvToDatabase 
 {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException 
+    public static void main(String[] args) throws SQLException, FileNotFoundException 
     {
         ImportTitanicCsvToDatabase app = new ImportTitanicCsvToDatabase();
         
