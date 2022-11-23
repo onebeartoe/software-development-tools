@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Tue Nov 22 11:21:12 CST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-0184-a05b-a922-000007485be8 
-on database directory C:\home\owner\github\onebeartoe\software-development-tools\data-visualization\titanic-statistics\derby  with class loader sun.misc.Launcher$AppClassLoader@3d4eac69 
+Tue Nov 22 19:22:32 CST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-0184-a214-53cb-00000740b758 
+on database directory C:\home\owner\github\onebeartoe\software-development-tools\data-visualization\titanic-statistics\derby  with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@14899482 
 Loaded from file:/C:/Users/roberto/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
 java.vendor=Azul Systems, Inc.
-java.runtime.version=1.8.0_345-b01
+java.runtime.version=11.0.17+8-LTS
 user.dir=C:\home\owner\github\onebeartoe\software-development-tools\data-visualization\titanic-statistics
 os.name=Windows 10
 os.arch=amd64
