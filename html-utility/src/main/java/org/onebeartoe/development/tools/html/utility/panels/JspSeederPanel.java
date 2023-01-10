@@ -87,7 +87,13 @@ public class JspSeederPanel extends JPanel implements ActionListener
             }
         };
         
-        fileSelectionPanel = new FileSelectionPanel(FileType.IMAGE, FileSelectionMethods.SINGLE_DIRECTORY, showRecursive, preferenceSaveListener);
+        String sourceDirectoryLabel = "Select the location of the WAR’s ‘webapp’ directory.";
+        
+        fileSelectionPanel = new FileSelectionPanel(FileType.IMAGE, 
+                                                    FileSelectionMethods.SINGLE_DIRECTORY, 
+                                                    showRecursive, 
+                                                    preferenceSaveListener,
+                                                    sourceDirectoryLabel);
         
         restorePreferences();
         
