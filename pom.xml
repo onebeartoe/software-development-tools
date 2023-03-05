@@ -33,6 +33,7 @@
     </modules>
 
     <repositories>
+        <!--
         <repository>
             <id>onebeartoe-repo</id>
             <name>onebeartoe Maven Repository</name>
@@ -43,6 +44,7 @@
               <checksumPolicy>warn</checksumPolicy>
             </releases>
         </repository>
+        -->
     </repositories>
     
     <build>
