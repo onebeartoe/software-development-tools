@@ -73,12 +73,9 @@
 
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-<<<<<<< HEAD
-                <version>3.4.2</version>
-=======
-                        <version>3.4.2</version>
 
->>>>>>> 53d571dbdbdf1523c655bacc90c77babc77aa056
+                <version>3.4.2</version>
+
                 <configuration>
                     <archive>
                         <manifest>
