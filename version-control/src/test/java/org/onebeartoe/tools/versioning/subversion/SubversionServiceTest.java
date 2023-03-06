@@ -25,8 +25,9 @@ public class SubversionServiceTest
     {
         implementation.appendCreationDate(blankInfile);
     }
-    
-    @Test(groups = {"unit"})
+  
+//TODO: re-enable this one there is a public Subversion repository available    
+//    @Test(groups = {"unit"})
     public void creationDate_pass_knownDate() throws Exception
     {
         final String repositoryPath = "https://svn.riouxsvn.com/junit-target/";

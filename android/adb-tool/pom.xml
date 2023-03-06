@@ -32,21 +32,23 @@
             <artifactId>onebeartoe-system</artifactId>  
             <version>1.0</version>
         </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx 
-<dependency>
-    <groupId>org.openjfx</groupId>
-    <artifactId>javafx</artifactId>
-    <version>15</version>
-</dependency>
--->
 
-<dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-controls</artifactId>
-      <version>15</version>
-    </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>13</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>            
+        </dependency>
     </dependencies>
     
     <build>
@@ -115,6 +117,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
+                    <source>11</source>
+                    <target>11</target>
 <!--                    
                     <source>1.9</source>
                     <target>1.2</target>
