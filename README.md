@@ -3,7 +3,7 @@
 <b>
     [![emerge]](https://github.com/glato/emerge)
 </b> 
- is used to generge dependency graphs for this proejct.
+ is used to generate dependency graphs for this proejct.
 
 
 
