@@ -341,7 +341,9 @@ int exitValue = commander.executeCommand(command);
 
     private void logReset(WatcherItem item) throws IOException
     {
-        String message = "quitePeriodRestartMessage " + "#" + item.resetCount;
+        String message = "quitePeriodRestartMessage " 
+                            + "#" + item.resetCount
+                            + System.lineSeparator();
         
         if(item.logPath == null)
         {

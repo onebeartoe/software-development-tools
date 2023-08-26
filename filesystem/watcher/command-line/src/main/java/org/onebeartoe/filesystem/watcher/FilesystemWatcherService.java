@@ -67,17 +67,15 @@ FileWatcherProfile p = (FileWatcherProfile)        runProfile;
         File d = new File(".");
         
         profile.directory = d.toPath();
-//        profile.directory = directory;
-        
+
         profile.recursive = recursive;
-        
-//        File d = new File(".");
         
         WatcherItem item = new WatcherItem();
 
-        item.logPath = d.getAbsolutePath() + "sure.log";
+        item.logPath = d.getCanonicalPath() + "/watcher.log";
         
-        item.outpath = d.getAbsolutePath() + "sure.out";
+        item.outpath = d.getAbsolutePath() + "/watcher.out";
+
         item.pattern = p.pattern1;    
         item.quietPeriod = p.quietPeriod1;
         item.command = p.command1;        

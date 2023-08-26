@@ -16,8 +16,6 @@
 
     <name>onebeartoe-development-tools-filesystem-cli-watcher</name>
 
-    
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -36,12 +34,13 @@
             <artifactId>guava</artifactId>
             <version>19.0</version>
         </dependency>
+
         
         <dependency>
             <groupId>org.onebeartoe</groupId>
             <artifactId>onebeartoe-application</artifactId>
             <version>1.0</version>
-        </dependency>
+        </dependency>                
 
         <dependency>
             <groupId>org.testng</groupId>
