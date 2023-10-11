@@ -14,6 +14,11 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+    
+    <name>
+        onebeartoe-development-tools-data-visualization-titanic-statistics-fx-view
+    </name>
+    
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
