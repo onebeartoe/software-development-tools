@@ -8,8 +8,8 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-**/nbactions.xml
-**/nb-configuration.xml
+#**/nbactions.xml
+#**/nb-configuration.xml
 **/.DS_Store
 **/.classpath
 **/.project
