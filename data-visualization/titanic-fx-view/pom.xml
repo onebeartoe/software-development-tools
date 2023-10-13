@@ -24,7 +24,7 @@
             <groupId>org.onebeartoe.development.tools</groupId>
             <artifactId>titanic-statistics</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
+            
         </dependency>
         
         <dependency>
