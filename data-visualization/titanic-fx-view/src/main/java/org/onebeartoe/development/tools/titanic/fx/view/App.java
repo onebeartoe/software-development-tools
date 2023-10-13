@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 //import org.onebeartoe.development.tools.titanic.
-import org.onebeartoe.development.tools.titanic.TitanicDataSource;
+//import org.onebeartoe.development.tools.titanic.TitanicDataSource;
 
 
 /**
@@ -19,14 +19,14 @@ public class App extends Application {
 
     private static Scene scene;
 
-    int t= 11;
+    int t = 11;
     
     @Override
     public void start(Stage stage) throws IOException 
     {
 t++;
 
-        TitanicDataSource ds;
+//        TitanicDataSource ds;
 
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
