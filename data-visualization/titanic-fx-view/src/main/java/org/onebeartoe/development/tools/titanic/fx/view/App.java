@@ -8,9 +8,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-//import org.onebeartoe.development.tools.titanic.
-import org.onebeartoe.development.tools.titanic.TitanicDataSource;
+import java.sql.SQLException;
 
+import java.util.List;
+
+import org.onebeartoe.development.tools.titanic.TitanicDataSource;
+import org.onebeartoe.development.tools.titanic.statistics.TitanicPassenger;
 
 /**
  * JavaFX App
@@ -22,7 +25,7 @@ public class App extends Application {
     int t = 11;
     
     @Override
-    public void start(Stage stage) throws IOException 
+    public void start(Stage stage) throws IOException, SQLException
     {
 t++;
 
@@ -31,6 +34,10 @@ t++;
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
         stage.show();
+        
+        List<TitanicPassenger> passengers = TitanicDataSource.retrievePassengers();
+        
+        System.out.println("passengers = " + passengers);
     }
 
     static void setRoot(String fxml) throws IOException {

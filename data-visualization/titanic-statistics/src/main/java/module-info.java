@@ -8,4 +8,5 @@ module org.onebeartoe.development.tools.titanic
     requires  opencsv;    
     
     exports org.onebeartoe.development.tools.titanic;
+    exports org.onebeartoe.development.tools.titanic.statistics;
 }

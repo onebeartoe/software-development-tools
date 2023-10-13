@@ -16,8 +16,9 @@ import org.onebeartoe.development.tools.titanic.statistics.TitanicPassenger;
  */
 public class TitanicDataSource 
 {
-    private static final String connectionUrl = "jdbc:derby:derby;";
-    
+//    private static final String connectionUrl = "jdbc:derby:derby;";
+    private static final String connectionUrl = "jdbc:derby:/home/roberto/Versioning/owner/github/software-development-tools/data-visualization/titanic-statistics/derby;";
+//  /home/roberto/Versioning/owner/github/software-development-tools/data-visualization/titanic-statistics/pom.xml    
     public static CasualtyReport casualtiesReport() throws SQLException 
     {
         Connection connection = getConnection();
