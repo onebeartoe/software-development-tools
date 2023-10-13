@@ -8,9 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import org.onebeartoe.development.tools.titanic.TitanicDataSource;
 
-
-import java.io.CharConversionException;
 
 /**
  * JavaFX App
@@ -25,6 +24,8 @@ public class App extends Application {
     public void start(Stage stage) throws IOException 
     {
 t++;
+
+        TitanicDataSource ds;
 
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
