@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.onebeartoe.development.tools.titanic.TitanicDataSource;
 import org.onebeartoe.development.tools.titanic.statistics.TitanicPassenger;
@@ -36,8 +39,29 @@ t++;
         stage.show();
         
         List<TitanicPassenger> passengers = TitanicDataSource.retrievePassengers();
+                
+        System.out.println("passengers count: " + passengers.size());
         
-        System.out.println("passengers = " + passengers);
+        long slashCount = 0;
+        for(TitanicPassenger passenger : passengers)
+        {
+            if(passenger.homeDest.contains("/"))
+            {
+                slashCount++;
+                
+            }
+        }
+        
+        System.out.println("slashcount: " + slashCount);
+        
+        Map<String, Long> homeDestCounts = passengers.stream()
+                              .collect(Collectors.groupingBy(TitanicPassenger::getHomeDest, Collectors.counting()));
+        Set<String> keySet = homeDestCounts.keySet();
+        for(String key : keySet)
+        {
+            System.out.println(key + ": " + homeDestCounts.get(key));
+        }
+//  .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     static void setRoot(String fxml) throws IOException {

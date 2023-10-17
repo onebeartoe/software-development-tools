@@ -60,5 +60,10 @@ public class TitanicPassenger
     
     
     @CsvBindByName(column = "home.dest")
-    public String homeDest;    
+    public String homeDest;  
+    
+    public String getHomeDest()
+    {
+        return homeDest;
+    }
 }
