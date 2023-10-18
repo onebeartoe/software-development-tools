@@ -11,6 +11,7 @@
     <modules>
         <module>titanic-statistics</module>
         <module>titanic-fx-view</module>
+        <module>sasquatch</module>
     </modules>
     <name>onebeartoe-development-tools-data-visualization</name>
 </project>
