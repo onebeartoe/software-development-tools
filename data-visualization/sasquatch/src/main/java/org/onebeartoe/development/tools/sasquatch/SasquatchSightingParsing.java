@@ -51,4 +51,12 @@ public class SasquatchSightingParsing
         
         return beans;
     }    
+
+    private void pairStateWithCoordinates(List<SasquatchSighting> sightings) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void outputJavascriptValues() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
