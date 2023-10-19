@@ -33,7 +33,7 @@ public class SasquatchSightingParsing
         System.out.println("Hello World!");
     
         String fileName = "src/main/resources/bfro_reports_geocoded.csv";
-
+        
         List<SasquatchSighting> beans = new CsvToBeanBuilder(new FileReader(fileName))
                 .withType(SasquatchSighting.class)
                 .build()
