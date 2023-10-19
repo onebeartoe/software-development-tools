@@ -19,12 +19,13 @@ public class StateSightingsServiceSpecification
     {
         SasquatchSighting sighting = implementation.sightingsFor("Texas");
 
-//TODO:
-int i = 2 /0;
 //TODO:        
 //What is hte count?        
 //        TX	31.968599	-99.901813	Texas
 //assert the values in line above                
+
+//TODO:
+int i = 2 /0;
     }
 
     /**

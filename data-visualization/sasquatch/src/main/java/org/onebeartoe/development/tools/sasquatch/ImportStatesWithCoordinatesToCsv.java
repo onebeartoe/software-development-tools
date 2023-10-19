@@ -8,6 +8,9 @@ import java.io.InputStream;
  */
 public class ImportStatesWithCoordinatesToCsv
 {
+
+//TODO: is this class still needed?        
+    
     public static void main(String[] args)
     {
         ImportStatesWithCoordinatesToCsv app = new ImportStatesWithCoordinatesToCsv();
