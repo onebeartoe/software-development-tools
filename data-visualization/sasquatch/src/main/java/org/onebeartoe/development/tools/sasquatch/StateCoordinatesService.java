@@ -51,4 +51,11 @@ public class StateCoordinatesService
             
         return coordinatesList.get(0);
     }
+
+    public List<String> stateNames()
+    {
+        return stateCoordinates.stream()
+                .map(state -> state.getName())
+                .collect( Collectors.toList() );
+    }
 }
