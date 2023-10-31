@@ -16,9 +16,9 @@ public class SasquatchSighting
   
     public Long count;
     
-    public float latitude;
+    public String latitude;
 
-    public float longitude;
+    public String longitude;
     
     public String getState()
     {

@@ -35,11 +35,11 @@ public class StateSightingsServiceSpecification
         assertEquals(expectedState, actualState);
 
         String expectedLatitude = "31.968599";
-        float actualLatitude = sighting.latitude;
+        String actualLatitude = sighting.latitude;
         assertEquals(expectedLatitude, actualLatitude);
 
         String expectedLongitude = "-99.901813";
-        float actualLongitude = sighting.longitude;
+        String actualLongitude = sighting.longitude;
         assertEquals(expectedLongitude, actualLongitude);
     }
 

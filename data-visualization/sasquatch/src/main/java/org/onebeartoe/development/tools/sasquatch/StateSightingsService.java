@@ -27,9 +27,9 @@ public class StateSightingsService
         
         StateCoordinates coordinates = coordinatesService.coordinatesFor(state);
         
-        sighting.latitude = Float.parseFloat(coordinates.latitude);
+        sighting.latitude = coordinates.latitude;
         
-        sighting.longitude = Float.parseFloat(coordinates.longitude);
+        sighting.longitude = coordinates.longitude;
         
         return sighting;
     }    
