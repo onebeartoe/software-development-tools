@@ -42,7 +42,7 @@ public class SasquatchSightingsServiceSpecification
             }
         }
         
-        int actualCount = implementation.sightingsFor(state);
+        long actualCount = implementation.sightingsFor(state);
         
         assertEquals(expectedCount, actualCount);
     }
@@ -53,8 +53,10 @@ public class SasquatchSightingsServiceSpecification
      * @param state 
      */
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void sightingsFor_fail(String state)
+    public void sightingsFor_fail()
     {
-        implementation.sightingsFor("San Antonio");
+        long sightingsFor = implementation.sightingsFor("Dallas");
+        
+        System.out.println("sightingsFor = " + sightingsFor);
     }
 }

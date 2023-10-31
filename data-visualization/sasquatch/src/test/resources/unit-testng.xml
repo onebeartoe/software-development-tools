@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="sasquatch-test-suite" parallel="none">
+    <test name="sasquatch-unit-tests">
+        <packages>    
+            <package name="org.onebeartoe.development.tools.sasquatch"/>
+        </packages>
+    </test>    
+</suite>

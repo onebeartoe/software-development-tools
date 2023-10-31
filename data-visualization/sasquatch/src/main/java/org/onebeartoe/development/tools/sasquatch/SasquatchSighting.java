@@ -9,9 +9,12 @@ import com.opencsv.bean.CsvBindByName;
 public class SasquatchSighting 
 {
     @CsvBindByName
-    public String state;
+    public String date;
     
-    public String stateAbbreviation;
+    @CsvBindByName
+    public String state;
+  
+    public Long count;
     
 //    @CsvBindByName
     public float latitude;

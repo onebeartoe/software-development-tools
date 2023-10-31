@@ -1,0 +1,52 @@
+
+package org.onebeartoe.development.tools.sasquatch;
+
+import com.opencsv.bean.CsvToBeanBuilder;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+/**
+ *
+ */
+public class StateCoordinatesService
+{
+    private List<StateCoordinates> stateCoordinates;
+    
+    public StateCoordinatesService()
+    {
+        String name = "states.csv";
+        
+        InputStream inStream = ClassLoader.getSystemResourceAsStream(name);        
+
+        InputStreamReader reader = new InputStreamReader(inStream);
+        
+        stateCoordinates = new CsvToBeanBuilder(reader)
+            .withType(StateCoordinates.class)
+            .build()
+            .parse();
+    }
+    
+    public StateCoordinates coordinatesFor(String stateName)
+    {
+        List<StateCoordinates> coordinatesList = stateCoordinates.stream()
+                .filter(sc -> sc.name.equals(stateName))
+                .collect( Collectors.toList());
+        
+        if(coordinatesList.size() > 1)
+        {
+            String message = "there is a collision on state names, " + stateName + ", while they should be unique";
+
+            throw new IllegalStateException(message);
+        }
+        
+        if(coordinatesList.isEmpty())
+        {
+            throw new IllegalStateException("an unknown state exeception occured; " + stateName);
+        }
+            
+        return coordinatesList.get(0);
+    }
+}
