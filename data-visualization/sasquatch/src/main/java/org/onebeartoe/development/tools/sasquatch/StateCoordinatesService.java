@@ -24,8 +24,11 @@ public class StateCoordinatesService
         
         stateCoordinates = new CsvToBeanBuilder(reader)
             .withType(StateCoordinates.class)
+            .withSeparator('\t')
             .build()
             .parse();
+        
+        System.out.println("stateCoordinates = " + stateCoordinates);
     }
     
     public StateCoordinates coordinatesFor(String stateName)
