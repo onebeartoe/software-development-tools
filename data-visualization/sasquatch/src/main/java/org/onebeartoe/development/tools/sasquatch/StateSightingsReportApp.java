@@ -51,11 +51,13 @@ public class StateSightingsReportApp
             {
                 SasquatchSighting sighting = sightingsService.sightingsFor(name);
 
-                report.append(sighting.state + fieldSeparator +
-                        sighting.count + fieldSeparator +
-                        sighting.latitude + fieldSeparator +
-                        sighting.longitude + fieldSeparator 
-                        );
+                report.append(sighting.state);
+                report.append(fieldSeparator );
+                report.append(sighting.count);
+                report.append(fieldSeparator );
+                report.append(sighting.latitude);
+                report.append(fieldSeparator );
+                report.append(sighting.longitude); 
                 
                 report.append(System.lineSeparator());
             }
@@ -65,20 +67,35 @@ public class StateSightingsReportApp
             }
         }
         
-        // footer
-        report.append("start date: " +
-                sightingsService.getStartDate() +
-
-                "\tend date: " + 
-                sightingsService.getEndDate() + 
-
-                "\ttotal sightings: " + 
-                sightingsService.getSightingsCount() + 
-
-                "\tunparsable sightings: " +
-                sightingsService.unparsableSightingDates()
-                );
+        printMetadata();
         
         return report.toString();
+    }
+
+    private void printMetadata()
+    {
+        StringBuffer metadata = new StringBuffer();
+        
+        metadata.append("start date: " +
+                sightingsService.getStartDate() );
+        metadata.append(System.lineSeparator());
+        
+metadata.append(
+                "end date: " + 
+                sightingsService.getEndDate() );
+        metadata.append(System.lineSeparator());
+        
+metadata.append(
+                "total sightings: " + 
+                sightingsService.getSightingsCount() );
+        metadata.append(System.lineSeparator());
+
+metadata.append(
+                "unparsable sightings: " +
+                sightingsService.unparsableSightingDates()
+                );
+        metadata.append(System.lineSeparator());
+        
+        System.out.println(metadata.toString());
     }
 }
