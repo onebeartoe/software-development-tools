@@ -16,10 +16,8 @@ public class SasquatchSighting
   
     public Long count;
     
-//    @CsvBindByName
     public float latitude;
-    
-//    @CsvBindByName
+
     public float longitude;
     
     public String getState()

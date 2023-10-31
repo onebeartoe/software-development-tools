@@ -6,14 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  *
  */
 public class StateCoordinatesService
 {
-    private List<StateCoordinates> stateCoordinates;
+    private final List<StateCoordinates> stateCoordinates;
     
     public StateCoordinatesService()
     {

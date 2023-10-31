@@ -2,6 +2,7 @@
 package org.onebeartoe.development.tools.sasquatch;
 
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 import org.testng.annotations.Test;
 
 /**
@@ -91,4 +92,34 @@ public class StateSightingsServiceSpecification
         
         assertEquals(expected, actual);
     }    
+    
+    /**
+     * This test ensures the correct number of records are read from the input file.
+     * 
+     * The expected value was derived by line counting the input file - 1 for the header.
+     */
+    @Test
+    public void sightingsCount()
+    {
+        int expected = 5082;
+
+        int actual = implementation.getSightingsCount();
+        
+        assertEquals(expected, actual);
+    }
+    
+    /**
+     * This tests ensures that sighting date count is available 
+     * and has reasonable values.
+     * 
+     * There are some blank/weird entries so we know there are some un-parsable
+     * date values.
+     */
+    @Test
+    public void unparsableSightingDates()
+    {        
+        int count = implementation.unparsableSightingDates();
+        
+        assertTrue(count > 1);
+    }
 }
