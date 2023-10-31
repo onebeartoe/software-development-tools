@@ -1,6 +1,8 @@
 
 package org.onebeartoe.development.tools.sasquatch;
 
+import java.util.List;
+
 /**
  *
  */
@@ -54,5 +56,10 @@ public class StateSightingsService
     public int unparsableSightingDates()
     {
         return sightingsService.unparsableSightingDates();
+    }
+
+    public List<String> stateNames()
+    {
+        return coordinatesService.stateNames();
     }
 }
