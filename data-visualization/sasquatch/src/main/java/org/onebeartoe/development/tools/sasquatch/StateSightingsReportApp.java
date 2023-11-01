@@ -22,7 +22,7 @@ public class StateSightingsReportApp
     {
         StateSightingsReportApp app = new StateSightingsReportApp();
         
-        String outpath = "target/report.csv";
+        String outpath = "target/sightings.csv";
         
         String report = app.generateReport(outpath);
         
