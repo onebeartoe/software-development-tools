@@ -82,12 +82,16 @@ function draw()
   textFont('Courier New');
   textSize(24);
   let heading1 = "Sasquatch Sightings\n" ;
+  
   let heading2 = 
         "start date: 1869-11-10 \n" + 
         "end date: 2023-02-28 \n " + 
-        "total sightings: 5082 \n " + 
-        "unparsable sightings: 978";
+        "total sightings: 5082 \n ";
+        
   
+  let heading2_b = "unparsable sighting dates: 978";
+  
+  let heading3 = "https://github.com/onebeartoe/software-development-tools/\n         tree/master/data-visualization/sasquatch";
   
   let x = width / 2.0 - (textWidth(heading1) / 2.0);
   let y = 25;
@@ -96,6 +100,13 @@ function draw()
   y += 25;
   x -= 35;
   text(heading2, x, y);
+  
+  text(heading2_b, 160, 140);
+  
+  textSize(20);
+  x -= 195;
+  y += 500;
+  text(heading3, x, y);
   
   for (let country of data) 
   {
@@ -109,4 +120,3 @@ function draw()
     ellipse(pix.x, pix.y, country.diameter * scl);
   }
 }
-
