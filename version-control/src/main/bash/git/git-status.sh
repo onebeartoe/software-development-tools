@@ -1,5 +1,5 @@
 
-cd /Users/lando/Versioning/owner/github
+cd ~/Versioning/owner/github
 
 printf "\n"
 cd 3D-Modeling
