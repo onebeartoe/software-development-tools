@@ -41,7 +41,7 @@ public class ImageTaskServiceSpecification
         int expected = 2;
         
         int actual = StringUtils.countMatches(html, target);
-        
+//TODO: use AssertJ        
         assertEquals(actual, expected);
     }
     

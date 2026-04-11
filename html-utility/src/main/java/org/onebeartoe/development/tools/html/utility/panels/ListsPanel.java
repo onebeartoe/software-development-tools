@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,11 +34,11 @@ public class ListsPanel extends JPanel implements DocumentListener
 
     private final ScrollableTextArea outputTextArea;
 
-    private JCheckBox anchorTagCheckBox;
+    protected JCheckBox anchorTagCheckBox;
     
-    private JCheckBox textAsLinkCheckBox;
+    protected JCheckBox textAsLinkCheckBox;
 
-    private JCheckBox unorderedListCheckBox;
+    private final JCheckBox unorderedListCheckBox;
     
     public ListsPanel()
     {
@@ -93,6 +94,14 @@ public class ListsPanel extends JPanel implements DocumentListener
         });
         
         textAsLinkCheckBox = new JCheckBox("Text as Link");
+        
+        var tip = """
+                  Use the text before the protocol (https://) as the label for 
+                  the anchor tag.
+                  """;
+        
+        textAsLinkCheckBox.setToolTipText(tip);
+        
         textAsLinkCheckBox.addActionListener( new ActionListener()
         {
             @Override
@@ -141,7 +150,17 @@ public class ListsPanel extends JPanel implements DocumentListener
         updateOutput();
     }
     
-    private void updateOutput()
+    protected String getOutput()
+    {
+        return outputTextArea.getText();
+    }
+    
+    protected void updateInput(String text) throws Exception
+    {
+        inputTextArea.setText(text);
+    }
+    
+    protected void updateOutput()
     {
         String input = inputTextArea.getText();
         
@@ -157,14 +176,31 @@ public class ListsPanel extends JPanel implements DocumentListener
             list = list.stream()
                        .map(s -> 
                        {
-                            String url = "";
+                            var url = "";
+                            
+                            String label = s;
                             
                             if( textAsLinkCheckBox.isSelected() )
                             {
-                                url = s;
+                                var target = "https://";
+                                
+                                if(s.contains(target))
+                                {
+                                    var urlStart = s.indexOf(target);
+                                    
+                                    url = s.substring(urlStart)
+                                            .trim();
+                                    
+                                    label = s.substring(0, urlStart)
+                                             .trim();
+                                }
+                                else
+                                {
+                                    url = s;
+                                }
                             }
                             
-                            String link = "<a href='" + url + "'alt=''>" + s + "</a>";
+                            String link = "<a href='" + url + "'>" + label + "</a>";
                            
                             return link;    
                        })
