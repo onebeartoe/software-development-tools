@@ -70,13 +70,13 @@ public class JspSeederPanel extends JPanel implements ActionListener
         {
             @Override
             public void actionPerformed(ActionEvent e)
-            {
-                String key = JSP_SEEDER_CURRENT_DIRECTORY;
+            {                
                 File f = JspSeederPanel.this.fileSelectionPanel.getCurrentDirectory();
                 String path = f.getAbsolutePath();
                 
                 try
                 {
+                    String key = JSP_SEEDER_CURRENT_DIRECTORY;
                     preferencesService.saveProperty(key, path);
                 } 
                 catch (BackingStoreException ex)
@@ -122,7 +122,8 @@ public class JspSeederPanel extends JPanel implements ActionListener
         inputPanel.add(fileSelectionPanel, BorderLayout.CENTER);
         inputPanel.add(targetPanel, BorderLayout.NORTH);
 
-        // this panel holds the  buttons that start the thumbnail generation and displays the status of the application.  
+        // this panel holds the  buttons that start the thumbnail generation 
+        // and displays the status of the application.  
         // Tthis is the text area the displays the status of the application
         statusPanel = new ScrollableTextArea("\n\n");
 
