@@ -30,6 +30,7 @@
         <module>version-control</module>
         <module>web-content-verification</module>
         <module>data-visualization</module>
+        <module>tomcat</module>
     </modules>
 
     <repositories>
