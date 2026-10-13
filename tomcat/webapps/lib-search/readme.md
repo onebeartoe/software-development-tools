@@ -1,7 +1,7 @@
 
 [x] do not look outside of this directory. update the pom.xml to specify Java 8 as the release target.
 
-[] Create Java application test infrastructure with one simple unit test.  Use AspectJ as the testing framework dependency.
+[x] Create Java application test infrastructure with one simple unit test.  Use AssertJ as the testing framework dependency.
 
 [] This command line application takes two arguments.  The first is the path to a Tomcat webapps/ directory.  The second is the search target string.
 
