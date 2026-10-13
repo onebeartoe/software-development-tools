@@ -1,8 +1,16 @@
 
-This command line application takes two arguments.
+[x] do not look outside of this directory. update the pom.xml to specify Java 8 as the release target.
 
-The first is the path to a Tomcat webapps directory.
-The second is the search string
+[] Create Java application test infrastructure with one simple unit test.  Use AspectJ as the testing framework dependency.
 
-The output is a list of any files matching the search target.
+[] This command line application takes two arguments.  The first is the path to a Tomcat webapps/ directory.  The second is the search target string.
+
+[] The application takes the webapps/ directory path and finds any directories directly under it.
+
+	[] for each directory under webapps/, the application looks for a directory path of 'WEB-INF/lib/'.
+	
+		[] the application then keeps track of evey JAR file under 'WEB-INF/lib/' that has the search target string in the file name.
+
+
+[] The output is a list of any files matching the search target, broken down by each directory under webapps/
 
