@@ -8,6 +8,9 @@
     </parent>
     <artifactId>webapps</artifactId>
     <packaging>pom</packaging>
+
+    <name>onebeartoe-development-tools-tomcat-webapps</name>
+
     <modules>
         <module>lib-search</module>
     </modules>
